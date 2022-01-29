@@ -19,7 +19,7 @@ const economySchema = new Schema({
     },
     bankSpace: { 
         type: Number, 
-        default: 10000 
+        default: 100000
     },
 });
 

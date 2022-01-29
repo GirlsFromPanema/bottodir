@@ -4,6 +4,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
 const economyUser = require("../../models/Economy/usereconomy");
 const emojis = require("../../../Controller/emojis/emojis");
+const config = require("../../../Controller/owners.json");
 
 module.exports.cooldown = {
     length: 360000000, /* 1h Cooldown */
@@ -30,6 +31,7 @@ module.exports.run = async (interaction, utils) =>
 {
     try
     {
+        const masterLogger = interaction.client.channels.cache.get(config.channel);
         const isRegistered = await economyUser.findOne({ userID: interaction.user.id });
         if(!isRegistered) return interaction.reply({ content: `${emojis.error} | You are not registered!\nUse \`/register\` to create an account.`, ephemeral: true })
 
@@ -41,6 +43,21 @@ module.exports.run = async (interaction, utils) =>
         .setColor("GREEN")
         .setFooter({ text: `Account: ${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true })})
         .setTimestamp()
+
+        const logs = new MessageEmbed()
+        .setTitle(`${emojis.success} Begged Money`)
+        .setDescription(`
+        **Actioned by**: \`${interaction.user.tag}\`
+        **Earning**: \`${earning}$\`
+        `)
+        .setColor("GREEN")
+        .setTimestamp()
+
+        /*
+        if(masterLogger) {
+            masterLogger.send({ embeds: [logs] })
+        }
+        */
 
         return interaction.reply({ embeds: [embed], ephemeral: true })
        

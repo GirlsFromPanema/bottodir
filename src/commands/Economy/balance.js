@@ -2,7 +2,9 @@
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
-const economySchema = require("../../models/Economy/usereconomy")
+const economySchema = require("../../models/Economy/usereconomy");
+const config = require("../../../Controller/owners.json");
+const emojis = require("../../../Controller/emojis/emojis");
 
 module.exports.cooldown = {
     length: 10000, /* in ms */
@@ -18,21 +20,41 @@ module.exports.run = async (interaction, utils) =>
 {
     try
     {
+        const masterLogger = interaction.client.channels.cache.get(config.channel);
         const user = interaction.options.getUser("user") || interaction.user;
         if(!user) return interaction.reply({ content: ":x: | This is not a valid user.", ephemeral: true });
 
         const isRegistered = await economySchema.findOne({ userID: user.id });
         if(!isRegistered) return interaction.reply({ content: `${user} is not registered.`, ephemeral: true });
 
+        const wallet = isRegistered.wallet ? isRegistered.wallet : 0;
+        const bank =  isRegistered.bank ? isRegistered.bank : 0;
+
         const balance = new MessageEmbed()
         .setTitle(`${user.username}'s Balance`)
         .setDescription(`
         **Wallet**: ${isRegistered.wallet.toLocaleString()}
         **Bank**: ${isRegistered.bank.toLocaleString()}/${isRegistered.bankSpace} \`${(isRegistered.bank / isRegistered.bankSpace * 100).toFixed(1)}%\`
+        **Net worth**: ${wallet + bank}
         `)
         .setFooter({ text: `From: ${user.username}`, iconURL: user.displayAvatarURL({ dynamic: true })})
         .setTimestamp()
         .setColor("RANDOM")
+
+        const logs = new MessageEmbed()
+        .setTitle(`${emojis.notify} Balance`)
+        .setDescription(`
+        **Actioned by**: \`${interaction.user.tag}\`
+        **User**: \`${user.tag  || "Author"}\`
+        `)
+        .setColor("GREEN")
+        .setTimestamp()
+
+        /*
+        if(masterLogger) {
+            masterLogger.send({ embeds: [logs] })
+        }
+        */
 
         if(isRegistered) {
             interaction.reply({ embeds: [balance], ephemeral: true })

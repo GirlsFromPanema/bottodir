@@ -3,7 +3,8 @@
 const { Permissions, CommandInteraction } = require("discord.js");
 const { getKeyByValue, msToMinAndSec } = require("../util/util.js");
 const { red } = require("colors/safe");
-const config = require("../../Controller/owners.json")
+const config = require("../../Controller/owners.json");
+const emojis = require("../../Controller/emojis/emojis");
 
 module.exports.data =
 {
@@ -30,14 +31,14 @@ module.exports.run = async (interaction) =>
         /* Check if command is on cooldown. */
         if (cmdFile.cooldown.users.has(interaction.member.id))
         {
-            await interaction.reply({ content: `:x: | You can only use this command every ${msToMinAndSec(cmdFile.cooldown.length)} minutes.`, ephemeral: true });
+            await interaction.reply({ content: `${emojis.error} | You can only use this command every ${msToMinAndSec(cmdFile.cooldown.length)} minutes.`, ephemeral: true });
             return;
         }
 
         // if the user isnt within the owners, dont execute the cmd
         if (cmdFile.ownerOnly) {
             if(!config.owner.includes(interaction.user.id))
-            return interaction.reply({ content: ":x: | You are not the Owner of this Bot.", ephemeral: true })
+            return interaction.reply({ content: `${emojis.error} | You are not the Owner of this Bot.`, ephemeral: true })
         }
 
         /* Array containing all the missing permissions of the client/user to run the interaction. Ideally those arrays are empty. */
@@ -54,7 +55,7 @@ module.exports.run = async (interaction) =>
         /* If the client is missing any permissions, don't run the command. */
         if (missingClientPermissions.length != 0)
         {
-            await interaction.reply({ content: `:x: | I am missing the following permissions.\n \`${missingClientPermissions.toString()}\``, ephemeral: true });
+            await interaction.reply({ content: `${emojis.error} | I am missing the following permissions.\n \`${missingClientPermissions.toString()}\``, ephemeral: true });
             return;
         }
 
@@ -80,7 +81,7 @@ module.exports.run = async (interaction) =>
                 }, cmdFile.cooldown.length);
             }
         }
-        else await interaction.reply({ content: `:x: | You are missing the following permissions.\n \`${missingUserPermissions.toString()}\``, ephemeral: true });
+        else await interaction.reply({ content: `${emojis.error} | You are missing the following permissions.\n \`${missingUserPermissions.toString()}\``, ephemeral: true });
     }
     catch (err)
     {

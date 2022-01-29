@@ -6,6 +6,8 @@ const economySchema = require("../../models/Economy/usereconomy");
 const emojis = require("../../../Controller/emojis/emojis");
 const moment = require("moment");
 
+const config = require("../../../Controller/owners.json");
+
 module.exports.cooldown = {
     length: 10000, /* in ms */
     users: new Set()
@@ -20,6 +22,7 @@ module.exports.run = async (interaction, utils) =>
 {
     try
     {
+        const masterLogger = interaction.client.channels.cache.get(config.channel);
         const isRegistered = await economySchema.findOne({ userID: interaction.user.id });
         if(isRegistered) return interaction.reply({ content: `You are already registered to the economic system.\nDate Registered: \`${moment(isRegistered.createdAt).fromNow()}\``, ephemeral: true })
 
@@ -36,6 +39,21 @@ module.exports.run = async (interaction, utils) =>
                 wallet: + 5000
             }).save();
         }
+
+        const logs = new MessageEmbed()
+        .setTitle(`${emojis.success} Registered`)
+        .setDescription(`
+        **Actioned by**: \`${interaction.user.tag}\`
+        **Date**: \`${moment((Date.now() * 1000) / 1000).fromNow()}\`
+        `)
+        .setColor("GREEN")
+        .setTimestamp()
+
+        /*
+        if(masterLogger) {
+            masterLogger.send({ embeds: [logs] })
+        }
+        */
 
         interaction.reply({ embeds: [registered], ephemeral: true })
        

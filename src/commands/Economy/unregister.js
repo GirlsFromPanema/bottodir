@@ -3,8 +3,10 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
 const { MessageActionRow, MessageButton, Interaction } = require("discord.js");
+const moment = require("moment")
 const economySchema = require("../../models/Economy/usereconomy");
 const emojis = require("../../../Controller/emojis/emojis");
+const config = require("../../../Controller/owners.json");
 
 module.exports.cooldown = {
   length: 500000 /* in ms */,
@@ -18,6 +20,7 @@ module.exports.cooldown = {
  */
 module.exports.run = async (interaction, utils) => {
   try {
+    const masterLogger = interaction.client.channels.cache.get(config.channel);
 
     // Check if the User is registered
     const isRegistered = await economySchema.findOne({
@@ -70,9 +73,9 @@ module.exports.run = async (interaction, utils) => {
     });
 
     const filter = (i) => {
-        if (i.user.id === interaction.user.id) return true
-        else i.reply({ content: "This is not for you!", ephemeral: true })
-    } 
+      if (i.user.id === interaction.user.id) return true;
+      else i.reply({ content: "This is not for you!", ephemeral: true });
+    };
 
     const collector = initialMessage.channel.createMessageComponentCollector({
       filter,
@@ -83,11 +86,13 @@ module.exports.run = async (interaction, utils) => {
     collector.on("collect", async (interaction, user) => {
       interaction.deferUpdate();
       if (interaction.customId === "verify") {
-
         const editEmbed = new MessageEmbed()
           .setTitle("UNREGISTERED")
           .setDescription(`${emojis.success} Successfully deleted your Data.`)
-          .setFooter({ text: `Requested by: ${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true })})
+          .setFooter({
+            text: `Requested by: ${interaction.user.username}`,
+            displayAvatarURL: interaction.user.displayAvatarURL({ dynamic: true }),
+          })
           .setTimestamp()
           .setColor("RANDOM");
 
@@ -98,21 +103,37 @@ module.exports.run = async (interaction, utils) => {
 
         // Delete the Users data if he clicks "verify"
         isRegistered.delete();
-
       } else if (interaction.customId === "deny") {
-
         const editEmbed = new MessageEmbed()
           .setTitle("CANCELLED")
           .setDescription(
             `You \`cancelled\` your unregistration from the economic system.`
           )
           .setColor("RANDOM");
-          
+
         initialMessage.edit({
           embeds: [editEmbed],
           components: components(true),
         });
       }
+
+      const logs = new MessageEmbed()
+        .setTitle(`${emojis.error} Unregistered`)
+        .setDescription(
+          `
+        **Actioned by**: \`${interaction.user.tag}\`
+        **Date**: \`${moment((Date.now() * 1000) / 1000).fromNow()}\`
+        `
+        )
+        .setColor("GREEN")
+        .setTimestamp();
+
+      /*
+        if(masterLogger) {
+            masterLogger.send({ embeds: [logs] })
+        }
+        */
+
     });
   } catch (err) {
     return Promise.reject(err);
