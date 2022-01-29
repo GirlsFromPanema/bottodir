@@ -3,6 +3,7 @@ const { Schema, Types, model } = require("mongoose");
 const economySchema = new Schema({
     userID: { 
         type: String, 
+        unique: true,
         required: true 
     },
     createdAt: { 

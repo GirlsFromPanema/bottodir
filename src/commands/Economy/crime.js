@@ -10,20 +10,18 @@ const config = require("../../../Controller/owners.json");
 const masterLogger = interaction.client.channels.cache.get(config.channel);
 
 module.exports.cooldown = {
-    length: 360000000, /* 1h Cooldown */
+    length: 360000000, /* in ms */
     users: new Set()
 };
 
 const randomNum = (max, min) => Math.floor(Math.random() * (max - (min ? min : 0))) + (min ? min : 0);
-        const addMoney = async (userID, wallet = 0) => {
-            await economyUser.updateOne(
-                { userID },
-                {
-                    $inc: { wallet }
-                },
-                { upsert: true }
-            );
-        };
+const addMoney = async (userID, wallet = 0) => {
+	await economyUser.updateOne(
+		{ userID },
+		{ $inc: { wallet } },
+		{ upsert: true }
+	);
+};
 
 /**
  * Runs ping command.
@@ -34,26 +32,26 @@ module.exports.run = async (interaction, utils) =>
 {
     try
     {
-
-         // Check if the Guild has enabled economy, if not, return an error.
+        // Check if the Guild has enabled economy, if not, return an error.
         const isSetup = await Guild.findOne({ id: interaction.guildId })
         if(!isSetup) return interaction.reply({ content: `${emojis.error} | Economy System is **disabled**, make sure to enable it before running this Command.\n\nSimply run \´/manageeconomy <enable/disable>\` and then rerun this Command.`, ephemeral: true})
-        
+
         // Find the user in the database, if he isn't registered, return an error.
         const isRegistered = await economyUser.findOne({ userID: interaction.user.id });
-        if(!isRegistered) return interaction.reply({ content: `${emojis.error} | You are not registered!\nUse \`/register\` to create an account.`, ephemeral: true })
+        if(!isRegistered) return interaction.reply({ content: `${emojis.error} | You are not registered!\nRun \`/register\`, then run this Command again.`, ephemeral: true });
 
-        const earning = randomNum(100, 350);
-        await addMoney(interaction.user.id, earning)
+        const win = randomNum(10, 1) > 4 ? false : true;
+		const earning = win ? 500 : -500;
+		await addMoney(interaction.user.id, earning);
 
-        const embed = new MessageEmbed()
-        .setDescription(`${emojis.success} Successfully begged for \`${earning}$\`\n\nUpdated Account:\n**Wallet**: ${isRegistered.wallet.toLocaleString()}`)
-        .setColor("GREEN")
-        .setFooter({ text: `Account: ${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true })})
-        .setTimestamp()
+        if(win) {
+            interaction.reply({ content: `${emojis.success} | You comitted a crime and got \`500\``, ephemeral: true})
+        } else {
+            interaction.reply({ content: `${emojis.error} | You comitted a crime and lost \`500\``, ephemeral: true})
+        }
 
         const logs = new MessageEmbed()
-        .setTitle(`${emojis.success} Begged Money`)
+        .setTitle(`${emojis.success} Crime comitted`)
         .setDescription(`
         **Actioned by**: \`${interaction.user.tag}\`
         **Earning**: \`${earning}$\`
@@ -66,9 +64,7 @@ module.exports.run = async (interaction, utils) =>
             masterLogger.send({ embeds: [logs] })
         }
         */
-
-        return interaction.reply({ embeds: [embed], ephemeral: true })
-       
+        
     }
     catch (err)
     {
@@ -82,5 +78,5 @@ module.exports.permissions = {
 };
 
 module.exports.data = new SlashCommandBuilder()
-    .setName("beg")
-    .setDescription("Beg for Money");
+    .setName("crime")
+    .setDescription("Commit a crime and earn big money with some luck!");

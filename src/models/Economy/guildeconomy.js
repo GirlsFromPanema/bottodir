@@ -4,7 +4,6 @@ const guildeconomySchema = new Schema({
     id:
     {
         type: String,
-        unique: true,
         required: true
     },
     option:

@@ -3,6 +3,7 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
 const economySchema = require("../../models/Economy/usereconomy");
+const Guild = require("../../models/Economy/guildeconomy");
 const config = require("../../../Controller/owners.json");
 const emojis = require("../../../Controller/emojis/emojis");
 
@@ -20,10 +21,16 @@ module.exports.run = async (interaction, utils) =>
 {
     try
     {
+
+         // Check if the Guild has enabled economy, if not, return an error.
+        const isSetup = await Guild.findOne({ id: interaction.guildId })
+        if(!isSetup) return interaction.reply({ content: `${emojis.error} | Economy System is **disabled**, make sure to enable it before running this Command.\n\nSimply run \´/manageeconomy <enable/disable>\` and then rerun this Command.`, ephemeral: true})
+
         const masterLogger = interaction.client.channels.cache.get(config.channel);
         const user = interaction.options.getUser("user") || interaction.user;
         if(!user) return interaction.reply({ content: ":x: | This is not a valid user.", ephemeral: true });
 
+        // Find the user in the database, if he isn't registered, return an error.
         const isRegistered = await economySchema.findOne({ userID: user.id });
         if(!isRegistered) return interaction.reply({ content: `${user} is not registered.`, ephemeral: true });
 
