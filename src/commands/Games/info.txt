@@ -1,0 +1,7 @@
+Common Errors
+
+- HTTPError: Invalid authorization
+=> Your IP doesn't match the whitelisted IP of your APi key
+
+- Undefined (output)
+=> APi Key invalid/Code Error
