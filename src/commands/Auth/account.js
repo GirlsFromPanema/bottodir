@@ -4,13 +4,13 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
 const { MessageActionRow, MessageButton, Interaction } = require("discord.js");
 const moment = require("moment")
-const economySchema = require("../../models/Economy/usereconomy");
-const Guild = require("../../models/Economy/guildeconomy");
 const emojis = require("../../../Controller/emojis/emojis");
 const config = require("../../../Controller/owners.json");
 
+const userAuth = require("../../models/Auth/user")
+
 module.exports.cooldown = {
-  length: 500000 /* in ms */,
+  length: 604800000 /* in ms */,
   users: new Set(),
 };
 
@@ -24,21 +24,30 @@ module.exports.run = async (interaction, utils) => {
     
     const masterLogger = interaction.client.channels.cache.get(config.channel);
 
-     // Check if the Guild has enabled economy, if not, return an error.
-    const isSetup = await Guild.findOne({ id: interaction.guildId })
-    if(!isSetup) return interaction.reply({ content: `${emojis.error} | Economy System is **disabled**, make sure to enable it before running this Command.\n\nSimply run \´/manageeconomy <enable/disable>\` and then rerun this Command.`, ephemeral: true})
-
     // Find the user in the database, if he isn't registered, return an error.
-    const isRegistered = await economySchema.findOne({
+    const hasAccount = await userAuth.find({
       userID: interaction.user.id,
     });
 
     // If the user isnt registered/if there is no data, dont do anything.
-    if (!isRegistered)
+    if (!hasAccount)
       return interaction.reply({
-        content: `${emojis.error} | You first have to \`register\` to be able to unregister.`,
+        content: `${emojis.error} | You first have to \`signup\` to be able to view your Account.`,
         ephemeral: true,
       });
+
+    const userdata = hasAccount 
+        .map((account) => {
+            return [
+                [`**Password:** ${account.password}\n**Recovery Number:** ${account.recoveryID}`].join("\n")
+            ]
+        }).join("\n");
+
+        const userdataembed = new MessageEmbed()
+        .setTitle(`${interaction.user.username}'s Data`)
+        .setDescription(`${userdata}\n\n${emojis.notify} Make sure you don't show this to anyone else.`)
+        .setFooter({ text: `User: ${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true })})
+        .setTimestamp()
 
     const verify = `${emojis.success}`;
     const cancel = `${emojis.error}`;
@@ -63,13 +72,13 @@ module.exports.run = async (interaction, utils) => {
     const initialEmbed = new MessageEmbed()
       .setTitle("UNREGISTER")
       .setDescription(
-        `Are you sure you want to unregister yourself from the economy system?`
+        `Are you sure you want to view your Account?\nIt might lower the security of your Account.`
       )
       .addField(
         "\u200b",
         `
-                Click ${verify} to unregister.
-                Click ${cancel} to cancel the unregistration.
+                Click ${verify} to continue.
+                Click ${cancel} to cancel the request.
       `
       );
     const initialMessage = await interaction.reply({
@@ -86,7 +95,7 @@ module.exports.run = async (interaction, utils) => {
 
     const collector = initialMessage.channel.createMessageComponentCollector({
       filter,
-      time: 20000,
+      time: 60000,
       max: 1,
     });
 
@@ -94,8 +103,8 @@ module.exports.run = async (interaction, utils) => {
       interaction.deferUpdate();
       if (interaction.customId === "verify") {
         const editEmbed = new MessageEmbed()
-          .setTitle("UNREGISTERED")
-          .setDescription(`${emojis.success} Successfully deleted your Data.`)
+          .setTitle("VIEWED")
+          .setDescription(`${emojis.success} successfully verified Account.\nCheck your DMs!`)
           .setFooter({
             text: `Requested by: ${interaction.user.username}`,
             displayAvatarURL: interaction.user.displayAvatarURL({ dynamic: true }),
@@ -108,13 +117,14 @@ module.exports.run = async (interaction, utils) => {
           components: components(true),
         });
 
-        // Delete the Users data if he clicks "verify"
-        isRegistered.delete();
+        // Sends the User his Data
+        interaction.user.send({ embeds: [userdataembed] })
+        
       } else if (interaction.customId === "deny") {
         const editEmbed = new MessageEmbed()
           .setTitle("CANCELLED")
           .setDescription(
-            `You \`cancelled\` your unregistration from the economic system.`
+            `Successfully \`cancelled\` your request.`
           )
           .setColor("RANDOM");
 
@@ -125,7 +135,7 @@ module.exports.run = async (interaction, utils) => {
       }
 
       const logs = new MessageEmbed()
-        .setTitle(`${emojis.error} Unregistered`)
+        .setTitle(`${emojis.error} Viewed Account`)
         .setDescription(
           `
         **Actioned by**: \`${interaction.user.tag}\`
@@ -134,7 +144,7 @@ module.exports.run = async (interaction, utils) => {
         )
         .setColor("GREEN")
         .setTimestamp();
-
+        
       /*
         if(masterLogger) {
             masterLogger.send({ embeds: [logs] })
@@ -153,5 +163,5 @@ module.exports.permissions = {
 };
 
 module.exports.data = new SlashCommandBuilder()
-  .setName("unregister")
-  .setDescription("Unregister from the Economy System");
+  .setName("account")
+  .setDescription("Displays Information about your signed account.");
