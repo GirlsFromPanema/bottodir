@@ -7,7 +7,7 @@ const { stripIndents } = require('common-tags');
 const cocToken = process.env.COC_TOKEN2
 
 const coc = new Client({
-    token: cocToken
+    keys: [cocToken]
 });
 
 module.exports.cooldown = {
@@ -31,23 +31,12 @@ module.exports.run = async (interaction, utils) =>
             return { ok: false, status: err.code, name: err.message };
         })
 
-        if (data.status === 503) {
-            return interaction.reply({ content: '⚠️ **Clash of Clans** API is down!', ephemeral: true });
-        }
-        if (!data.ok && data.status === 404) {
-            return message.channel.send({ content: '⚠️ Please provide a valid tag!', ephemeral: true});
-        }
-
-        if (!data.ok && data.status !== 404) {
-            return interaction.reply({ content: `${data.reason}`, ephemeral: true });
-        }
-
         const embed = new MessageEmbed()
 				.setTitle(`${data.name} - ${data.tag}`)
 				.setThumbnail('https://cdn.discordapp.com/attachments/717460150528639077/751713217096712213/unnamed.png')
 				.setDescription(stripIndents`
-					[Player Link Here](https://link.clashofclans.com/en?action=OpenPlayerProfile&tag=${encodeURIComponent(data.tag)})
-					${data.labels.map(m => labels[m.name]).join(' ')}
+					[Player](https://link.clashofclans.com/en?action=OpenPlayerProfile&tag=${encodeURIComponent(data.tag)})
+					
 					Name:
 					\`${data.name}\`
 					XP:
