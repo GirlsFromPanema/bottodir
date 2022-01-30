@@ -6,7 +6,7 @@ const warnModel = require("../../models/Moderation/warning");
 const moment = require("moment");
 
 module.exports.cooldown = {
-  length: 10000 /* in ms */,
+  length: 160000 /* in ms */,
   users: new Set(),
 };
 
@@ -17,7 +17,7 @@ module.exports.cooldown = {
  */
 module.exports.run = async (interaction, utils) => {
   try {
-    const user = interaction.options.getMember("target");
+    const user = interaction.options.getMember("target") || interaction.user
 
     const userWarnings = await warnModel.find({
       userId: user.id,
@@ -59,7 +59,7 @@ module.exports.run = async (interaction, utils) => {
 
 module.exports.permissions = {
   clientPermissions: [Permissions.FLAGS.ADMINISTRATOR],
-  userPermissions: [Permissions.FLAGS.MANAGE_MESSAGES],
+  userPermissions: [Permissions.FLAGS.SEND_MESSAGES],
 };
 
 module.exports.data = new SlashCommandBuilder()
@@ -69,5 +69,5 @@ module.exports.data = new SlashCommandBuilder()
     option
       .setName("target")
       .setDescription("Select the User to list warns from")
-      .setRequired(true)
+      .setRequired(false)
   );

@@ -37,11 +37,12 @@ module.exports.run = async (member) => {
 
     // Query the database for the Guilds Settings (Channel)
     const guildQuery = await Guild.findOne({ id: member.guild.id });
+    if (!guildQuery) return;
+    
     const role = member.guild.roles.cache.find(
       (role) => role.id == guildQuery.role
     );
     
-    if (!guildQuery) return;
     if (guildQuery) {
       // Sending message when new user joins the Server.
       const guild = member.client.guilds.cache.get(member.guild.id);
