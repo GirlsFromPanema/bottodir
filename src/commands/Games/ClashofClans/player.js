@@ -36,7 +36,7 @@ module.exports.run = async (interaction, utils) =>
 				.setThumbnail('https://cdn.discordapp.com/attachments/717460150528639077/751713217096712213/unnamed.png')
 				.setDescription(stripIndents`
 					[Player](https://link.clashofclans.com/en?action=OpenPlayerProfile&tag=${encodeURIComponent(data.tag)})
-					
+		
 					Name:
 					\`${data.name}\`
 					XP:

@@ -4,10 +4,10 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
 const { Client } = require('clashofclans.js');
 const { stripIndents } = require('common-tags');
-const cocToken = process.env.COC_TOKEN;
+const cocToken = process.env.COC_TOKEN2;
 
 const coc = new Client({
-    token: cocToken
+    keys: [cocToken]
 });
 
 module.exports.cooldown = {
@@ -28,18 +28,6 @@ module.exports.run = async (interaction, utils) =>
         
         const data = await coc.getClan(tag);
 
-        if (data.status === 503) {
-            return interaction.reply({ content: '⚠️ **Clash of** API is down!', ephemeral: true });
-        }
-        if (!data.ok && data.status === 404) {
-            return message.channel.send({ content: '⚠️ Please provide a valid tag!', ephemeral: true});
-        }
-
-        if (!data.ok && data.status !== 404) {
-            return interaction.reply({ content: `${data.reason}`, ephemeral: true });
-        }
-        if (!data.ok) return;
-
         const embed = new MessageEmbed()
 			
 			.setColor("RANDOM")
@@ -47,7 +35,7 @@ module.exports.run = async (interaction, utils) =>
 			.setThumbnail('https://cdn.discordapp.com/attachments/717460150528639077/751713217096712213/unnamed.png')
 			.setDescription(stripIndents`
 				[Clan Link Here](https://link.clashofclans.com/en?action=OpenClanProfile&tag=${encodeURIComponent(data.tag)})
-				${data.labels?.map(m => labels[m.name]).join(' ') ?? ''}
+                
 				**Description:**
 				\`${data.description}\`
 				**Tag:**
