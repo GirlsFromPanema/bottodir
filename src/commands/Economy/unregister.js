@@ -9,8 +9,6 @@ const Guild = require("../../models/Economy/guildeconomy");
 const emojis = require("../../../Controller/emojis/emojis");
 const config = require("../../../Controller/owners.json");
 
-const masterLogger = interaction.client.channels.cache.get(config.channel);
-
 module.exports.cooldown = {
   length: 500000 /* in ms */,
   users: new Set(),
@@ -23,6 +21,8 @@ module.exports.cooldown = {
  */
 module.exports.run = async (interaction, utils) => {
   try {
+    
+    const masterLogger = interaction.client.channels.cache.get(config.channel);
 
      // Check if the Guild has enabled economy, if not, return an error.
     const isSetup = await Guild.findOne({ id: interaction.guildId })

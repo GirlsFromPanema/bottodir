@@ -4,7 +4,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
 const { Client } = require('clashofclans.js');
 const { stripIndents } = require('common-tags');
-const cocToken = process.env.COC_TOKEN
+const cocToken = process.env.COC_TOKEN2
 
 const coc = new Client({
     token: cocToken
