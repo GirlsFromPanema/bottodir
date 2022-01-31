@@ -8,8 +8,6 @@ const userSchema = new Schema({
     timestamp: Number,
 })
    
-
 const User = model("User", userSchema);
-
 
 module.exports = User;

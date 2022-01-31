@@ -94,8 +94,6 @@ module.exports.run = async (interaction, utils) => {
       .setColor("RED")
       .setTimestamp();
 
-    target.send({ embeds: [targetembed] });
-
     const e3 = new MessageEmbed();
     e3.setDescription("❌ | Action was canceled!");
     e3.setColor("RED");
@@ -111,24 +109,21 @@ module.exports.run = async (interaction, utils) => {
           guildId: interaction.guildId,
           moderatorId: interaction.member.id,
           reason,
-          /* warnings */
           timestamp: Date.now(),
         }).save();
 
-        //  warnings++
-
         // fetch the logs channel of the guild, then send the embed.
         const guildQuery = await Guild.findOne({ id: interaction.guild.id });
+
         if (guildQuery) {
           const guild = interaction.client.guilds.cache.get(
             interaction.guild.id
           );
           const logging = guild.channels.cache.get(guildQuery.channel);
           logging.send({ embeds: [e2] });
-        } else if (!guildQuery) {
-          return;
-        }
+        } 
 
+        target.send({ embeds: [targetembed] });
         collector.stop("success");
       } else if (i.customId === "NO") {
         interaction.editReply({

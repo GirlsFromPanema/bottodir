@@ -22,10 +22,13 @@ module.exports.run = async (interaction, utils) => {
     const target = interaction.options.getUser("target");
 
     // Find the data of the user and delete one warning, if there isn't any warning saved, return an error.
-    const data = await warnModel.findOneAndDelete({ userId: target.id})
+    const data = await warnModel.findOne({ 
+      userId: target.id 
+    })
     if(!data) {
         return interaction.reply({ content: `${target.tag} has no warnings`})
     } 
+    data.delete();
     
     // Embed structure
     const user = interaction.guild.members.cache.get(target.userId)

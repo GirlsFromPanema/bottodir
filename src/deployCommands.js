@@ -1,7 +1,4 @@
 "use strict";
-
-/* Script to deploy commands. */
-
 const path = require("path");
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 const { REST } = require("@discordjs/rest");
@@ -11,7 +8,7 @@ const { green } = require("colors/safe");
 
 const local = true; /* Change to false to deploy global commands */
 
-const clientId = "904355568431542302"; /* Change clientId */
+const clientId = "904355568431542302"; /* Change bot id */
 const guildId = "902910129802985473"; /* Change guildId (for local commands) */
 const commands = [];
 
