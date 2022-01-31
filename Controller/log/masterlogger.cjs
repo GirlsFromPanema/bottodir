@@ -1,6 +1,8 @@
-const config = require("../../../Controller/owners.json");
+// This is used to log user information to a channel within the developers guild.
 
+const config = require("../../../Controller/owners.json");
 const masterLogger = client.channels.cache.get(config.channel);
+
 const logs = new MessageEmbed()
   .setTitle(`${emojis.success} ACTION`)
   .setDescription(
