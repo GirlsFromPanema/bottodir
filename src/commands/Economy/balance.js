@@ -25,7 +25,7 @@ module.exports.run = async (interaction, utils) =>
         
          // Check if the Guild has enabled economy, if not, return an error.
         const isSetup = await Guild.findOne({ id: interaction.guildId })
-        if(!isSetup) return interaction.reply({ content: `${emojis.error} | Economy System is **disabled**, make sure to enable it before running this Command.\n\nSimply run \´/manageeconomy <enable/disable>\` and then rerun this Command.`, ephemeral: true})
+        if(!isSetup) return interaction.reply({ content: `${emojis.error} | Economy System is **disabled**, make sure to enable it before running this Command.\n\nSimply run \`/manageeconomy <enable/disable>\` and then rerun this Command.`, ephemeral: true})
  
         const user = interaction.options.getUser("user") || interaction.user;
         if(!user) return interaction.reply({ content: ":x: | This is not a valid user.", ephemeral: true });

@@ -12,16 +12,14 @@ module.exports.cooldown = {
     users: new Set()
 };
 
-const randomNum = (max, min) => Math.floor(Math.random() * (max - (min ? min : 0))) + (min ? min : 0);
-        const addMoney = async (userID, wallet = 0) => {
-            await economyUser.updateOne(
-                { userID },
-                {
-                    $inc: { wallet }
-                },
-                { upsert: true }
-            );
-        };
+const addMoney = async (userID, wallet = 0) => economyUser.updateOne({ userID }, { $set: { userID }, $inc: { wallet } }, { upsert: true })
+const robMoney = async (userID, wallet = 0) => {
+    await economyUser.updateOne({
+        userID,
+        $inc: { wallet: -wallet}, 
+        upsert: true 
+    });
+};
 
 /**
  * Runs ping command.
@@ -33,8 +31,9 @@ module.exports.run = async (interaction, utils) =>
     try
     {
         const masterLogger = interaction.client.channels.cache.get(config.channel);
-
-         // Check if the Guild has enabled economy, if not, return an error.
+        const target = interaction.options.getUser("target");
+        
+        // Check if the Guild has enabled economy, if not, return an error.
         const isSetup = await Guild.findOne({ id: interaction.guildId })
         if(!isSetup) return interaction.reply({ content: `${emojis.error} | Economy System is **disabled**, make sure to enable it before running this Command.\n\nSimply run \`/manageeconomy <enable/disable>\` and then rerun this Command.`, ephemeral: true})
         
@@ -42,20 +41,33 @@ module.exports.run = async (interaction, utils) =>
         const isRegistered = await economyUser.findOne({ userID: interaction.user.id });
         if(!isRegistered) return interaction.reply({ content: `${emojis.error} | You are not registered!\nUse \`/register\` to create an account.`, ephemeral: true })
 
-        const earning = randomNum(100, 350);
-        await addMoney(interaction.user.id, earning)
+        // Check if the robbed user is registered
+        const UserisRegistered = await economyUser.findOne({ userID: target.id });
+        if(!UserisRegistered) return interaction.reply({ content: `${target} is not registered.`, ephemeral: true });
+
+        const memberBank = await economyUser.findOne({ userID: target.id });
+        const memberCash = memberBank && memberBank.wallet ? memberBank.wallet : 0;
+        const robbed = Math.floor((memberCash * 40) / 100);
+
+        if(robbed === 0) {
+            return interaction.reply({ content: `${emojis.error} | The user you are trying to rob has no money!`, ephemeral: true })
+        }
+
+        await robMoney(target.id, robbed);
+        await addMoney(interaction.user.id, robbed);
 
         const embed = new MessageEmbed()
-        .setDescription(`${emojis.success} Successfully begged for \`${earning}$\`\n\nUpdated Account:\n**Wallet**: ${isRegistered.wallet.toLocaleString()}`)
+        .setDescription(`${emojis.success} Successfully robbed ${robbed} from ${target}`)
         .setColor("GREEN")
         .setFooter({ text: `Account: ${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true })})
         .setTimestamp()
 
         const logs = new MessageEmbed()
-        .setTitle(`${emojis.success} Begged Money`)
+        .setTitle(`${emojis.success} ${interaction.user.tag} Rob`)
         .setDescription(`
         **Actioned by**: \`${interaction.user.tag}\`
-        **Earning**: \`${earning}$\`
+        **Target**: \`${target.tag}\`
+        **Earning**: \`${robbed}$\`
         `)
         .setColor("GREEN")
         .setTimestamp()
@@ -81,5 +93,6 @@ module.exports.permissions = {
 };
 
 module.exports.data = new SlashCommandBuilder()
-    .setName("beg")
-    .setDescription("Beg for Money");
+    .setName("rob")
+    .setDescription("Rob someones money")
+    .addUserOption((option) => option.setName("target").setDescription("Who do you want to rob?").setRequired(true))

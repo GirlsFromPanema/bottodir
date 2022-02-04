@@ -12,6 +12,10 @@ module.exports.cooldown = {
     users: new Set()
 };
 
+// Randomize the jobs for the users work.
+const jobs = ['House wife', 'Programmer', 'Builder', 'McDonald\'s employee', 'Law enforcer', 'Lawyer', 'Banker', 'Cleaner', 'Discord Mod'];
+
+// Randomize the money and then update the user 
 const randomNum = (max, min) => Math.floor(Math.random() * (max - (min ? min : 0))) + (min ? min : 0);
         const addMoney = async (userID, wallet = 0) => {
             await economyUser.updateOne(
@@ -33,26 +37,27 @@ module.exports.run = async (interaction, utils) =>
     try
     {
         const masterLogger = interaction.client.channels.cache.get(config.channel);
-
-         // Check if the Guild has enabled economy, if not, return an error.
+        
+        // Check if the Guild has enabled economy, if not, return an error.
         const isSetup = await Guild.findOne({ id: interaction.guildId })
-        if(!isSetup) return interaction.reply({ content: `${emojis.error} | Economy System is **disabled**, make sure to enable it before running this Command.\n\nSimply run \`/manageeconomy <enable/disable>\` and then rerun this Command.`, ephemeral: true})
+        if(!isSetup) return interaction.reply({ content: `${emojis.error} | Economy System is **disabled**, make sure to enable it before running this Command.\n\nSimply run \´/manageeconomy <enable/disable>\` and then rerun this Command.`, ephemeral: true})
         
         // Find the user in the database, if he isn't registered, return an error.
         const isRegistered = await economyUser.findOne({ userID: interaction.user.id });
         if(!isRegistered) return interaction.reply({ content: `${emojis.error} | You are not registered!\nUse \`/register\` to create an account.`, ephemeral: true })
 
-        const earning = randomNum(100, 350);
+        const earning = randomNum(800, 1260);
+        const job = [randomNum(jobs.length)]
         await addMoney(interaction.user.id, earning)
 
         const embed = new MessageEmbed()
-        .setDescription(`${emojis.success} Successfully begged for \`${earning}$\`\n\nUpdated Account:\n**Wallet**: ${isRegistered.wallet.toLocaleString()}`)
+        .setDescription(`${emojis.success} Work hard as a ${job} and earned \`${earning}$\`\n\nUpdated Account:\n**Wallet**: ${isRegistered.wallet.toLocaleString()}`)
         .setColor("GREEN")
         .setFooter({ text: `Account: ${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true })})
         .setTimestamp()
 
         const logs = new MessageEmbed()
-        .setTitle(`${emojis.success} Begged Money`)
+        .setTitle(`${emojis.success} Worked as a ${job} and earned \`${earning}$\``)
         .setDescription(`
         **Actioned by**: \`${interaction.user.tag}\`
         **Earning**: \`${earning}$\`
@@ -81,5 +86,5 @@ module.exports.permissions = {
 };
 
 module.exports.data = new SlashCommandBuilder()
-    .setName("beg")
-    .setDescription("Beg for Money");
+    .setName("work")
+    .setDescription("Work for Money");

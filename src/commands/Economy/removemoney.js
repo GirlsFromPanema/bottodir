@@ -18,7 +18,7 @@ module.exports.ownerOnly = {
 
 // Update the Users profile => add money to his wallet.
 const addMoney = async (userID, wallet = 0) => {
-	await economyUser.updateOne({ userID }, { $set: { userID }, $inc: { wallet } }, { upsert: true });
+	await economyUser.updateOne({ userID }, { $set: { userID }, $inc: { wallet: -wallet } }, { upsert: true });
 };
 
 /**
@@ -47,15 +47,15 @@ module.exports.run = async (interaction, utils) =>
 
         const bal = Number(amount)
         await addMoney(user.id, bal)
-    
+
         const embed = new MessageEmbed()
-        .setDescription(`${emojis.success} Successfully added \`${amount}$\` to ${user.tag}`)
+        .setDescription(`${emojis.success} Successfully removed \`${amount}$\` to ${user.tag}`)
         .setColor("GREEN")
         .setFooter({ text: `Dev: ${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true })})
         .setTimestamp()
 
         const logs = new MessageEmbed()
-        .setTitle(`${emojis.success} Added Money`)
+        .setTitle(`${emojis.success} Removed Money`)
         .setDescription(`
         **Actioned by**: \`${interaction.user.tag}\`
         **User**: \`${user.tag}\`
@@ -74,9 +74,9 @@ module.exports.run = async (interaction, utils) =>
         const userlogs = new MessageEmbed()
         .setTitle(`${emojis.notify} Economy Profile Update`)
         .setDescription(`
-        Your Balance has changed because someone removed your Money!
+        Your Balance has changed because someone added you Money!
         **Actioned by**: \`${interaction.user.tag}\`
-        **User**: \`${user.tag}\`
+        **Recipient**: \`${user.tag}\`
         **Guild**: \`${interaction.guild.name}\`
         **Amount**: \`${amount}$\`
         `)
@@ -100,8 +100,8 @@ module.exports.permissions = {
 };
 
 module.exports.data = new SlashCommandBuilder()
-    .setName("addmoney")
-    .setDescription("Add money to a User")
-    .addIntegerOption((option) => option.setName("amount").setDescription("How much should the User receive?").setRequired(true))
-    .addUserOption((option) => option.setName("user").setDescription("Who should receive the Money?").setRequired(false))
+    .setName("removemoney")
+    .setDescription("Remove Money from a User.")
+    .addIntegerOption((option) => option.setName("amount").setDescription("How much money would you like to remove?").setRequired(true))
+    .addUserOption((option) => option.setName("user").setDescription("What user would you like to remove money from?").setRequired(false))
 
