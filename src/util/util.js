@@ -3,7 +3,11 @@
 const fs = require("fs");
 const path = require("path");
 
-/* Various utility functions. */
+/* 
+
+Various utility functions for uptime/math etc.
+
+*/
 
 /**
  * Storing the bots color plaette

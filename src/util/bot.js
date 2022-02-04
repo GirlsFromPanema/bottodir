@@ -7,6 +7,12 @@ const { getAllFiles } = require("./util.js");
 const { cyan, green, red } = require("colors/safe");
 const config = require("../../Controller/owners.json")
 
+/*
+
+The main file of the bot defining intents etc.
+
+*/
+
 const client = new Client({
     intents: [
         Intents.FLAGS.GUILDS,

@@ -1,5 +1,11 @@
 "use strict";
 
+/*
+
+Script to connect to the Database (defined in the .env file)
+
+*/
+
 const { connect, Mongoose } = require("mongoose");
 const { cyan, red, green } = require("colors/safe");
 
