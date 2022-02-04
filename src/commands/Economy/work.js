@@ -28,7 +28,7 @@ const randomNum = (max, min) => Math.floor(Math.random() * (max - (min ? min : 0
         };
 
 /**
- * Runs ping command.
+ * Runs the command.
  * @param {CommandInteraction} interaction The Command Interaciton
  * @param {any} utils Additional util
  */

@@ -22,7 +22,7 @@ const addMoney = async (userID, wallet = 0) => {
 };
 
 /**
- * Runs ping command.
+ * Runs the command.
  * @param {CommandInteraction} interaction The Command Interaciton
  * @param {any} utils Additional util
  */

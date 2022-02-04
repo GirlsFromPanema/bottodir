@@ -15,7 +15,7 @@ module.exports.cooldown = {
 };
 
 /**
- * Runs ping command.
+ * Runs the command.
  * @param {CommandInteraction} interaction The Command Interaciton
  * @param {any} utils Additional util
  */

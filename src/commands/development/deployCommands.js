@@ -14,7 +14,7 @@ module.exports.ownerOnly = {
 };
 
 /**
- * Runs ping command.
+ * Runs the command.
  * @param {CommandInteraction} interaction The Command Interaciton
  * @param {any} utils Additional util
  */
