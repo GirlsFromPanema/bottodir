@@ -1,2 +1,2 @@
-Due to some Bugs, this Code has been removed from the master branch of the Bot.
+Due to some Bugs this Code has been removed from the master branch of the Bot.
 You can move the whole sub folder of the src folder into the src/commands folder to use it.

@@ -1,5 +1,11 @@
 "use strict";
 
+/*
+
+This is a simple boilerplate for a command.
+
+*/
+
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
 
