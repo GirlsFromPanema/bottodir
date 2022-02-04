@@ -38,24 +38,20 @@ module.exports.run = async (interaction, utils) =>
                 ]
             }).join("\n");
 
-        const embed = new MessageEmbed()
-        
-        .setDescription(`There is a new Tournament going on!\n\n${tournaments}`)
-        .setFooter({ text: `Server: ${interaction.guild.name}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true })})
-        .setTimestamp()
-       
         channel.send({
-            content: `<@&${role}>`,
+            content: `${role}`,
             embeds: [{
                 title: `${emojis.notify} New Tournament!`,
                 description: `There is a new Tournament going on!\n\n${tournaments}`,
                 color: "GREEN",
                 thumbnail: {
-                    url: interaction.user.avatarURL({ format: "png", size: 1024 }),
+                    url: interaction.guild.iconURL({ format: "png", size: 1024 }),
                 },
                 timestamp: new Date()
             }]
         });
+
+        interaction.reply({ content: "Notification sent!", ephemeral: true })
     }
     catch (err)
     {
