@@ -47,11 +47,11 @@ module.exports.run = async (interaction, utils) =>
         if(!isRegistered) return interaction.reply({ content: `${emojis.error} | You are not registered!\nUse \`/register\` to create an account.`, ephemeral: true })
 
         const earning = randomNum(800, 1260);
-        const job = [randomNum(jobs.length)]
+        const job = jobs[Math.floor(Math.random() * jobs.length)];
         await addMoney(interaction.user.id, earning)
 
         const embed = new MessageEmbed()
-        .setDescription(`${emojis.success} Work hard as a ${job} and earned \`${earning}$\`\n\nUpdated Account:\n**Wallet**: ${isRegistered.wallet.toLocaleString()}`)
+        .setDescription(`${emojis.success} Work hard as a ${job} and earned \`${earning}$\``)
         .setColor("GREEN")
         .setFooter({ text: `Account: ${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true })})
         .setTimestamp()
