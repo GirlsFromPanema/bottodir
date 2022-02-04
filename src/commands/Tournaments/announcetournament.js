@@ -22,6 +22,9 @@ module.exports.run = async (interaction, utils) =>
 
         // Check if the guild is signed up with any tournament
         const isSetup = await Guild.find({ id: interaction.guild.id });
+
+        const channel = interaction.options.getChannel("channel") || interaction.channel;
+        const role = interaction.options.getRole("role");
         
         // If there is no tournament, return an error.
         if(!isSetup) { 
@@ -31,17 +34,28 @@ module.exports.run = async (interaction, utils) =>
         const tournaments = isSetup 
             .map((tournament) => {
                 return [
-                    [`**Name:** ${tournament.name}\n**Date:** ${tournament.date}\n**Price**: ${tournament.price}`].join("\n")
+                    [`**Name:** ${tournament.name}\n**Date:** ${tournament.date}\n**Price:** ${tournament.price}`].join("\n")
                 ]
             }).join("\n");
 
         const embed = new MessageEmbed()
-        .setTitle(`${interaction.guild.name} Tournament's`)
-        .setDescription(`${tournaments}`)
+        
+        .setDescription(`There is a new Tournament going on!\n\n${tournaments}`)
         .setFooter({ text: `Server: ${interaction.guild.name}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true })})
         .setTimestamp()
        
-        interaction.reply({ embeds: [embed], ephemeral: true })
+        channel.send({
+            content: `<@&${role}>`,
+            embeds: [{
+                title: `${emojis.notify} New Tournament!`,
+                description: `There is a new Tournament going on!\n\n${tournaments}`,
+                color: "GREEN",
+                thumbnail: {
+                    url: interaction.user.avatarURL({ format: "png", size: 1024 }),
+                },
+                timestamp: new Date()
+            }]
+        });
     }
     catch (err)
     {
@@ -51,10 +65,13 @@ module.exports.run = async (interaction, utils) =>
 
 module.exports.permissions = {
     clientPermissions: [Permissions.FLAGS.SEND_MESSAGES],
-    userPermissions: [Permissions.FLAGS.SEND_MESSAGES]
+    userPermissions: [Permissions.FLAGS.ADMINISTRATOR]
 };
 
 module.exports.data = new SlashCommandBuilder()
-    .setName("listtournament")
-    .setDescription("List the Tournament on your Server");
+    .setName("announcetournament")
+    .setDescription("Announce the tournament on your Server")
+    .addRoleOption((option) => option.setName("role").setDescription("What role should be pinged?").setRequired(true))
+    .addChannelOption((option) => option.setName("channel").setDescription("Where should the announcement be sent to?").setRequired(false));
+    
     

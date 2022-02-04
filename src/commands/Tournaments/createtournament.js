@@ -20,6 +20,7 @@ module.exports.run = async (interaction, utils) => {
   try {
     const tournamentname = interaction.options.getString("name");
     const tournamentdate = interaction.options.getString("date");
+    const tournamentprice = interaction.options.getString("price");
 
     const isSetup = await Guild.findOne({ id: interaction.guild.id });
 
@@ -36,6 +37,7 @@ module.exports.run = async (interaction, utils) => {
       id: interaction.guild.id,
       name: tournamentname,
       date: tournamentdate,
+      price: tournamentprice,
     });
     newtournament.save();
 
@@ -66,5 +68,11 @@ module.exports.data = new SlashCommandBuilder()
     option
       .setName("date")
       .setDescription("When is the Tournament? Example: 12/12/2022 6PM MESZ")
+      .setRequired(true)
+  )
+  .addStringOption((option) =>
+    option
+      .setName("price")
+      .setDescription("What is the price for the tournament?")
       .setRequired(true)
   );

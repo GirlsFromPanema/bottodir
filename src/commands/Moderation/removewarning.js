@@ -26,7 +26,7 @@ module.exports.run = async (interaction, utils) => {
       userId: target.id 
     })
     if(!data) {
-        return interaction.reply({ content: `${target.tag} has no warnings`})
+        return interaction.reply({ content: `${target.tag} has no warnings`, ephemeral: true })
     } 
     data.delete();
     
