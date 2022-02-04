@@ -6,6 +6,8 @@ const { red } = require("colors/safe");
 const config = require("../../Controller/owners.json");
 const emojis = require("../../Controller/emojis/emojis");
 
+const User = require("../models/Admin/userblacklist");
+
 module.exports.data =
 {
     name: "interactionCreate",
@@ -34,6 +36,10 @@ module.exports.run = async (interaction) =>
             await interaction.reply({ content: `${emojis.error} | You can only use this command every ${msToMinAndSec(cmdFile.cooldown.length)} minutes.`, ephemeral: true });
             return;
         }
+
+        // Check if the User is blacklisted, if true, return.
+        let profile = await User.findOne({ userID: interaction.user.id })
+        if(profile) return interaction.reply({ content: `${emojis.error} | You are blacklisted from using my Commands.`, ephemeral: true })
 
         // if the user isnt within the owners, dont execute the cmd
         if (cmdFile.ownerOnly) {
