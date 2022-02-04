@@ -28,14 +28,7 @@ module.exports.run = async (interaction, utils) => {
   try {
     const tag = interaction.options.getString("tag");
 
-    const data = await coc.clan(tag).catch((err) => {
-      console.log(err);
-      return {
-        ok: false,
-        status: err.code,
-        name: err.message,
-      };
-    });
+    const data = await coc.clan(tag);
 
     const embed = new MessageEmbed()
       .setColor("RANDOM")
@@ -86,7 +79,7 @@ module.exports.permissions = {
 };
 
 module.exports.data = new SlashCommandBuilder()
-  .setName("player")
+  .setName("crplayer")
   .setDescription("Search for a Clash Royal Player")
   .addStringOption((option) =>
     option

@@ -67,6 +67,6 @@ module.exports.permissions = {
 };
 
 module.exports.data = new SlashCommandBuilder()
-    .setName("clan")
+    .setName("cocclan")
     .setDescription("Show Information about a Clash of Clans Clan")
     .addStringOption((option) => option.setName("tag").setDescription("Provide the Clan Tag you want to lookup").setRequired(true))
