@@ -116,7 +116,3 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# not working code
-guildDelete.js
-reset.js
-villagegirl.png
