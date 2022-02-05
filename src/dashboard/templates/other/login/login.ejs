@@ -1,0 +1,141 @@
+<html lang="en">
+  <head>
+    <meta name="theme-color" content="#36393f" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <title>Bottodir • Login</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="title" content="Bottodir • Utility" />
+
+    <meta property="og:image" content="<%=domain%>/logo.png" />
+    <meta
+      property="og:title"
+      content="Bottodir • Discord Utility with ease"
+    />
+    <meta
+      property="og:description"
+      content="Utility Discord"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link
+      href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <noscript>
+      <div class="noscript">
+        To view the page please enable Javascript in your browser
+      </div>
+    </noscript>
+    <script type="text/javascript">
+      var preload = document.createElement('div')
+      preload.className = 'loading-screen'
+      preload.innerHTML =
+        '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>'
+      document.body.appendChild(preload)
+      window.addEventListener('load', function () {
+        preload.className += ' fade'
+      })
+      setTimeout(function () {
+        preload.style.display = 'none'
+      }, 600)
+    </script>
+    <div id="logo" onclick="window.location.href='/'">
+      <svg height="30" width="200">
+        <text x="0" y="15" fill="white">Bottodir</text>
+      </svg>
+    </div>
+    <div id="navbar">
+      <a href="/" target="_blank">Home</a>
+      <a href="/#features">Features</a
+      ><a href="/discord" target="_blank">Discord</a>
+    </div>
+    <% if (user) { %>
+    <div class="user-dropdown">
+      <div id="login">
+        <%= user.username %>
+        <i class="fa fa-caret-down"></i>
+        <div class="dropdown-content">
+          <a href="/panel">Dashboard</a>
+          <a href="/me">Settings</a>
+          <a href="/logout" style="color: red">Logout</a>
+        </div>
+      </div>
+    </div>
+    <% } else { %><a id="login" href="/login">Login</a><% } %>
+    <div id="lg">
+      <div id="login-hamburger">
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="/#features" class="nav-link">Features</a>
+          </li>
+          <li class="nav-item">
+            <a href="/discord" class="nav-link">Discord</a>
+          </li>
+          <li class="nav-item">
+            <a href="/status" class="nav-link">Status</a>
+          </li>
+          <li class="nav-item">
+            <% if (user) { %>
+            <div class="user-dropdown">
+              <div>
+                <a><%= user.username %></a>
+                <i class="fa fa-caret-down"></i>
+                <div class="dropdown-content">
+                  <a href="/panel">Dashboard</a>
+                  <a href="/me">Settings</a>
+                  <a href="/logout" style="color: red">Logout</a>
+                </div>
+              </div>
+            </div>
+            <% } else { %><a id="user" href="/login">Login</a><% } %>
+          </li>
+        </ul>
+        <div class="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="center-div">
+      <h1>Uh Oh!</h1>
+      <h2>You must be logged in to view this page.</h2>
+      <a href="/login"><button class="button">Login</button></a>
+    </div>
+    <div id="footer">
+      <hr />
+      <div id="left-footer">
+        © 2021 Bottodir Development
+      </div>
+      <div id="right-footer">
+        <a href="/contact">Contact</a
+        ><a href="/discord" target="_blank">Discord</a
+        ><a href="/panel" target="_blank">Dashboard</a
+        ><a href="/policy">Privacy Policy</a>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init()
+    </script>
+  </body>
+</html>

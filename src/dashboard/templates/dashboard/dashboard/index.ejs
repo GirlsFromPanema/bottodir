@@ -1,0 +1,220 @@
+<html lang="en">
+  <head>
+    <meta name="theme-color" content="#36393f" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <title>Bottodir • Dashboard</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="title" content="Bottodir • Utility Discord" />
+
+    <meta property="og:image" content="<%=domain%>/logo.png" />
+    <meta
+      property="og:title"
+      content="Bottodir • Utility Discord"
+    />
+    <meta
+      property="og:description"
+      content="Utility Discord with ease"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <link rel="stylesheet" href="/css/dashboard/dashboard.css" />
+
+    <link
+      href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <noscript>
+      <div class="noscript">
+        To view the page please enable Javascript in your browser
+      </div>
+    </noscript>
+    <script type="text/javascript">
+      var preload = document.createElement('div')
+      preload.className = 'loading-screen'
+      preload.innerHTML =
+        '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>'
+      document.body.appendChild(preload)
+      window.addEventListener('load', function () {
+        preload.className += ' fade'
+      })
+      setTimeout(function () {
+        preload.style.display = 'none'
+      }, 600)
+    </script>
+    <div id="logo" onclick="window.location.href='/'">
+      <svg height="30" width="200">
+        <text x="0" y="15" fill="white">Bottodir</text>
+      </svg>
+    </div>
+    <div id="navbar">
+      <a href="/" target="_blank">Home</a> <a href="/#features">Features</a
+      ><a href="/discord" target="_blank">Discord</a>
+    </div>
+    <% if (user) { %>
+    <div class="user-dropdown">
+      <div id="login">
+        <%= user.username %>
+        <i class="fa fa-caret-down"></i>
+        <div class="dropdown-content">
+          <a href="/panel">Dashboard</a>
+          <a href="/me">Settings</a>
+          <a href="/logout" style="color: red">Logout</a>
+        </div>
+      </div>
+    </div>
+    <% } else { %><a id="login" href="/login">Login</a><% } %>
+    <div id="lg">
+      <div id="login-hamburger">
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="/#features" class="nav-link">Features</a>
+          </li>
+          <li class="nav-item">
+            <a href="/discord" class="nav-link">Discord</a>
+          </li>
+          <li class="nav-item">
+            <a href="/status" class="nav-link">Status</a>
+          </li>
+          <li class="nav-item">
+            <% if (user) { %>
+            <div class="user-dropdown">
+              <div>
+                <a><%= user.username %></a>
+                <i class="fa fa-caret-down"></i>
+                <div class="dropdown-content">
+                  <a href="/">Home</a>
+                  <a href="/me">Settings</a>
+                  <a href="/logout" style="color: red">Logout</a>
+                </div>
+              </div>
+            </div>
+            <% } else { %><a id="user" href="/login">Login</a><% } %>
+          </li>
+        </ul>
+        <div class="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </div>
+    </div>
+
+    <% if (guild.icon) { iconurl = "https://cdn.discordapp.com/icons/" +
+    guild.id + "/" + guild.icon + ".png??size=512"; } else { iconurl =
+    "https://cdn.glitch.com/82fe990a-7942-42e3-9790-39807ccdb9f6%2Ficon-404-dark.png?v=1602427904949";
+    } %>
+
+    <div class="dash_main">
+      <div class="dash_box">
+        <div class="title">
+          <img draggable="false" src="<%= iconurl %>" alt="<% guild.name %>" />
+
+          <span><%= guild.name %></span>
+        </div>
+        <div class="plugins">
+          <a href="/panel/<%= guild.id %>/settings">
+            <div class="item" data-aos="zoom-in" id="hov-big">
+              <div style="margin-left: 0px">
+                <img
+                  alt="settings"
+                  src="/images/dashboard/settings.svg"
+                  width="50"
+                  height="50"
+                  draggable="false"
+                />
+              </div>
+              <div style="margin-left: 20px; margin-top: 10px">
+                <div class="pl-title">
+                  Settings
+                </div>
+                <div class="pl-description">
+                  Customise Bottodir's General Settings.
+                </div>
+              </div>
+            </div>
+          </a>
+          <a href="/panel/<%= guild.id %>/leaderboard">
+            <div class="item" data-aos="zoom-in" id="hov-big">
+              <div style="margin-left: 0px">
+                <img
+                  draggable="false"
+                  alt="leaderboard"
+                  src="/images/dashboard/leaderboard.svg"
+                  width="50"
+                  height="50"
+                />
+              </div>
+              <div style="margin-left: 20px; margin-top: 10px">
+                <div class="pl-title">
+                  Leaderboard
+                </div>
+                <div class="pl-description">
+                  View the leaderboard.
+                </div>
+              </div>
+            </div>
+          </a>
+          <a href="/panel/<%= guild.id %>/toggles">
+            <div class="item" data-aos="zoom-in" id="hov-big">
+              <div style="margin-left: 0px">
+                <img
+                  draggable="false"
+                  alt="Premium"
+                  src="/images/dashboard/toggles.svg"
+                  width="50"
+                  height="50"
+                />
+              </div>
+              <div style="margin-left: 20px; margin-top: 10px">
+                <div class="pl-title">
+                  Toggles
+                </div>
+                <div class="pl-description">
+                  Toggle Commands and Channels.
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div style="padding-bottom: 6%"></div>
+      </div>
+    </div>
+    <div id="footer">
+      <hr />
+      <div id="left-footer">
+        © 2021 Bottodir Development
+      </div>
+      <div id="right-footer">
+        <a href="/contact">Contact</a
+        ><a href="/discord" target="_blank">Discord</a
+        ><a href="/" target="_blank">Home</a
+        ><a href="/policy">Privacy Policy</a>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      $(document).ready(function () {
+        AOS.init()
+      })
+    </script>
+  </body>
+</html>
