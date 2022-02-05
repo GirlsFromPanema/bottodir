@@ -28,22 +28,18 @@ module.exports.run = async (interaction, utils) =>
         const user = interaction.options.getUser("id");
 
         const isBlacklisted = await User.findOne({ userID: user.id })
-        if(isBlacklisted) return interaction.reply({ content: `${emojis.error} | <@${user.id}> is already blacklisted.`, ephemeral: true })
+        if(!isBlacklisted) return interaction.reply({ content: `${emojis.error} | <@${user.id}> is not blacklisted.`, ephemeral: true })
 
-        const blacklist = new User({
-            userID: user.id,
-            active: true
-        }).save();
+            isBlacklisted.delete();
 
         const embed = new MessageEmbed()
         .setTitle(`${emojis.notify} Profile Updated`)
-        .setDescription(`Dear ${user.tag}, your profile got updated!\n\n**Action:** Blacklisted.\nYou have been banned from using my Commands.\n\nIf you think this was a mistake, contact \`Koni#9521\`.`)
-        .setColor("RED")
+        .setDescription(`Dear ${user.tag}, your profile got updated!\n\n**Action:** Whitelisted.\nYou are allowed to use my Commands again.`)
+        .setColor("GREEN")
         .setTimestamp()
 
         await user.send({ embeds: [embed] })
-
-        interaction.reply({ content: `${emojis.success} | Successfully blacklisted ${user}`, ephemeral: true })
+        interaction.reply({ content: `${emojis.success} | Successfully whitelisted ${user}`, ephemeral: true })
     }
     catch (err)
     {
@@ -57,6 +53,6 @@ module.exports.permissions = {
 };
 
 module.exports.data = new SlashCommandBuilder()
-    .setName("blacklistuser")
-    .setDescription("Blacklist a User from using the Bot")
-    .addUserOption((option) => option.setName("id").setDescription("Who should get blacklisted?").setRequired(true));
+    .setName("whitelistuser")
+    .setDescription("Whitelist a User from using the Bot")
+    .addUserOption((option) => option.setName("id").setDescription("Who should get whitelisted?").setRequired(true));
