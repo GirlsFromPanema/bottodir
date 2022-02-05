@@ -2,8 +2,10 @@
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
-const ms = require("ms")
-const Guild = require("../../models/logs")
+
+const ms = require("ms");
+
+const Guild = require("../../models/logs");
 
 module.exports.cooldown = {
     length: 10000, /* in ms */

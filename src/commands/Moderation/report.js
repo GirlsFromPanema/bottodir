@@ -2,8 +2,10 @@
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed, Message } = require("discord.js");
-const Guild = require("../../models/report")
-const emojis = require("../../../Controller/emojis/emojis")
+
+const Guild = require("../../models/report");
+
+const emojis = require("../../../Controller/emojis/emojis");
 
 module.exports.cooldown = {
     length: 108000000, /* in ms */
@@ -19,8 +21,8 @@ module.exports.run = async (interaction, utils) =>
 {
     try
     {
-        const target = interaction.options.getMember("target")
-        const reason = interaction.options.getString("reason")
+        const target = interaction.options.getMember("target");
+        const reason = interaction.options.getString("reason");
 
         const embed = new MessageEmbed()
         .setTitle(`${emojis.notify} Report`)
@@ -61,8 +63,8 @@ module.exports.run = async (interaction, utils) =>
         });
 
         if(guildQuery) {
-            const target = interaction.options.getMember("target")
-            const reason = interaction.options.getString("reason")
+            const target = interaction.options.getMember("target");
+            const reason = interaction.options.getString("reason");
 
             const guild = interaction.client.guilds.cache.get(interaction.guild.id);
             const reportchannel = guild.channels.cache.get(guildQuery.channel);

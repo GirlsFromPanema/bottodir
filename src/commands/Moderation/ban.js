@@ -2,7 +2,8 @@
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
-const Guild = require("../../models/logs")
+
+const Guild = require("../../models/logs");
 
 module.exports.cooldown = {
     length: 10000, /* in ms */
@@ -18,10 +19,10 @@ module.exports.run = async (interaction, utils) =>
 {
     try
     {
-        const target = interaction.options.getMember("target")
+        const target = interaction.options.getMember("target");
         const reason = interaction.options.getString('reason') || "No reason provided";
 
-        if(!target) return interaction.reply({ content: "This User is invalid"})
+        if(!target) return interaction.reply({ content: "This User is invalid"});
 
         let bandm = new MessageEmbed()
         .setColor("RED")

@@ -17,8 +17,8 @@ module.exports.run = async (interaction, utils) =>
 {
     try
     {
-        const role = interaction.options.getRole("role")
-        if(!role) interaction.reply({ content: "This is not a valid Role", ephemeral: true })
+        const role = interaction.options.getRole("role");
+        if(!role) interaction.reply({ content: "This is not a valid Role", ephemeral: true });
 
         const Members = interaction.guild.members.cache
         .filter((member) => member.roles.cache.find((role) => role === role))

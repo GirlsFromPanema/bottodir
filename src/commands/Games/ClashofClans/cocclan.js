@@ -2,10 +2,11 @@
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
+
 const { Client } = require('clashofclans.js');
 const { stripIndents } = require('common-tags');
-const cocToken = process.env.COC_TOKEN;
 
+const cocToken = process.env.COC_TOKEN;
 const coc = new Client({
     keys: [cocToken]
 });
@@ -29,10 +30,8 @@ module.exports.run = async (interaction, utils) =>
         const data = await coc.getClan(tag);
 
         const embed = new MessageEmbed()
-			
-			.setColor("RANDOM")
-
 			.setThumbnail('https://cdn.discordapp.com/attachments/717460150528639077/751713217096712213/unnamed.png')
+            .setColor("RANDOM")
 			.setDescription(stripIndents`
 				[Clan Link Here](https://link.clashofclans.com/en?action=OpenClanProfile&tag=${encodeURIComponent(data.tag)})
                 
@@ -53,7 +52,7 @@ module.exports.run = async (interaction, utils) =>
 				**War Losses:**
 				\`${data.warLosses || 'Private War Log'}\`
       `);
-      interaction.reply({ embeds: [embed], ephemeral: true })
+      interaction.reply({ embeds: [embed], ephemeral: true });
     }
     catch (err)
     {

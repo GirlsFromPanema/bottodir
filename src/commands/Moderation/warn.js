@@ -9,7 +9,11 @@ const {
   MessageButton,
   ReactionUserManager,
 } = require("discord.js");
+
+// User profile
 const warnModel = require("../../models/Moderation/warning");
+
+// Logging
 const Guild = require("../../models/logs");
 
 module.exports.cooldown = {
