@@ -1,9 +1,9 @@
 Echo off
-title Konibot DevOps
+title Bottodir DevOps
 color 4
 cls
-Echo Konibot DevOps - Panel
-Echo ============================Konibot Panel============================
+Echo Bottodir Dev - Panel
+Echo ============================Bottodir Panel============================
 Echo 1 Install Modules           Installs Required modules to load app!  (AFTER INSTALL RELAUNCH APP)          
 Echo 2 Start Node App            Launches Gen on [PORT Specified] - DC API
 Echo 3 Nodemon Setup             Required downloads of Nodemon (Server)

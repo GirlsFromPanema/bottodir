@@ -2,5 +2,5 @@
 echo Starting..
 :main
 node .
-echo Restarting Bot..
+echo Restarting Bottodir..
 goto main
