@@ -37,5 +37,9 @@
     "path": "^0.12.7",
     "uninstall": "^0.0.0",
     "voucher-code-generator": "^1.1.1"
+  },
+  "devDependencies": {
+    "grunt": "^1.4.1",
+    "gulp": "^4.0.2"
   }
 }
