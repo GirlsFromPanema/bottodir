@@ -22,7 +22,6 @@ const minifyHTML = require('express-minify-html-terser');
 
 const rateLimit = require('express-rate-limit');
 const contactCooldown = new Set();
-const nicknameCooldown = new Set();
 
 const rateLimiter = rateLimit({
   windowMs: 60 * 1000,
