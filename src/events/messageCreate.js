@@ -1,10 +1,15 @@
 "use strict";
 
 const { GuildMember, MessageEmbed } = require("discord.js");
-const Guild = require("../models/Moderation/antiscam");
-const emojis = require("../../Controller/emojis/emojis");
-const Logs = require("../models/logs");
+
 const ms = require("moment");
+const emojis = require("../../Controller/emojis/emojis");
+
+// Database Query Model
+const Guild = require("../models/Moderation/antiscam");
+
+// Server logging
+const Logs = require("../models/logs");
 
 const {
   CommandInteraction,
@@ -32,8 +37,9 @@ module.exports.run = async (message) => {
 
     // If the Guild has no setup done, dont do anything/ignore it.
     if(!check) return; 
+
     if(check) {
-      
+  //  if(message.author.bot) return;
       if (array.some(word => message.content.toLowerCase().includes(word))) {
           message.delete()
 
@@ -55,8 +61,8 @@ module.exports.run = async (message) => {
         }
 
         // Timeout the User after sending the word.
-         const member = message.guild.members.cache.get(message.author)
-         const timeout = await message.member.timeout(43200000)
+         const member = message.guild.members.cache.get(message.author);
+         const timeout = await message.member.timeout(43200000);
 
          const embed2 = new MessageEmbed()
          .setTitle(`${emojis.error} Scam detected`)
