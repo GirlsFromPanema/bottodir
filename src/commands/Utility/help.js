@@ -1,3 +1,61 @@
+/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+I love (hate) it to make help commands, I will prolly move it to a website soon, don't look at the code, just don't do it.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+STOP SCROLLING!!!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AAAAAAA, okay fine.
+*/
+
+
+
+
+
 "use strict";
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
@@ -9,7 +67,8 @@ const {
   MessageButton,
   MessageSelectMenu,
 } = require("discord.js");
-const emojis = require("../../../Controller/emojis/emojis")
+
+const emojis = require("../../../Controller/emojis/emojis");
 
 module.exports.cooldown = {
   length: 120000 /* in ms */,

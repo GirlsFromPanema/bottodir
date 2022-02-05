@@ -2,12 +2,14 @@
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed, Discord } = require("discord.js");
+
 const { stripIndents } = require('common-tags');
-const moment = require("moment")
-const emojis = require("../../../Controller/emojis/emojis")
+const moment = require("moment");
+
+const emojis = require("../../../Controller/emojis/emojis");
 
 module.exports.cooldown = {
-    length: 10000, /* in ms */
+    length: 90000, /* in ms */
     users: new Set()
 };
 
@@ -20,10 +22,9 @@ module.exports.run = async (interaction, utils) =>
 {
     try
     {
-        const owner = await await interaction.guild.fetchOwner()
+        const owner = await interaction.guild.fetchOwner()
 
         const embed = new MessageEmbed()
-		
 		.addFields({
             name: `**Server Information**`,
             value: `Status: ${emojis.online} Online\n• Owner: ${

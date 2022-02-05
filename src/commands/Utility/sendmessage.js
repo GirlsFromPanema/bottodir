@@ -4,7 +4,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
 
 module.exports.cooldown = {
-  length: 360000000 /* in ms */,
+  length: 120000 /* in ms */,
   users: new Set(),
 };
 
@@ -38,7 +38,7 @@ module.exports.permissions = {
 
 module.exports.data = new SlashCommandBuilder()
   .setName("sendmessage")
-  .setDescription("Send a message into a channel")
+  .setDescription("Send a message into a specific channel")
   .addChannelOption((option) =>
     option
       .setName("channel")

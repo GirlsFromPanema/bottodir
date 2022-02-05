@@ -4,7 +4,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
 
 module.exports.cooldown = {
-    length: 10000, /* in ms */
+    length: 90000, /* in ms */
     users: new Set()
 };
 
@@ -19,8 +19,7 @@ module.exports.run = async (interaction, utils) =>
     {
         const roles = interaction.guild.roles.cache;
 
-        
-
+        // What tf is this?
         const embed = new MessageEmbed()
         .setDescription(
             `Total Roles: ${roles.size}`,
@@ -38,7 +37,7 @@ module.exports.run = async (interaction, utils) =>
 
 module.exports.permissions = {
     clientPermissions: [Permissions.FLAGS.SEND_MESSAGES],
-    userPermissions: [Permissions.FLAGS.MANAGE_CHANNELS]
+    userPermissions: [Permissions.FLAGS.MANAGE_ROLES]
 };
 
 module.exports.data = new SlashCommandBuilder()

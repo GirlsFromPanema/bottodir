@@ -2,11 +2,12 @@
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions } = require("discord.js");
+
 const { msToTimeObj } = require("../../util/util.js");
 const emojis = require("../../../Controller/emojis/emojis");
 
 module.exports.cooldown = {
-    length: 10000, /* in ms */
+    length: 90000, /* in ms */
     users: new Set()
 };
 

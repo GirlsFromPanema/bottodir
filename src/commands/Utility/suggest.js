@@ -2,8 +2,10 @@
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
-const Guild = require("../../models/suggestions")
-const emojis = require("../../../Controller/emojis/emojis")
+
+const emojis = require("../../../Controller/emojis/emojis");
+
+const Guild = require("../../models/suggestions");
 
 module.exports.cooldown = {
     length: 320000, /* in ms */
@@ -22,9 +24,8 @@ module.exports.run = async (interaction) =>
         const suggestion = interaction.options.getString("suggestion")
 
         const guildQuery = await Guild.findOne({ id: interaction.guild.id })
-        if(!guildQuery) {
-            return interaction.reply({ content: `${emojis.error} | This guild has no Suggestion System setup.`, ephemeral: true })
-        }
+        if(!guildQuery) return interaction.reply({ content: `${emojis.error} | This guild has **no** suggestion system setup.`, ephemeral: true })
+        
 
         const embed = new MessageEmbed()
         .setTitle(`${emojis.notify} New Suggestion`)

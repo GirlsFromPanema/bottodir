@@ -2,12 +2,14 @@
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
-const GuildVerification = require("../../models/verification");
-const guildLogging = require("../../models/logs");
+
 const emojis = require("../../../Controller/emojis/emojis");
 
+const GuildVerification = require("../../models/verification");
+const guildLogging = require("../../models/logs");
+
 module.exports.cooldown = {
-    length: 10000, /* in ms */
+    length: 90000, /* in ms */
     users: new Set()
 };
 
@@ -23,10 +25,8 @@ module.exports.run = async (interaction, utils, user) =>
 
         const guildQuery = await GuildVerification.findOne({ id: interaction.guild.id });
         
-        if(!guildQuery) {
-            return interaction.reply({ content: `${emojis.error} | Verification is currently not available.`, ephemeral: true })
-        }
-
+        if(!guildQuery) return interaction.reply({ content: `${emojis.error} | Verification is currently not available.`, ephemeral: true })
+        
         const embed = new MessageEmbed()
         .setTitle(`${emojis.success} Verified`)
         .setDescription(`<@${interaction.user.id}> you have successfully verified for ${interaction.guild.name}`)
@@ -66,7 +66,7 @@ module.exports.run = async (interaction, utils, user) =>
 };
 
 module.exports.permissions = {
-    clientPermissions: [Permissions.FLAGS.SEND_MESSAGES],
+    clientPermissions: [Permissions.FLAGS.ADMINISTRATOR],
     userPermissions: [Permissions.FLAGS.SEND_MESSAGES]
 };
 

@@ -2,8 +2,10 @@
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
-const warnModel = require("../../models/Moderation/warning");
+
 const moment = require("moment");
+
+const warnModel = require("../../models/Moderation/warning");
 
 module.exports.cooldown = {
   length: 160000 /* in ms */,
@@ -17,7 +19,7 @@ module.exports.cooldown = {
  */
 module.exports.run = async (interaction, utils) => {
   try {
-    const user = interaction.options.getMember("target") || interaction.user
+    const user = interaction.options.getMember("target") || interaction.user;
 
     const userWarnings = await warnModel.find({
       userId: user.id,
@@ -49,7 +51,10 @@ module.exports.run = async (interaction, utils) => {
       .setColor("RED")
       .setTimestamp()
       .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))
-      .setFooter({ text: `Server: ${user.guild.name}`, iconURL: user.displayAvatarURL({ dynamic: true })})
+      .setFooter({
+        text: `Server: ${user.guild.name}`,
+        iconURL: user.displayAvatarURL({ dynamic: true }),
+      });
 
     interaction.reply({ embeds: [embed] });
   } catch (err) {
@@ -58,7 +63,7 @@ module.exports.run = async (interaction, utils) => {
 };
 
 module.exports.permissions = {
-  clientPermissions: [Permissions.FLAGS.ADMINISTRATOR],
+  clientPermissions: [Permissions.FLAGS.SEND_MESSAGES],
   userPermissions: [Permissions.FLAGS.SEND_MESSAGES],
 };
 

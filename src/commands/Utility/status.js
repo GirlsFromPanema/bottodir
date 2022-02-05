@@ -7,13 +7,17 @@ const {
   MessageEmbed,
   Discord,
 } = require("discord.js");
-const emojis = require("../../../Controller/emojis/emojis");
+
 const { utc } = require("moment");
 const os = require("os");
+
 const ms = require("ms");
 const moment = require("moment");
 const momentDurationFormatSetup = require("moment-duration-format");
+
 const version = require("../../../package.json").version;
+const emojis = require("../../../Controller/emojis/emojis");
+
 const { msToTimeObj, colorPalette } = require("../../util/util");
 
 module.exports.cooldown = {
@@ -56,7 +60,6 @@ module.exports.run = async (interaction, utils, client) => {
     })
 
     // Check if they are setup, if yes => on. if not => off.
-    
     let welcomeing = emojis[welcome ? 'on' : 'off']
     let logging = emojis[logs ? 'on' : 'off']
     let tracking = emojis[tracker ? 'on' : 'off']
@@ -115,4 +118,4 @@ module.exports.permissions = {
 
 module.exports.data = new SlashCommandBuilder()
   .setName("status")
-  .setDescription("Information about the Bot Server's status");
+  .setDescription("Information about the Bot Server's Server");
