@@ -13,7 +13,7 @@ module.exports.data = {
 };
 
 /**
- * Handle the clients ready event.
+ * Handle the clients event.
  * @param {GuildMember} member The client that triggered the event.
  */
 

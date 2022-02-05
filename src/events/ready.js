@@ -12,7 +12,7 @@ module.exports.data =
 };
 
 /**
- * Handle the clients ready event.
+ * Handle the clients event.
  * @param {Client} client The client that triggered the event.
  */
 module.exports.run = async (client) =>
