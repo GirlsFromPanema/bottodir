@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  app:
+    build: .
+  networks: 
+    - web
+
+networks: 
+  web:
+    external: true
