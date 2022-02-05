@@ -1,16 +1,15 @@
 {
-  "name": "bot",
+  "name": "bottodir",
   "version": "2.2.5",
-  "description": "",
+  "description": "Advanced Discord yes",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "node ./src/deployCommands.js",
-    "start": "nodemon index.js"
+    "dev": "nodemon index.js"
   },
   "author": "vKxni",
   "license": "ISC",
-  "homepage": "https://oneupgaming.eu",
   "dependencies": {
     "@discordjs/builders": "^0.12.0",
     "@discordjs/rest": "^0.1.0-canary.0",

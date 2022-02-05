@@ -61,7 +61,7 @@ module.exports.run = async (interaction, utils) => {
     );
 
     let embed = new MessageEmbed()
-      .setTitle("OneUpGaming Help")
+      .setTitle("Bottodir Help")
       .setDescription("Choose the Category you'd like to select")
       .setColor("GREEN");
 
