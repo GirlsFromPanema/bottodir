@@ -43,15 +43,15 @@ module.exports.run = async (interaction, utils) =>
         .setTimestamp()
 
         const guildQuery = await Guild.findOne({ id: interaction.guild.id });
+        if (!guildQuery)
+        
         if (guildQuery) {
           const guild = interaction.client.guilds.cache.get(
             interaction.guild.id
           );
           const logging = guild.channels.cache.get(guildQuery.channel);
           logging.send({ embeds: [logs] });
-        } else if (!guildQuery) {
-          return;
-        }
+        } 
         
         await interaction.reply({ embeds: [embed], ephemeral: true });
         return;

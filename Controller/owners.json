@@ -1,4 +1,5 @@
 {
     "owner": ["578678204890349594", "660559556098785282"],
-    "channel": "937076782404878396"
+    "channel": "937076782404878396",
+    "database": "mongodb://localhost:27017/konibottesting"
 }
