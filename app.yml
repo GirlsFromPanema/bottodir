@@ -1,0 +1,9 @@
+runtime: nodejs16
+handlers:
+- url: /.*
+  script: auto
+  secure: always
+  redirect_http_response_code: 404
+  vpc_access_connector:
+  name: projects/PROJECT_ID/locations/REGION/connectors/CONNECTOR_NAME
+  egress_setting: EGRESS_SETTING
