@@ -11,6 +11,7 @@ const economyUser = require("../../models/Economy/usereconomy");
 // Warnings
 const warnedUser = require("../../models/user");
 
+// We are not resetting blacklists as they might be unfair.
 
 module.exports.cooldown = {
     length: 10000, /* in ms */
@@ -46,7 +47,7 @@ module.exports.run = async (interaction, utils) =>
                 continue; 
             }
         
-            isUser.delete()
+            isUser.delete();
         }
     }
     catch (err)
