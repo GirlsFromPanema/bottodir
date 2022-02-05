@@ -2,8 +2,8 @@
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions } = require("discord.js");
-const { msToTimeObj, colorPalette } = require("../../util/util.js");
-const emojis = require("../../../Controller/emojis/emojis")
+const { msToTimeObj } = require("../../util/util.js");
+const emojis = require("../../../Controller/emojis/emojis");
 
 module.exports.cooldown = {
     length: 10000, /* in ms */
@@ -27,7 +27,7 @@ module.exports.run = async (interaction, utils) =>
                 title: "Uptime",
                 description: `**${timeObj.days}** days, **${timeObj.hours}** hours, **${timeObj.minutes}** minutes, **${timeObj.seconds}** seconds`,
                 footer: {
-                    text: `${emojis.saphire} OneUpGaming`
+                    text: `${emojis.saphire} Bottodir`
                 },
                 thumbnail: {
                     url: interaction.client.user.avatarURL({
