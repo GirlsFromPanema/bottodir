@@ -2,8 +2,7 @@ module.exports = {
     apps: [
         {
             name: "Bottodir",
-            script: ".",
-            //options reference: https://pm2.keymetrics.io/docs/usage/application-declaration/
+            script: ".", // . - this dir.
             autorestart: true,
             watch: false,
         },
