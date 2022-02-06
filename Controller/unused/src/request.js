@@ -3,7 +3,7 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
 
-const voucher_codes = require('voucher-code-generator')
+const voucher_codes = require('voucher-code-generator');
 
 const config = require("../../owners.json");
 

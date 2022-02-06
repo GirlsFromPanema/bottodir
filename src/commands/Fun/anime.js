@@ -18,7 +18,7 @@ module.exports.run = async (interaction, utils) =>
     {
         const embed = new MessageEmbed()
         .setTitle("Get Trolled Loser!!!")
-        .setImage("https://tenor.com/view/rick-roll-rick-ashley-never-gonna-give-you-up-gif-22113173")
+        .setImage("https://media.giphy.com/media/g7GKcSzwQfugw/giphy.gif")
 
         await interaction.reply({ embeds: [embed], ephemeral: false });
         return;
