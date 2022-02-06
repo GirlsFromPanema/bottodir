@@ -44,9 +44,7 @@ module.exports.run = async (interaction, utils) => {
         ephemeral: true,
       });
     } else {
-      const channel =
-        interaction.options.getChannel("channel") || interaction.channel;
-
+     
       if (channel.type != "GUILD_TEXT") {
         interaction.reply({
           content: ":x: | This is not a valid channel!",

@@ -32,19 +32,23 @@ module.exports.run = async (message) => {
   try {
 
     if(message.author.bot) return;
+    
+    if(message.content = message.content.replace(/@(everyone)/gi, "everyone").replace(/@(here)/gi, "here"))
+    if (message.content.includes(`@`)) {
+      return message.channel.send(`**:x: Please dont mention anyone**`);
+    }
 
     const hasChatbot = await Guild.findOne({ id: message.guild.id })
     if(!hasChatbot) return;
 
-    const guildgame = message.client.guilds.cache.get(message.guild.id);
-    const botchannel = guildgame.channels.cache.get(hasChatbot.channel);
+    const chatbotchannel = hasChatbot.channel;
     
-    if(message.channel.id === botchannel) {
-        fetch(`https://api.monkedev.com/fun/chat?msg=${message.content}&uid=${message.author.id}&yr0n57JXpCy7aXlzFmMchuas`)
+    if(message.channel.id === chatbotchannel) {
+      fetch(`https://api.affiliateplus.xyz/api/chatbot?message=${encodeURIComponent(message.content)}&botname=${message.client.user.username}&ownername=Koni#9521`)
+        
         .then(response => response.json())
         .then(data => {
-            message.reply(data.response)
-            console.log(data.response)
+            message.reply(data.message)
         })
     }
   } catch (err) {
