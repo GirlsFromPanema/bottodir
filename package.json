@@ -38,6 +38,7 @@
     "express-session": "^1.17.2",
     "ffmpeg-static": "^4.4.1",
     "fs": "^0.0.1-security",
+    "inquirer": "^8.2.0",
     "konimath": "^1.1.2",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
