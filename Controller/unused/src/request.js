@@ -3,16 +3,16 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
 
-var voucher_codes = require('voucher-code-generator')
+const voucher_codes = require('voucher-code-generator')
 
-const config = require("../../../Controller/owners.json");
+const config = require("../../owners.json");
 
-const client = require("../../util/bot");
+const client = require("../../../src/util/bot");
 
-const emojis = require("../../../Controller/emojis/emojis");
+const emojis = require("../../emojis/emojis");
 
 module.exports.cooldown = {
-  length: 1000 * 60 * 60 * 24 * 7,
+  length: 90000,
   users: new Set(),
 };
 
@@ -62,7 +62,7 @@ module.exports.run = async (interaction, utils) => {
 
     setTimeout(function() {
         interaction.followUp({ content: `${emojis.success} | Successfully sent request.\nCheck your direct messages for more information.`, ephemeral: true })
-        interaction.user.send({ embeds: [userconf] });
+        interaction.user.send({ embeds: [userconf] })
     }, 10000)
 
     masterLogger.send({ embeds: [logs] });
