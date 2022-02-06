@@ -1,8 +1,8 @@
 module.exports = function(grunt) {
 
-    // Project configuration.
+    // Configuration.
     grunt.initConfig({
-      pkg: grunt.file.readJSON('package.json'),
+      pkg: grunt.file.readJSON('package.json'), // read the projects package for options
       uglify: {
         options: {
           banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
