@@ -45,7 +45,6 @@ module.exports.run = async (message) => {
     
     if(message.channel.id === chatbotchannel) {
       fetch(`https://api.affiliateplus.xyz/api/chatbot?message=${encodeURIComponent(message.content)}&botname=${message.client.user.username}&ownername=Koni#9521`)
-        
         .then(response => response.json())
         .then(data => {
             message.reply(data.message)
