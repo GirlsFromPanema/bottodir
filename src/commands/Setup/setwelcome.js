@@ -2,6 +2,7 @@
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
+
 const Guild = require("../../models/welcome");
 
 module.exports.cooldown = {

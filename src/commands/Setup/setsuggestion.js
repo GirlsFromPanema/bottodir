@@ -2,7 +2,9 @@
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
-const emojis = require("../../../Controller/emojis/emojis")
+
+const emojis = require("../../../Controller/emojis/emojis");
+
 const Guild = require("../../models/suggestions");
 
 module.exports.cooldown = {

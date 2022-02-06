@@ -1,8 +1,10 @@
 "use strict";
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions } = require("discord.js");
-const Guild = require("../../models/guilds.js");
+
 const emojis = require("../../../Controller/emojis/emojis");
+
+const Guild = require("../../models/guilds.js");
 
 module.exports.cooldown = {
     length: 10000, /* in ms */

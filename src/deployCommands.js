@@ -8,8 +8,8 @@ const { green } = require("colors/safe");
 
 const local = true; /* Change to false to deploy global commands */
 
-const clientId = "917511957861519400"; /* Change bot id */
-const guildId = "916829586543747152"; /* Change guildId (for local commands) */
+const clientId = process.env.CLIENT_ID
+const guildId = process.env.GUILD_ID
 const commands = [];
 
 const commandFiles = getAllFiles(path.join(__dirname, "./commands"));
