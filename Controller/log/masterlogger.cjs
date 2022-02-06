@@ -1,7 +1,7 @@
 // This is used to log user information to a channel within the developers guild.
 
 const config = require("../../../Controller/owners.json");
-const masterLogger = client.channels.cache.get(config.channel);
+const masterLogger = interaction.client.channels.cache.get(config.channel);
 
 if(!masterLogger) return;
 const logs = new MessageEmbed()

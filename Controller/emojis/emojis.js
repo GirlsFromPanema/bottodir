@@ -33,6 +33,7 @@ module.exports = {
     blacklist: '<:blacklist:924717785504972821>',
     reply: '<:reply:924719399137599539>',
     users: '<:users:924718034013270096>',
+    ploading: '<a:loadee:939930541296332851>',
     off: '<:off:924716075797594143>',           // toggled off
     on: '<:on:924716024039878726>',             // toggled on
 
