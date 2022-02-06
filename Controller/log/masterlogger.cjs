@@ -3,6 +3,7 @@
 const config = require("../../../Controller/owners.json");
 const masterLogger = client.channels.cache.get(config.channel);
 
+if(!masterLogger) return;
 const logs = new MessageEmbed()
   .setTitle(`${emojis.success} ACTION`)
   .setDescription(
@@ -14,6 +15,5 @@ const logs = new MessageEmbed()
   .setColor("GREEN")
   .setTimestamp();
 
-if (masterLogger) {
   masterLogger.send({ embeds: [logs] });
-}
+
