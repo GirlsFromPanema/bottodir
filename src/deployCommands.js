@@ -21,10 +21,10 @@ const { Routes } = require("discord-api-types/v9");
 const { getAllFiles } = require("./util/util.js");
 const { green } = require("colors/safe");
 
-const local = true; /* Change to false to deploy global commands */
+const local = true; /* Change to false to deploy commands globally. */
 
-const clientId = process.env.CLIENT_ID
-const guildId = process.env.GUILD_ID
+const clientId = process.env.CLIENT_ID;
+const guildId = process.env.GUILD_ID;
 const commands = [];
 
 const commandFiles = getAllFiles(path.join(__dirname, "./commands"));

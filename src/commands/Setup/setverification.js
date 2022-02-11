@@ -61,17 +61,9 @@ module.exports.run = async (interaction, utils) => {
         content: `✅ | Successfully set the Verification Channel to ${channel}.`, ephemeral: true
       });
 
-      channel.send({ embeds: [embed]})
-    } else {
+      channel.send({ embeds: [embed] });
 
-      const embed2 = new MessageEmbed()
-      .setTitle(`${emojis.server} Verify`)
-      .setDescription(`Verification for ${interaction.guild.name}.\n\nSimply run`)
-      .setThumbnail(interaction.guild.iconURL({ dynamic: true }))
-      .setImage(interaction.guild.iconURL({ dynamic: true }))
-      .setFooter({ text: `Server: ${interaction.guild.name}`, iconURL: interaction.guild.iconURL({ dynamic: true })})
-      .setColor("GREEN")
-      .setTimestamp()
+    } else {
 
       const channel = interaction.options.getChannel("channel", true);
 
@@ -85,7 +77,7 @@ module.exports.run = async (interaction, utils) => {
         ephemeral: true,
       });
 
-      channel.send({ embeds: [embed2] })
+      channel.send({ embeds: [embed] })
     }
   } catch (err) {
     return Promise.reject(err);
