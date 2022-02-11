@@ -63,9 +63,7 @@ module.exports.run = async (interaction, utils) =>
         });
 
         if(guildQuery) {
-            const target = interaction.options.getMember("target");
-            const reason = interaction.options.getString("reason");
-
+           
             const guild = interaction.client.guilds.cache.get(interaction.guild.id);
             const reportchannel = guild.channels.cache.get(guildQuery.channel);
             reportchannel.send({ embeds: [embed] });
