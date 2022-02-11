@@ -9,17 +9,26 @@
 Nothing can go wrong with someone like Bottodir, what are you waiting for?
   
 ## Get Started
+> 1. Download/Install
 ```
-git clone https://github.com/GirlsFromPanema/bottodir
-cd bottodir
-npm install
-npm start
+$ git clone https://github.com/GirlsFromPanema/bottodir
+$ cd bottodir
+$ npm install
+$ npm start
 ```
-```
-Run the following Commands in any Channel:
-/help - will display all possible Commands from configs to utility commands.
+> 2. Update Token
+- rename `.envexample` to `.env`
+- fill out `bottoken`, `mongodb`, `BOT_ID`, `GUILD_ID`
+ 
+`Controller/owners.json`
+owner IDs, channel ID (for master logger)
+`Controller/dashboard.json`
+for the website
   
-Bottodir brings fun to your Server and helps growing it with powerful moderation.
+> 3. Starting the Bot
+```
+$ npm run deploy
+$ npm run dev
 ```
 
 Features:
