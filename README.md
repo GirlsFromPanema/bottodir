@@ -55,8 +55,8 @@ and much more!
 
 ## Collaborate
 - Fork the Repository 
-- Submit a Pull request
-optionally join our [Discord Server](https://discord.gg/SMzefFJN7x) 
+- Submit a Pull request.
+[Discord Server](https://discord.gg/SMzefFJN7x) 
 
 ## Support
 If you need help with anything, ask [here](https://discord.gg/SMzefFJN7x)
