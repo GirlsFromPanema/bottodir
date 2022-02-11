@@ -55,8 +55,8 @@ and much more!
 
 ## Collaborate
 - Fork the Repository 
-- Submit a Pull request
-optionally join our [Discord Server](https://discord.gg/SMzefFJN7x) 
+- Submit a Pull request.
+[Discord Server](https://discord.gg/SMzefFJN7x) 
 
 ## Support
 If you need help with anything, ask [here](https://discord.gg/SMzefFJN7x)
@@ -142,3 +142,20 @@ Children's Information
 Another part of our priority is adding protection for children while using the internet. We encourage parents and guardians to observe, participate in, and/or monitor and guide their online activity.
 
 Bottodir does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our website or API, we strongly encourage you to contact us immediately and we will do our best efforts to promptly remove such information from our records.
+  
+## Copyright && License
+
+Copyright Bottodir 2021. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
