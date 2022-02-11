@@ -12,6 +12,16 @@ const logSchema = new Schema({
         type: String,
         required: false
     },
+    webhookid:
+    {
+        type: String,
+        required: true 
+    },
+    webhooktoken:
+    {
+        type: String,
+        required: true 
+    },
     channel:
     {
         type: String,

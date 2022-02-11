@@ -1,10 +1,12 @@
 "use strict";
 
-const { GuildMember, MessageEmbed, Role } = require("discord.js");
+const { GuildMember, MessageEmbed, WebhookClient } = require("discord.js");
 const moment = require("moment");
-const Guild = require("../models/welcome.js");
 const client = require("../util/bot.js");
+
+const Guild = require("../models/welcome.js");
 const GuildLogs = require("../models/logs");
+
 const emojis = require("../../Controller/emojis/emojis");
 
 module.exports.data = {
@@ -56,9 +58,12 @@ module.exports.run = async (member) => {
     if(!logQuery) return;
 
     if(logQuery) {
-      const guildlogs = member.client.guilds.cache.get(member.guild.id);
-      const logchannel = guildlogs.channels.cache.get(logQuery.channel);
-      logchannel.send({ embeds: [logembed] })
+      const webhookid = logQuery.webhookid;
+      const webhooktoken = logQuery.webhooktoken;
+
+      const webhookClient = new WebhookClient({ id: webhookid, token: webhooktoken });
+    
+      webhookClient.send({ embeds: [logembed]})
     }
   } catch (err) {
     return Promise.reject(err);

@@ -1,8 +1,11 @@
 "use strict";
 
-const { GuildMember, MessageEmbed } = require("discord.js");
+const { channelMention } = require("@discordjs/builders");
+const { GuildMember, MessageEmbed, WebhookClient } = require("discord.js");
+
+const emojis = require("../../Controller/emojis/emojis");
+
 const Guild = require("../models/logs");
-const emojis = require("../../Controller/emojis/emojis")
 
 module.exports.data = {
   name: "messageDelete",
@@ -34,10 +37,14 @@ module.exports.run = async (message) => {
     if (!guildQuery) return;
 
     if (guildQuery) {
-      // Sending message someone deletes a message
-      const guild = message.client.guilds.cache.get(message.guild.id);
-      const logging = guild.channels.cache.get(guildQuery.channel);
-      logging.send({ embeds: [embed] });
+
+      const webhookid = guildQuery.webhookid;
+      const webhooktoken = guildQuery.webhooktoken;
+
+      const webhookClient = new WebhookClient({ id: webhookid, token: webhooktoken });
+    
+      webhookClient.send({ embeds: [embed]})
+      
     }
   } catch (err) {
     return Promise.reject(err);

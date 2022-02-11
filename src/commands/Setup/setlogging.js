@@ -17,11 +17,8 @@ module.exports.cooldown = {
  */
 module.exports.run = async (interaction, utils) => {
   try {
-
-    // Find the Guild in the Database
     const isSetup = await Guild.findOne({ id: interaction.guild.id });
 
-    // If its not in the Database, check if the User mentioned a valid channel, if yes, save it to the Database
     if (!isSetup) {
       const channel = interaction.options.getChannel("channel", true);
 
@@ -33,23 +30,59 @@ module.exports.run = async (interaction, utils) => {
         return;
       }
 
+      let webhookid;
+      let webhooktoken;
+
+      let newwebhook = await channel
+        .createWebhook("Bottodir-Logging", {
+          avatar: "https://media.discordapp.net/attachments/937076782404878396/941768103807840336/Zofia_Hund_R6.jpg?width=664&height=648",
+        })
+        .then((webhook) => {
+          webhookid = webhook.id;
+          webhooktoken = webhook.token;
+        });
+
       const newLogs = new Guild({
         id: interaction.guild.id,
         channel: channel.id,
+        webhookid: webhookid,
+        webhooktoken: webhooktoken,
       });
 
-      // Save guild id and channel id (unique)
       newLogs.save();
       interaction.reply({
-        content: `✅ | Successfully set the Logging Channel to ${channel}`, ephemeral: true});
-
-      // If the Guild has already done the Setup before, update it to the new channel
+        content: `✅ | Successfully set the logging Channel to ${channel}`,
+        ephemeral: true,
+      });
     } else {
-      const channel = interaction.options.getChannel("channel", true);
+
+      const channel = interaction.options.getChannel("channel")
+
+      if (channel.type != "GUILD_TEXT") {
+        interaction.reply({
+          content: ":x: | This is not a valid Channel!",
+          ephemeral: true,
+        });
+        return;
+      }
+
+      let webhookid;
+      let webhooktoken;
+
+      let newwebhook = await channel
+        .createWebhook("Bottodir-Logging", {
+          avatar: "https://media.discordapp.net/attachments/937076782404878396/941768103807840336/Zofia_Hund_R6.jpg?width=664&height=648",
+        })
+        .then((webhook) => {
+          webhookid = webhook.id;
+          webhooktoken = webhook.token;
+        });
 
       await Guild.findOneAndUpdate({
         id: interaction.guild.id,
         channel: channel.id,
+        webhookid: webhookid,
+        webhooktoken: webhooktoken,
       });
       await interaction.reply({
         content: `🌀 | Successfully changed logging channel to ${channel}`,

@@ -1,6 +1,7 @@
 "use strict";
 
-const { GuildMember, MessageEmbed } = require("discord.js");
+const { GuildMember, MessageEmbed, WebhookClient } = require("discord.js");
+
 const Guild = require("../models/logs");
 
 module.exports.data = {
@@ -21,7 +22,7 @@ module.exports.run = async (oldMessage, newMessage) => {
 
     if(oldMessage.content === newMessage.content) return; 
 
-    const Count = 1950
+    const Count = 1950;
 
     const Originial = oldMessage.content.slice(0, Count) + (oldMessage.content.length > 1950 ? " ..." : "")
     const Edited = newMessage.content.slice(0, Count) + (newMessage.content.length > 1950 ? " ..." : "")
@@ -39,11 +40,13 @@ module.exports.run = async (oldMessage, newMessage) => {
     if (!guildQuery) return;
 
     if (guildQuery) {
-      
      // Send message if someone updates message
-      const guild = newMessage.client.guilds.cache.get(newMessage.guild.id);
-      const logging = guild.channels.cache.get(guildQuery.channel);
-      logging.send({ embeds: [embed] });
+     const webhookid = guildQuery.webhookid;
+     const webhooktoken = guildQuery.webhooktoken;
+
+     const webhookClient = new WebhookClient({ id: webhookid, token: webhooktoken });
+   
+     webhookClient.send({ embeds: [embed]})
     }
   } catch (err) {
     return Promise.reject(err);
