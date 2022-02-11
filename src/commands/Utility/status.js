@@ -36,8 +36,8 @@ module.exports.run = async (interaction, utils, client) => {
     // Database queries
     const Guild = require("../../models/welcome");
     const GuildLogs = require("../../models/logs");
-    const GuildTracker = require("../../models/guilds")
-    const GuildSuggestion = require("../../models/suggestions")
+    const GuildTracker = require("../../models/guilds");
+    const GuildSuggestion = require("../../models/suggestions");
 
     // Welcoming
     const welcome = await Guild.findOne({ 
