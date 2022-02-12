@@ -21,19 +21,27 @@ module.exports.cooldown = {
  */
 module.exports.run = async (interaction, utils) => {
   try {
+    const hasSetup = await Guild.findOne({ id: interaction.guild.id });
+    if (!hasSetup)
+      return interaction.reply({
+        content: `${emojis.error} | You first have to setup polls to be able to create polls.\nSimply run \`setpolls <channel>\``,
+        ephemeral: true,
+      });
 
     const question = interaction.options.getString("question");
 
-    const hasSetup = await Guild.findOne({ id: interaction.guild.id });
-    if (!hasSetup) return interaction.reply({ content: `${emojis.error} | You first have to setup polls to be able to create polls.\nSimply run \`setpolls <channel>\``, ephemeral: true});
-
     const embed = new MessageEmbed()
-        .setTitle(`${emojis.notify} New Poll`)
-        .setDescription(`${question}?\n\nClick ${emojis.success} to upvote.\nClick ${emojis.error} to downvote.`)
-        .setTimestamp()
-        .setFooter({ text: `From: ${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true })})
-        .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
-        .setColor("#36393F")
+      .setTitle(`${emojis.notify} New Poll`)
+      .setDescription(
+        `${question}?\n\nClick ${emojis.success} to upvote.\nClick ${emojis.error} to downvote.`
+      )
+      .setTimestamp()
+      .setFooter({
+        text: `From: ${interaction.user.tag}`,
+        iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
+      })
+      .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
+      .setColor("#36393F");
 
     const guild = interaction.client.guilds.cache.get(interaction.guild.id);
     const pollchannel = guild.channels.cache.get(hasSetup.channel);
@@ -42,8 +50,11 @@ module.exports.run = async (interaction, utils) => {
     await message.react(`${emojis.success}`);
     await message.react(`${emojis.error}`);
 
-    interaction.reply({ content: `${emojis.success} | Successfully sent poll.`, ephemeral: true, fetchReply: true });
-    
+    interaction.reply({
+      content: `${emojis.success} | Successfully sent poll.`,
+      ephemeral: true,
+      fetchReply: true,
+    });
   } catch (err) {
     return Promise.reject(err);
   }
