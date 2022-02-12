@@ -3,9 +3,11 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
 
-const emojis = require("../../../Controller/emojis/emojis");
-
+// Databae queries
 const Guild = require("../../models/Polls/polls");
+
+// Config files
+const emojis = require("../../../Controller/emojis/emojis");
 
 module.exports.cooldown = {
   length: 10000 /* in ms */,
@@ -20,7 +22,7 @@ module.exports.cooldown = {
 module.exports.run = async (interaction, utils) => {
   try {
 
-    const question = interaction.options.getString("question") 
+    const question = interaction.options.getString("question");
 
     const hasSetup = await Guild.findOne({ id: interaction.guild.id });
     if (!hasSetup) return interaction.reply({ content: `${emojis.error} | You first have to setup polls to be able to create polls.\nSimply run \`setpolls <channel>\``, ephemeral: true});
@@ -35,10 +37,10 @@ module.exports.run = async (interaction, utils) => {
 
     const guild = interaction.client.guilds.cache.get(interaction.guild.id);
     const pollchannel = guild.channels.cache.get(hasSetup.channel);
-    const message = await pollchannel.send({ embeds: [embed] }) 
+    const message = await pollchannel.send({ embeds: [embed] });
 
-    await message.react(`${emojis.success}`)
-    await message.react(`${emojis.error}`)
+    await message.react(`${emojis.success}`);
+    await message.react(`${emojis.error}`);
 
     interaction.reply({ content: `${emojis.success} | Successfully sent poll.`, ephemeral: true, fetchReply: true });
     
