@@ -20,7 +20,7 @@ CommonRegistry.prototype.init = function(gulpInst) {
   const exists = fs.existsSync(buildDir);
 
   if(exists){
-    throw new Error('Cannot initialize common tasks. ' + buildDir + ' directory exists.');
+    throw new Error('Cannot initialize common tasks. However, ' + buildDir + ' directory exists.');
   }
 
   gulpInst.task('clean', function(){
