@@ -195,6 +195,7 @@ app.get(
   passport.authenticate('discord', { prompt: 'none' })
 )
 
+// Handle authentication
 const checkAuth = (req, res, next) => {
   if (req.isAuthenticated()) return next()
   req.session.backURL = req.url
