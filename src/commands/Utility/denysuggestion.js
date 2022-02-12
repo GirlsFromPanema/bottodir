@@ -54,8 +54,8 @@ module.exports.run = async (interaction, utils) => {
       return interaction.reply(`${emojis.error} | No suggestion channel found.`);
 
     const embed = new MessageEmbed()
-      .setTitle(`${emojis.success} | Suggestion accepted`)
-      .setDescription(`${suggestionmessage}\n\nThanks for this cool idea!`)
+      .setTitle(`${emojis.error} | Suggestion denied`)
+      .setDescription(`${suggestionmessage}\n\nSadly, this suggestion is not good enough.`)
       .setColor("RED")
       .setFooter({ text: `Bottdir :: Suggestions`, iconURL: interaction.guild.iconURL({ dynamic: true })})
       .setThumbnail(interaction.guild.iconURL({ dynamic: true }))
@@ -76,7 +76,7 @@ module.exports.run = async (interaction, utils) => {
     suggestionQuery.delete();
 
     interaction.reply({
-      content: `${emojis.success} | Suggestion successfully **accepted**!`,
+      content: `${emojis.success} | Suggestion successfully **denied**!`,
       ephemeral: true,
     });
   } catch (err) {
@@ -90,12 +90,12 @@ module.exports.permissions = {
 };
 
 module.exports.data = new SlashCommandBuilder()
-  .setName("acceptsuggestion")
-  .setDescription("Accepts a suggestion.")
+  .setName("denysuggestion")
+  .setDescription("Deny a suggestion.")
   .addStringOption((option) =>
     option
       .setName("id")
-      .setDescription("Enter the Suggestion ID you would like to accept")
+      .setDescription("Enter the Suggestion ID you would like to deny")
       .setRequired(true)
   )
   
