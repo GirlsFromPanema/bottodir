@@ -8,7 +8,7 @@ module.exports.cooldown = {
 };
 
 module.exports.ownerOnly = {
-  ownerOnly: true
+  ownerOnly: true,
 };
 
 /**

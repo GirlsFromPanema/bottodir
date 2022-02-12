@@ -1,24 +1,26 @@
 "use strict";
 
 const { Client } = require("discord.js");
-const { red, green, blue, yellow, cyan } = require('chalk');
-const User = require("../models/Premium/User")
-const client = require("../util/bot")
+const { red, green, blue, yellow, cyan } = require("chalk");
+const User = require("../models/Premium/User");
+const client = require("../util/bot");
 
-module.exports.data =
-{
-    name: "ready",
-    once: true,
+module.exports.data = {
+  name: "ready",
+  once: true,
 };
 
 /**
  * Handle the clients event.
  * @param {Client} client The client that triggered the event.
  */
-module.exports.run = async (client) =>
-{
+module.exports.run = async (client) => {
+  const commandsToSet = client.commands.map((cmd) => cmd.data);
+  console.log(commandsToSet);
+  const guild = await client.guilds.fetch(process.env.GUILD_ID);
+  await guild.commands.set(commandsToSet);
 
-    /*
+  /*
     const users = await User.find();
     for (let user of users) {
       client.userSettings.set(user.Id, user);
@@ -27,10 +29,10 @@ module.exports.run = async (client) =>
 
   //  require("../util/premium")(client);
 
-    // Set the Bot status
-    client.user.setPresence({ activities: [{ name: `...` }], status: "dnd" });
+  // Set the Bot status
+  client.user.setPresence({ activities: [{ name: `...` }], status: "dnd" });
 
-    const loading = String.raw`
+  const loading = String.raw`
                   __         ______   __    __  __    __   ______   __    __  ______  __    __   ______  
                  /  |       /      \ /  |  /  |/  \  /  | /      \ /  |  /  |/      |/  \  /  | /      \ 
                  $$ |      /$$$$$$  |$$ |  $$ |$$  \ $$ |/$$$$$$  |$$ |  $$ |$$$$$$/ $$  \ $$ |/$$$$$$  |
@@ -42,28 +44,68 @@ module.exports.run = async (client) =>
                  $$$$$$$$/ $$/   $$/  $$$$$$/  $$/   $$/  $$$$$$/  $$/   $$/ $$$$$$/ $$/   $$/  $$$$$$/  
                                                                                                                                                                                                       
 `;
-    // backslash
-const backslash = String.raw` \ `;
-const prefix = "/"
+  // backslash
+  const backslash = String.raw` \ `;
+  const prefix = "/";
 
-console.log(red(loading))
+  console.log(red(loading));
 
-console.log(``);
-console.log(green(`                                                     Konicord`));
-console.log(``);
-console.log(``);
-console.log(yellow('               + ================================================================================== +'));
-console.log(cyan(`                                [i] :: ${prefix}help                :: Displays commands.                   `));
-console.log(cyan(`                                [i] :: ${prefix}ping                :: Displays bots ping.                  `));
-console.log(yellow('               + ================================Commands========================================== +'));
-console.log(cyan(`                       Author   [i] :: Programmed by [Koni#9521]    :: © 2021 Development                   `));
-console.log(cyan(`                       Bot info [i] :: Status                       :: ✅ Online                           `));
-console.log(cyan(`                       Users    [i] ::                              :: ${client.users.cache.size}  Users   `));
-console.log(cyan(`                       Guilds   [i] ::                              :: ${client.guilds.cache.size} Guilds  `));
-console.log(yellow('               + ================================Website=========================================== +'));
-console.log(cyan(`                       Link     [i] ::        [konicord.dev]        :: Our Website                          `));
+  console.log(``);
+  console.log(
+    green(`                                                     Konicord`)
+  );
+  console.log(``);
+  console.log(``);
+  console.log(
+    yellow(
+      "               + ================================================================================== +"
+    )
+  );
+  console.log(
+    cyan(
+      `                                [i] :: ${prefix}help                :: Displays commands.                   `
+    )
+  );
+  console.log(
+    cyan(
+      `                                [i] :: ${prefix}ping                :: Displays bots ping.                  `
+    )
+  );
+  console.log(
+    yellow(
+      "               + ================================Commands========================================== +"
+    )
+  );
+  console.log(
+    cyan(
+      `                       Author   [i] :: Programmed by [Koni#9521]    :: © 2021 Development                   `
+    )
+  );
+  console.log(
+    cyan(
+      `                       Bot info [i] :: Status                       :: ✅ Online                           `
+    )
+  );
+  console.log(
+    cyan(
+      `                       Users    [i] ::                              :: ${client.users.cache.size}  Users   `
+    )
+  );
+  console.log(
+    cyan(
+      `                       Guilds   [i] ::                              :: ${client.guilds.cache.size} Guilds  `
+    )
+  );
+  console.log(
+    yellow(
+      "               + ================================Website=========================================== +"
+    )
+  );
+  console.log(
+    cyan(
+      `                       Link     [i] ::        [konicord.dev]        :: Our Website                          `
+    )
+  );
 
-
-    
-console.log("Press [CTRL + C] to stop the Terminal ...")
+  console.log("Press [CTRL + C] to stop the Terminal ...");
 };
