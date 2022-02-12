@@ -66,12 +66,9 @@ module.exports.run = async (interaction, utils) => {
 
     await schannel.messages.fetch(message).then((editm) => {
       editm.edit({ embeds: [embed] })
+      editm.reactions.removeAll()
     });
 
-    await schannel.messages.fetch(message).then((reactionss) => {
-        reactionss.reactions.removeAll()
-    })
-   
     // Delete suggestion from database.
     suggestionQuery.delete();
 
