@@ -177,7 +177,7 @@ Bottodir has not reviewed all of the sites linked to its Website and is not resp
 Bottodir may revise these Terms of Use for its Website at any time without prior notice. By using this Website, you are agreeing to be bound by the current version of these Terms and Conditions of Use.
 
 8. Your Privacy.
-Please read our Privacy Policy [here](GirlsFromPanema/bottodir/blob/main/privacy.md)  .
+Please read our Privacy Policy [here](https://github.com/GirlsFromPanema/bottodir/blob/main/privacy.md).
 
 9. Governing Law
 Any claim related to Bottodir's Website shall be governed by the laws of at without regards to its conflict of law provisions.
