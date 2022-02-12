@@ -1,6 +1,6 @@
 module.exports = function(grunt) {
 
-    // Configuration.
+    // Project configuration.
     grunt.initConfig({
       pkg: grunt.file.readJSON('package.json'), // read the projects package for options
       uglify: {
@@ -14,10 +14,9 @@ module.exports = function(grunt) {
       }
     });
   
-    // Load the plugin that provides the "uglify" task.
+    // Load the plugin that provides the "uglify" task in the project.
     grunt.loadNpmTasks('grunt-contrib-uglify');
   
     // Default task(s).
     grunt.registerTask('default', ['uglify']);
-  
-  }
+}
