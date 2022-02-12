@@ -123,8 +123,6 @@ else {
 /* Login and connect the bot to the api. */
 client.login(process.env.BOT_TOKEN);
 
-<<<<<<< HEAD
 module.exports = client;
-=======
-module.exports = client;
->>>>>>> 48dc4b62c7b424239ce6c0ee28745c8fc064744c
+
+

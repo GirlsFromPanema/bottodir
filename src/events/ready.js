@@ -1,5 +1,52 @@
 "use strict";
 
+                                                                                                                                                                                                                                                                                                                            /*
+
+                                        ----- INFORMATION ----- INFORMATION ----- INFORMATION ----- INFORMATION ----- INFORMATION ----- INFORMATION 
+
+                                                                            THIS IS THE TIME SYSTEM OF THE BOT.
+                                                                                    MODIFY AT YOUR OWN RISK.
+
+                                                                - THIS FILE IS ONLY NEEDED FOR INIT. THE TIME UTIL QUERIES.
+
+                                     - SUPPORT IS NOT PROVIDED IF THIS IS MODIFIED/CHANGED/MOVED IN ANY WAY THAT MAY BREAK COMMANDS/EVENTS/FUNCTIONS.
+
+
+
+
+                                                                                                                                                                                                                                                                                                                    */
+
+
+
+                                                                                                                                                                                                                                                                                                                                    /*
+
+
+
+                                                                                %CopyrightBegin%
+
+
+                                                                    Copyright Bottodir 2021. All Rights Reserved.
+
+                                                            Licensed under the Apache License, Version 2.0 (the "License");
+                                                            you may not use this file except in compliance with the License.
+
+                                                                    You may obtain a copy of the License at
+
+                                                                    http://www.apache.org/licenses/LICENSE-2.0
+
+                                                            Unless required by applicable law or agreed to in writing, software
+                                                            distributed under the License is distributed on an "AS IS" BASIS,
+                                                        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+                                                        See the License for the specific language governing permissions and
+                                                                            limitations under the License.
+
+
+                                                                                    %CopyrightEnd%    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                        --      last update: 12/2/2022         --                                                                                                                                                                                                       */
+
 const { Client } = require("discord.js");
 const { red, green, blue, yellow, cyan } = require("chalk");
 
@@ -17,13 +64,8 @@ module.exports.data = {
  * @param {Client} client The client that triggered the event.
  */
 module.exports.run = async (client) => {
-  const commandsToSet = client.commands.map((cmd) => cmd.data);
-  console.log(commandsToSet);
-  const guild = await client.guilds.fetch(process.env.GUILD_ID);
-  await guild.commands.set(commandsToSet);
-
   // Set the Bot status
-  client.user.setPresence({ activities: [{ name: `...` }], status: "dnd" });
+  client.user.setPresence({ activities: [{ name: `/help | ${client.guilds.cache.size} Guilds` }], status: "dnd" });
 
   const loading = String.raw`
                   __         ______   __    __  __    __   ______   __    __  ______  __    __   ______  
