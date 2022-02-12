@@ -2,14 +2,16 @@
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
-const emojis = require("../../../Controller/emojis/emojis");
 
+// Config files
+const emojis = require("../../../Controller/emojis/emojis");
 
 module.exports.cooldown = {
   length: 60000 /* in ms */,
   users: new Set(),
 };
 
+// only allow owners to run this command
 module.exports.ownerOnly = {
   ownerOnly: true
 };
@@ -26,7 +28,7 @@ module.exports.run = async (interaction, utils) => {
     if (ping >= 500) {
       var stat = "🔴";
     } else {
-      var stat = "🟢";
+      stat = "🟢";
     }
 
     const embed = new MessageEmbed()

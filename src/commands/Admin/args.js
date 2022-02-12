@@ -7,6 +7,7 @@ module.exports.cooldown = {
   users: new Set(),
 };
 
+// only allow owners to run this command
 module.exports.ownerOnly = {
   ownerOnly: true
 };

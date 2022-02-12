@@ -8,10 +8,11 @@ const {
   WebhookClient,
 } = require("discord.js");
 
+// Database queries
 const Guild = require("../../models/Auction/actions");
-
 const Auction = require("../../models/Auction/items");
 
+// Configs
 const emojis = require("../../../Controller/emojis/emojis");
 
 module.exports.cooldown = {

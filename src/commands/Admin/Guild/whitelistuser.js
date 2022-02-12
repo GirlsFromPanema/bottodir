@@ -11,6 +11,7 @@ module.exports.cooldown = {
     users: new Set()
 };
 
+// only allow owners to run this command
 module.exports.ownerOnly = {
     ownerOnly: true
 };
@@ -27,8 +28,8 @@ module.exports.run = async (interaction, utils) =>
     {
         const user = interaction.options.getUser("id");
 
-        const isBlacklisted = await User.findOne({ userID: user.id })
-        if(!isBlacklisted) return interaction.reply({ content: `${emojis.error} | <@${user.id}> is not blacklisted.`, ephemeral: true })
+        const isBlacklisted = await User.findOne({ userID: user.id });
+        if(!isBlacklisted) return interaction.reply({ content: `${emojis.error} | <@${user.id}> is not blacklisted.`, ephemeral: true });
 
             isBlacklisted.delete();
 
@@ -38,8 +39,8 @@ module.exports.run = async (interaction, utils) =>
         .setColor("GREEN")
         .setTimestamp()
 
-        await user.send({ embeds: [embed] })
-        interaction.reply({ content: `${emojis.success} | Successfully whitelisted ${user}`, ephemeral: true })
+        await user.send({ embeds: [embed] });
+        interaction.reply({ content: `${emojis.success} | Successfully whitelisted ${user}`, ephemeral: true });
     }
     catch (err)
     {

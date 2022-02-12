@@ -2,10 +2,14 @@
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
+const moment = require("moment");
+
+// Database queries
 const economySchema = require("../../models/Economy/usereconomy");
 const Guild = require("../../models/Economy/guildeconomy");
+
+// Configs
 const emojis = require("../../../Controller/emojis/emojis");
-const moment = require("moment");
 const config = require("../../../Controller/owners.json");
 
 module.exports.cooldown = {

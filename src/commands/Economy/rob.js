@@ -2,8 +2,12 @@
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
+
+// Database queries
 const economyUser = require("../../models/Economy/usereconomy");
 const Guild = require("../../models/Economy/guildeconomy");
+
+// Configs
 const emojis = require("../../../Controller/emojis/emojis");
 const config = require("../../../Controller/owners.json");
 
@@ -12,6 +16,7 @@ module.exports.cooldown = {
     users: new Set()
 };
 
+// functions to update the user
 const addMoney = async (userID, wallet = 0) => economyUser.updateOne({ userID }, { $set: { userID }, $inc: { wallet } }, { upsert: true })
 const robMoney = async (userID, wallet = 0) => {
     await economyUser.updateOne({

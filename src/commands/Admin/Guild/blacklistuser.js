@@ -16,7 +16,6 @@ module.exports.ownerOnly = {
     ownerOnly: true
 };
   
-
 /**
  * Runs the command.
  * @param {CommandInteraction} interaction The Command Interaciton

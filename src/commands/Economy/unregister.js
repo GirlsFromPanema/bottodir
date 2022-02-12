@@ -4,8 +4,12 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
 const { MessageActionRow, MessageButton, Interaction } = require("discord.js");
 const moment = require("moment")
+
+// Database queries
 const economySchema = require("../../models/Economy/usereconomy");
 const Guild = require("../../models/Economy/guildeconomy");
+
+// Configs
 const emojis = require("../../../Controller/emojis/emojis");
 const config = require("../../../Controller/owners.json");
 

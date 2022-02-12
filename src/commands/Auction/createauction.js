@@ -3,10 +3,11 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed, WebhookClient } = require("discord.js");
 
+// Datbase queries
 const Guild = require("../../models/Auction/actions");
-
 const Auction = require("../../models/Auction/items");
 
+// Configs
 const emojis = require("../../../Controller/emojis/emojis");
 
 module.exports.cooldown = {
@@ -14,7 +15,8 @@ module.exports.cooldown = {
   users: new Set(),
 };
 
-function generatePassword() {
+// generate random ID
+function generateID() {
     var length = 12,
         charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
         retVal = "";
@@ -44,7 +46,7 @@ module.exports.run = async (interaction, utils) => {
 
     const description = interaction.options.getString("description");
     const budget = interaction.options.getNumber("budget");
-    const pin = generatePassword();
+    const pin = generateID();
 
     const user = interaction.user;
 
