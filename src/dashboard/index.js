@@ -100,6 +100,7 @@ module.exports = async client => {
     )
   )
 
+  // creating ratelimiter with a cookie of a year (lft)
   app.use(rateLimiter)
   app.use(
     session({
@@ -148,6 +149,7 @@ app.use(
   })
 )
 
+// Handle the rate limit
 const limit = rateLimit({
   windowMs: 60 * 1000,
   max: 10,
@@ -246,6 +248,7 @@ app.get('/panel/:guildID', checkAuth, async (req, res) => {
     })
   }
 
+  // Check if the user is in any of the displayed guild
   const member = guild.members.cache.get(req.user.id)
   if (!member) {
     res.status(500)
@@ -253,6 +256,8 @@ app.get('/panel/:guildID', checkAuth, async (req, res) => {
       error: 'You are not a member of this Guild'
     })
   }
+  
+  // Dont show the page if the user doesn't have the perms
   if (!member.permissions.has('MANAGE_GUILD')) {
     res.status(500)
     return render(res, req, 'other/error/error.ejs', {
@@ -443,5 +448,5 @@ app.use((error, req, res, next) => {
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Dashboard listening on port ${port}`)
 });
