@@ -28,8 +28,11 @@ module.exports.run = async (interaction, utils) => {
   try {
     const guildQuery = await Guild.findOne({ id: interaction.guild.id });
     const auctionID = interaction.options.getString("id");
+    const reason = interaction.options.getString("reason");
 
     const itemQuery = await Auction.findOne({ pin: auctionID });
+
+    
 
     if (!guildQuery)
       return interaction.reply({
@@ -49,7 +52,7 @@ module.exports.run = async (interaction, utils) => {
 
     const embed = new MessageEmbed()
       .setTitle(`${emojis.error} | Auction Ended`)
-      .setDescription(`**Auction:** This auction has ended`)
+      .setDescription(`**Auction:** This auction has ended.\n**Moderator**: ${interaction.user.username}\n**Reason**: ${reason}`)
       .setColor("RED")
       .setTimestamp();
 
@@ -59,8 +62,10 @@ module.exports.run = async (interaction, utils) => {
       editm.edit({ embeds: [embed] });
     });
 
+    itemQuery.delete();
+
     interaction.reply({
-      content: `${emojis.success} | Auction **deleted**!`,
+      content: `${emojis.success} | Auction successfully **deleted**!`,
       ephemeral: true,
     });
   } catch (err) {
@@ -81,4 +86,10 @@ module.exports.data = new SlashCommandBuilder()
       .setName("id")
       .setDescription("Enter the Auction ID you would like to remove")
       .setRequired(true)
-  );
+  )
+  .addStringOption((option) =>
+    option
+      .setName("reason")
+      .setDescription("Enter reason for the deletion of the auction")
+      .setRequired(true)
+  )

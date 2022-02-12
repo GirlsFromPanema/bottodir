@@ -44,8 +44,9 @@ module.exports.run = async (interaction, utils) => {
 
     const description = interaction.options.getString("description");
     const budget = interaction.options.getNumber("budget");
+    const pin = generatePassword();
 
-    const pin = generatePassword()
+    const user = interaction.user;
 
     if(description.length >= 30) return interaction.reply({ content: `${emojis.error} | Description must be less than 30 characters.`, ephemeral: true })
     if(budget.length >= 5) return interaction.reply({ content: `${emojis.error} | Budget must be less than 5 digits.`, ephemeral: true })
@@ -61,10 +62,26 @@ module.exports.run = async (interaction, utils) => {
     .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true, size: 512 }))
     .setTimestamp()
 
+    const userembed = new MessageEmbed()
+    .setTitle(`${emojis.success} Auction`)
+    .setDescription(`
+    **Name**: ${interaction.user.tag}
+    **Description**: ${description}\n
+    **Budget**: ${budget}$
+
+    By creating auctions, you agree to the [Privacy Policy](https://github.com/GirlsFromPanema/bottodir#privacy-policy).
+    Admins and Server Owners are allowed to delete your auction any time.
+    `)
+    .setFooter({ text: `PIN: ${pin}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) })
+    .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true, size: 512 }))
+    .setTimestamp()
+
+    // Fetch the guilds saved channel and send the embed into it.
     const guild = interaction.client.guilds.cache.get(interaction.guild.id);
     const auctionchannel = guild.channels.cache.get(guildQuery.channel);
     const message = await auctionchannel.send({ embeds: [embed] });
 
+    // Save the data in the db.
     const newAuction = new Auction({
         userID: interaction.user.id,
         description: description,
@@ -75,6 +92,9 @@ module.exports.run = async (interaction, utils) => {
     newAuction.save();
 
     interaction.reply({ content: `${emojis.success} | Auction created!`, ephemeral: true });
+
+    user.send({ embeds: [userembed] });
+
   } catch (err) {
     return Promise.reject(err);
   }
