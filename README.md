@@ -10,10 +10,10 @@ Nothing can go wrong with someone like Bottodir, what are you waiting for?
   
 ## Get started
 > 1. Invite Bottodir
-Click [here](https://discord.com/api/oauth2/authorize?client_id=838730162283216968&permissions=1644972343287&scope=applications.commands%20bot) to invite to your Server
+* Click [here](https://discord.com/api/oauth2/authorize?client_id=838730162283216968&permissions=1644972343287&scope=applications.commands%20bot) to invite to your Server
   
 > 2. Setup Bottodir
-Run `/help` to see all available commands.
+* Run `/help` to see all available commands.
   
 > 3. Setup Enviroment
 soon
