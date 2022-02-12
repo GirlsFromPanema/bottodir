@@ -5,10 +5,14 @@
 <p align="center">A high quality <a href="http://discord.gg" target="_blank">Discord</a> Bot to grow your Server.</p>
 <p align="center">
 
-# Bottodir - made for everyone
+# Bottodir - Utility Discord
 Nothing can go wrong with someone like Bottodir, what are you waiting for?
   
-## Get Started
+## Get started
+> 1. Invite Bottodir
+  ...
+  
+## Local Setup
 > 1. Download/Install
 ```
 $ git clone https://github.com/GirlsFromPanema/bottodir
