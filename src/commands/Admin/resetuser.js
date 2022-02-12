@@ -33,7 +33,7 @@ module.exports.run = async (interaction, utils) =>
     try
     {
         const mentionedUser = interaction.options.getUser("user");
-        if(!mentionedUser) return interaction.reply({ content: "That's not a valid User.", ephemeral: true })
+        if(!mentionedUser) return interaction.reply({ content: `${emojis.error} | That's not a valid User.`, ephemeral: true })
 
         const userTypesToDelete = [economyUser]
 
