@@ -2,10 +2,11 @@
 
 const { GuildMember, MessageEmbed, MessageFlags, DiscordAPIError } = require("discord.js");
 
-const emojis = require("../../../Controller/emojis/emojis");
-
 // Database Query Model
 const Guild = require("../../models/Games/gtn");
+
+// Configs
+const emojis = require("../../../Controller/emojis/emojis");
 
 const {
   CommandInteraction,
@@ -31,7 +32,7 @@ module.exports.run = async (message) => {
 
     if(message.author.bot) return;
 
-    const isRunning = await Guild.findOne({ id: message.guild.id })
+    const isRunning = await Guild.findOne({ id: message.guild.id });
     if(!isRunning) return;
 
     const guildgame = message.client.guilds.cache.get(message.guild.id);
@@ -55,7 +56,7 @@ module.exports.run = async (message) => {
         });
     }
     message.react("✅").catch(error => console.log(error));
-    message.reply('This is the correct number! Congrats!')
+    message.reply('This is the correct number! Congrats!');
     isRunning.delete();
 
   } catch (err) {

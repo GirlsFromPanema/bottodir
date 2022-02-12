@@ -7,9 +7,11 @@ const {
   CommandInteraction,
 } = require("discord.js");
 
-const emojis = require("../../../Controller/emojis/emojis");
-
+// Database queries
 const User = require("../../models/AFK/afk");
+
+// Configs
+const emojis = require("../../../Controller/emojis/emojis");
 
 module.exports.data = {
   name: "messageCreate",

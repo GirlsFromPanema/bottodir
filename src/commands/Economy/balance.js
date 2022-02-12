@@ -2,8 +2,12 @@
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
+
+// Database queries
 const economySchema = require("../../models/Economy/usereconomy");
 const Guild = require("../../models/Economy/guildeconomy");
+
+// Configs
 const config = require("../../../Controller/owners.json");
 const emojis = require("../../../Controller/emojis/emojis");
 

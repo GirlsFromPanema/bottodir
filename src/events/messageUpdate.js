@@ -2,7 +2,11 @@
 
 const { GuildMember, MessageEmbed, WebhookClient } = require("discord.js");
 
+// Database queries
 const Guild = require("../models/logs");
+
+// Configs
+const emojis = require("../../Controller/emojis/emojis");
 
 module.exports.data = {
   name: "messageUpdate",
@@ -28,7 +32,7 @@ module.exports.run = async (oldMessage, newMessage) => {
     const Edited = newMessage.content.slice(0, Count) + (newMessage.content.length > 1950 ? " ..." : "")
 
     const embed = new MessageEmbed()
-      .setTitle("🌀 Message Updated")
+      .setTitle(`${emojis.notify} Message Updated`)
       .setDescription(`[Message](${newMessage.url}) by ${newMessage.author.tag} was **edited** in ${newMessage.channel}.\n**Original**: ${Originial}\n**Edited**: ${Edited}`.slice("0", "4096"))
       .setColor("RED")
       .setTimestamp()
@@ -46,7 +50,7 @@ module.exports.run = async (oldMessage, newMessage) => {
 
      const webhookClient = new WebhookClient({ id: webhookid, token: webhooktoken });
    
-     webhookClient.send({ embeds: [embed]})
+     webhookClient.send({ embeds: [embed]});
     }
   } catch (err) {
     return Promise.reject(err);

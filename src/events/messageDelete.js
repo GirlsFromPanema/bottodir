@@ -3,9 +3,11 @@
 const { channelMention } = require("@discordjs/builders");
 const { GuildMember, MessageEmbed, WebhookClient } = require("discord.js");
 
-const emojis = require("../../Controller/emojis/emojis");
-
+// Database queries
 const Guild = require("../models/logs");
+
+// Configs
+const emojis = require("../../Controller/emojis/emojis");
 
 module.exports.data = {
   name: "messageDelete",
@@ -37,14 +39,12 @@ module.exports.run = async (message) => {
     if (!guildQuery) return;
 
     if (guildQuery) {
-
       const webhookid = guildQuery.webhookid;
       const webhooktoken = guildQuery.webhooktoken;
 
       const webhookClient = new WebhookClient({ id: webhookid, token: webhooktoken });
     
-      webhookClient.send({ embeds: [embed]})
-      
+      webhookClient.send({ embeds: [embed]});
     }
   } catch (err) {
     return Promise.reject(err);

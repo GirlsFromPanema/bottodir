@@ -1,13 +1,14 @@
 "use strict";
 
 const { GuildMember, MessageEmbed, MessageFlags, DiscordAPIError } = require("discord.js");
-
-const emojis = require("../../../Controller/emojis/emojis");
-
 const fetch = require("cross-fetch");
 
 // Database Query Model
 const Guild = require("../../models/Games/chatbot");
+
+// Configs
+const emojis = require("../../../Controller/emojis/emojis");
+const config = require("../../../Controller/owners.json");
 
 const {
   CommandInteraction,
@@ -33,11 +34,6 @@ module.exports.run = async (message) => {
 
     if(message.author.bot) return;
     
-    if(message.content = message.content.replace(/@(everyone)/gi, "everyone").replace(/@(here)/gi, "here"))
-    if (message.content.includes(`@`)) {
-      return message.channel.send(`**:x: Please dont mention anyone**`);
-    }
-
     const hasChatbot = await Guild.findOne({ id: message.guild.id })
     if(!hasChatbot) return;
 

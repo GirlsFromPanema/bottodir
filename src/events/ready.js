@@ -2,8 +2,10 @@
 
 const { Client } = require("discord.js");
 const { red, green, blue, yellow, cyan } = require("chalk");
-const User = require("../models/Premium/User");
+
+// Configs
 const client = require("../util/bot");
+const emojis = require("../../Controller/emojis/emojis");
 
 module.exports.data = {
   name: "ready",
@@ -19,15 +21,6 @@ module.exports.run = async (client) => {
   console.log(commandsToSet);
   const guild = await client.guilds.fetch(process.env.GUILD_ID);
   await guild.commands.set(commandsToSet);
-
-  /*
-    const users = await User.find();
-    for (let user of users) {
-      client.userSettings.set(user.Id, user);
-    }
-    */
-
-  //  require("../util/premium")(client);
 
   // Set the Bot status
   client.user.setPresence({ activities: [{ name: `...` }], status: "dnd" });
@@ -49,7 +42,6 @@ module.exports.run = async (client) => {
   const prefix = "/";
 
   console.log(red(loading));
-
   console.log(``);
   console.log(
     green(`                                                     Konicord`)

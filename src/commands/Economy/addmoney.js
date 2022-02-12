@@ -2,8 +2,12 @@
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed, Interaction } = require("discord.js");
+
+// Database queries
 const economyUser = require("../../models/Economy/usereconomy");
 const Guild = require("../../models/Economy/guildeconomy");
+
+// Configs
 const emojis = require("../../../Controller/emojis/emojis");
 const config = require("../../../Controller/owners.json");
 
@@ -45,8 +49,8 @@ module.exports.run = async (interaction, utils) =>
         const isRegistered = await economyUser.findOne({ userID: user.id });
         if(!isRegistered) return interaction.reply({ content: `${emojis.error} | This User is not registered.`, ephemeral: true })
 
-        const bal = Number(amount)
-        await addMoney(user.id, bal)
+        const bal = Number(amount);
+        await addMoney(user.id, bal);
     
         const embed = new MessageEmbed()
         .setDescription(`${emojis.success} Successfully added \`${amount}$\` to ${user.tag}`)

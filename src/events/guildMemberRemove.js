@@ -1,7 +1,11 @@
 "use strict";
 
 const { GuildMember, MessageEmbed, Role } = require("discord.js");
+
+// Database queries
 const Guild = require("../models/leave");
+
+// Configs
 const client = require("../util/bot.js");
 
 module.exports.data = {
