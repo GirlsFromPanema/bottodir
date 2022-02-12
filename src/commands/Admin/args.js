@@ -9,7 +9,7 @@ module.exports.cooldown = {
 
 // only allow owners to run this command
 module.exports.ownerOnly = {
-  ownerOnly: true
+  ownerOnly: true,
 };
 
 /**
