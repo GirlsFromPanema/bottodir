@@ -2,7 +2,8 @@ module.exports = {
     apps: [
         {
             name: "Bottodir",
-            script: ".", // . - this dir.
+            script: ".", 
+            version: "v5.5.0",
             autorestart: true,
             watch: false,
         },

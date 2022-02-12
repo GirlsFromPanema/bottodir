@@ -5,10 +5,20 @@
 <p align="center">A high quality <a href="http://discord.gg" target="_blank">Discord</a> Bot to grow your Server.</p>
 <p align="center">
 
-# Bottodir - made for everyone
+# Bottodir - Utility Discord
 Nothing can go wrong with someone like Bottodir, what are you waiting for?
   
-## Get Started
+## Get started
+> 1. Invite Bottodir
+* Click [here](https://discord.com/api/oauth2/authorize?client_id=838730162283216968&permissions=1644972343287&scope=applications.commands%20bot) to invite Bottodir to your Server
+  
+> 2. Setup Bottodir
+* Run `/help` to see all available commands.
+  
+> 3. Setup Enviroment
+* soon
+  
+## Local Setup
 > 1. Download/Install
 ```
 $ git clone https://github.com/GirlsFromPanema/bottodir
@@ -30,16 +40,49 @@ for the website
 $ npm run deploy
 $ npm run dev
 ```
-
-Features:
+The bot should be online now. 
   
-* High Quality Moderation
-* Utility 
-* Fun 
-* Logging
-* Master logger
-* Games
+## Deployment
+I'm using Ubuntu 20.4 and PM2 in this example. Make sure NodeJS v16+ and PM2 is installed.
+  
+> 1. Upload project to Server
+```
+Upload your files through a SFT(P) (Save File Transport)
+```
+  
+> 2. Installing Dependencies
+```
+$ npm install
+```
+
+> 3. Final deployment
+```
+$ pm2 start index.js --name discordbot
+
+[ a table should be here now ]
+```
+
+Running 
+```
+$ pm2 ls
+``` 
+shows all the current running services.
+
+```
+pm2 logs
+```
+current logs (errors etc.) are displayed here.
+  
+🎉 Your bot should run 24/7 now.
+  
+## Features:
+  
+* Moderation
+* Utility
+* Economy
+* Fun
 * NSFW
+* Utility
 
 and much more!
   
@@ -172,8 +215,8 @@ Bottodir has not reviewed all of the sites linked to its Website and is not resp
 7. Site Terms of Use Modifications
 Bottodir may revise these Terms of Use for its Website at any time without prior notice. By using this Website, you are agreeing to be bound by the current version of these Terms and Conditions of Use.
 
-8. Your Privacy
-Please read our Privacy Policy.
+8. Your Privacy.
+Please read our Privacy Policy [here](https://github.com/GirlsFromPanema/bottodir/blob/main/privacy.md).
 
 9. Governing Law
 Any claim related to Bottodir's Website shall be governed by the laws of at without regards to its conflict of law provisions.
