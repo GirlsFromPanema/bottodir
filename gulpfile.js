@@ -1,9 +1,11 @@
 const { series } = require('gulp');
+const del = require('delete')
 
 // The `clean` function is not exported so it can be considered a private task.
 // It can still be used within the `series()` composition.
 function clean(cb) {
   // body omitted
+   del(['output/*.js'], cb);
   cb();
 }
 
