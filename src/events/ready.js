@@ -2,8 +2,10 @@
 
 const { Client } = require("discord.js");
 const { red, green, blue, yellow, cyan } = require('chalk');
-const User = require("../models/Premium/User")
-const client = require("../util/bot")
+
+// Configs
+const client = require("../util/bot");
+const emojis = require("../../Controller/emojis/emojis");
 
 module.exports.data =
 {
@@ -17,15 +19,6 @@ module.exports.data =
  */
 module.exports.run = async (client) =>
 {
-
-    /*
-    const users = await User.find();
-    for (let user of users) {
-      client.userSettings.set(user.Id, user);
-    }
-    */
-
-  //  require("../util/premium")(client);
 
     // Set the Bot status
     client.user.setPresence({ activities: [{ name: `...` }], status: "dnd" });
@@ -47,7 +40,6 @@ const backslash = String.raw` \ `;
 const prefix = "/"
 
 console.log(red(loading))
-
 console.log(``);
 console.log(green(`                                                     Konicord`));
 console.log(``);
@@ -64,6 +56,5 @@ console.log(yellow('               + ================================Website====
 console.log(cyan(`                       Link     [i] ::        [konicord.dev]        :: Our Website                          `));
 
 
-    
 console.log("Press [CTRL + C] to stop the Terminal ...")
 };

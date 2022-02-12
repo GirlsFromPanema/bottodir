@@ -1,13 +1,14 @@
 "use strict";
 
 const { GuildMember, MessageEmbed, MessageFlags, DiscordAPIError } = require("discord.js");
-
-const emojis = require("../../../Controller/emojis/emojis");
-
 const fetch = require("cross-fetch");
 
 // Database Query Model
 const Guild = require("../../models/Games/chatbot");
+
+// Configs
+const emojis = require("../../../Controller/emojis/emojis");
+const config = require("../../../Controller/owners.json");
 
 const {
   CommandInteraction,

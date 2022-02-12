@@ -1,15 +1,14 @@
 "use strict";
 
 const { GuildMember, MessageEmbed, WebhookClient } = require("discord.js");
-
 const ms = require("moment");
-const emojis = require("../../Controller/emojis/emojis");
 
-// Database Query Model
+// Database queries
 const Guild = require("../models/Moderation/antiscam");
-
-// Server logging
 const Logs = require("../models/logs");
+
+// Configs
+const emojis = require("../../Controller/emojis/emojis");
 
 const {
   CommandInteraction,

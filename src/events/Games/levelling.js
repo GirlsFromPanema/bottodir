@@ -7,13 +7,13 @@ const {
   CommandInteraction,
 } = require("discord.js");
 
-const emojis = require("../../../Controller/emojis/emojis");
-
-const config = require("../../../Controller/owners.json");
-
+// Database queries
 const Guild = require("../../models/Levelling/guildlevel");
-
 const Levels = require("discord-xp");
+
+// Configs
+const emojis = require("../../../Controller/emojis/emojis");
+const config = require("../../../Controller/owners.json");
 
 const mongooseConnectionString = config.database;
 Levels.setURL(mongooseConnectionString);

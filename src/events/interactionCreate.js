@@ -3,10 +3,13 @@
 const { Permissions, CommandInteraction } = require("discord.js");
 const { getKeyByValue, msToMinAndSec } = require("../util/util.js");
 const { red } = require("colors/safe");
+
+// Database queries
+const User = require("../models/Admin/userblacklist");
+
+// Configs
 const config = require("../../Controller/owners.json");
 const emojis = require("../../Controller/emojis/emojis");
-
-const User = require("../models/Admin/userblacklist");
 
 module.exports.data =
 {

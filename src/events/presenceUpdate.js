@@ -2,8 +2,12 @@
 
 const { PresenceUpdateStatus } = require("discord-api-types/v9");
 const { Presence } = require("discord.js");
+
+// Database queries
 const Guild = require("../models/guilds.js");
-const emojis = require("../../Controller/emojis/emojis")
+
+// Configs
+const emojis = require("../../Controller/emojis/emojis");
 
 module.exports.data = {
     name: "presenceUpdate",
