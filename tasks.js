@@ -12,6 +12,7 @@ function CommonRegistry(opts){
   this.buildDir = opts.buildDir || './build';
 }
 
+// D !!!
 util.inherits(CommonRegistry, DefaultRegistry);
 
 CommonRegistry.prototype.init = function(gulpInst) {
