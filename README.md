@@ -10,13 +10,13 @@ Nothing can go wrong with someone like Bottodir, what are you waiting for?
   
 ## Get started
 > 1. Invite Bottodir
-* Click [here](https://discord.com/api/oauth2/authorize?client_id=838730162283216968&permissions=1644972343287&scope=applications.commands%20bot) to invite to your Server
+* Click [here](https://discord.com/api/oauth2/authorize?client_id=838730162283216968&permissions=1644972343287&scope=applications.commands%20bot) to invite Bottodir to your Server
   
 > 2. Setup Bottodir
 * Run `/help` to see all available commands.
   
 > 3. Setup Enviroment
-soon
+* soon
   
 ## Local Setup
 > 1. Download/Install
@@ -41,6 +41,39 @@ $ npm run deploy
 $ npm run dev
 ```
 The bot should be online now. 
+  
+## Deployment
+I'm using Ubuntu 20.4 and PM2 in this example. Make sure NodeJS v16+ and PM2 is installed.
+  
+> 1. Upload project to Server
+```
+Upload your files through a SFT(P) (Save File Transport)
+```
+  
+> 2. Installing Dependencies
+```
+$ npm install
+```
+
+> 3. Final deployment
+```
+$ pm2 start index.js --name discordbot
+
+[ a table should be here now ]
+```
+
+Running 
+```
+$ pm2 ls
+``` 
+shows all the current running services.
+
+```
+pm2 logs
+```
+current logs (errors etc.) are displayed here.
+  
+🎉 Your bot should run 24/7 now.
   
 ## Features:
   
