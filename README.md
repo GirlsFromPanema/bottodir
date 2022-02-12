@@ -10,7 +10,13 @@ Nothing can go wrong with someone like Bottodir, what are you waiting for?
   
 ## Get started
 > 1. Invite Bottodir
-  ...
+- Click [here](https://discord.com/api/oauth2/authorize?client_id=838730162283216968&permissions=1644972343287&scope=applications.commands%20bot) to invite to your Server
+  
+> 2. Setup Bottodir
+- Run `/help` to see all available commands.
+  
+> 3. Setup Enviroment
+soon
   
 ## Local Setup
 > 1. Download/Install
@@ -34,16 +40,16 @@ for the website
 $ npm run deploy
 $ npm run dev
 ```
-
-Features:
+The bot should be online now. 
   
-* High Quality Moderation
-* Utility 
-* Fun 
-* Logging
-* Master logger
-* Games
+## Features:
+  
+* Moderation
+* Utility
+* Economy
+* Fun
 * NSFW
+* Utility
 
 and much more!
   
