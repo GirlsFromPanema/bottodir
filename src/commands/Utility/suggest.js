@@ -3,14 +3,28 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
 
-const emojis = require("../../../Controller/emojis/emojis");
+// Database queries
+const Guild = require("../../models/Suggestions/suggestions");
+const User = require("../../models/Suggestions/usersuggestions");
 
-const Guild = require("../../models/suggestions");
+// Configs
+const emojis = require("../../../Controller/emojis/emojis");
 
 module.exports.cooldown = {
     length: 320000, /* in ms */
     users: new Set()
 };
+
+// generate random ID
+function generateID() {
+    var length = 12,
+        charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+        retVal = "";
+    for (var i = 0, n = charset.length; i < length; ++i) {
+        retVal += charset.charAt(Math.floor(Math.random() * n));
+    }
+    return retVal;
+}
 
 /**
  * Runs the command.
@@ -21,24 +35,36 @@ module.exports.run = async (interaction) =>
 {
     try
     {
-        const suggestion = interaction.options.getString("suggestion")
-
+    
         const guildQuery = await Guild.findOne({ id: interaction.guild.id })
         if(!guildQuery) return interaction.reply({ content: `${emojis.error} | This guild has **no** suggestion system setup.`, ephemeral: true })
         
+        const suggestion = interaction.options.getString("suggestion")
+        const pin = generateID();
+        const user = interaction.user;
+
+        if(suggestion.length >= 150) return interaction.reply({ content: `${emojis.error} | Description must be less than **150** characters.`, ephemeral: true })
 
         const embed = new MessageEmbed()
         .setTitle(`${emojis.notify} New Suggestion`)
-        .setDescription(`${suggestion}`)
+        .setDescription(`${suggestion}\n\nWaiting for the community to vote!`)
         .setTimestamp()
-        .setFooter({ text: `From: ${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true })})
+        .setFooter({ text: `Pin: ${pin}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true })})
         .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
         .setColor("#36393F")
 
         if(guildQuery) {
             const guild = interaction.client.guilds.cache.get(interaction.guild.id);
             const suggestionchannel = guild.channels.cache.get(guildQuery.channel);
-            const message = await suggestionchannel.send({ embeds: [embed] }) 
+            const message = await suggestionchannel.send({ embeds: [embed] }); 
+
+            const userSuggestion = new User({
+                userID: interaction.user.id,
+                suggestion: suggestion,
+                message: message.id,
+                pin: pin
+            })
+            userSuggestion.save();
 
             await message.react(`${emojis.success}`)
             await message.react(`${emojis.error}`)

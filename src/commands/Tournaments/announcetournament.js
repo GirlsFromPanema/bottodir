@@ -29,9 +29,8 @@ module.exports.run = async (interaction, utils) =>
         const role = interaction.options.getRole("role");
         
         // If there is no tournament, return an error.
-        if(!isSetup) { 
-            return interaction.reply({ content: `${emojis.error} | There is no Tournament going on.`, ephemeral: true })
-        }
+        if(!isSetup) return interaction.reply({ content: `${emojis.error} | There is no Tournament going on.`, ephemeral: true })
+        
 
         const tournaments = isSetup 
             .map((tournament) => {

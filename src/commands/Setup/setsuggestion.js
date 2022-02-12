@@ -3,9 +3,11 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
 
-const emojis = require("../../../Controller/emojis/emojis");
+// Database query
+const Guild = require("../../models/Suggestions/suggestions");
 
-const Guild = require("../../models/suggestions");
+// Configs
+const emojis = require("../../../Controller/emojis/emojis");
 
 module.exports.cooldown = {
   length: 43200 /* in ms */,
@@ -34,10 +36,10 @@ module.exports.run = async (interaction, utils) => {
         });
         return;
       }
-  
+
       const newLogs = new Guild({
         id: interaction.guild.id,
-        channel: channel.id
+        channel: channel.id,
       });
 
       // Save guild id and channel id (unique)

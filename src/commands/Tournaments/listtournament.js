@@ -25,17 +25,15 @@ module.exports.run = async (interaction, utils) =>
         // Check if the guild is signed up with any tournament
         const isSetup = await Guild.find({ id: interaction.guild.id });
         
-        // If there is no tournament, return an error.
-        if(!isSetup) { 
-            return interaction.reply({ content: `${emojis.error} | There is no Tournament going on.`, ephemeral: true })
-        }
-
         const tournaments = isSetup 
             .map((tournament) => {
                 return [
                     [`**Name:** ${tournament.name}\n**Date:** ${tournament.date}\n**Price**: ${tournament.price}`].join("\n")
                 ]
             }).join("\n");
+
+        // If no tournaments, return error.
+        if(!tournaments?.length) return interaction.reply({ content: `${emojis.error} | There is currently no Tournament going on.`, ephemeral: true })
 
         const embed = new MessageEmbed()
         .setTitle(`${interaction.guild.name} Tournament's`)

@@ -5,21 +5,17 @@ const tournamentSchema = new Schema({
     {
         type: String,
         unique: true,
-        required: true
     },
     name:
     {
         type: String,
         unique: true,
-        required: true
     },
     date: { 
         type: String, 
-        required: true 
     },
     price: {
         type: String,
-        required: true
     }
 
 }, { timestamps: true });
