@@ -84,6 +84,7 @@ module.exports.cooldown = {
 module.exports.run = async (interaction, utils) => {
     
   try {
+    /*
     const row = new MessageActionRow().addComponents(
       new MessageSelectMenu()
         .setCustomId("select")
@@ -224,6 +225,8 @@ module.exports.run = async (interaction, utils) => {
         collected.reply({ embeds: [embed5], ephemeral: true });
       }
     });
+    */
+   interaction.reply({ content: `I've too many commands, type \`/\` and click on my profile to browse all of them.`, ephemeral: true });
   } catch (err) {
     return Promise.reject(err);
   }
