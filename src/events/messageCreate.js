@@ -4,7 +4,7 @@ const { GuildMember, MessageEmbed, WebhookClient } = require("discord.js");
 const ms = require("moment");
 
 // Database queries
-const Guild = require("../models/Moderation/antiscam");
+const Guild = require("../models/Antiscam/antiscam");
 const Logs = require("../models/logs");
 
 // Configs
@@ -31,7 +31,7 @@ module.exports.data = {
 
 module.exports.run = async (message) => {
   try {
-    const check = await Guild.findOne({ id: message.guildId });
+    const check = await Guild.findOne({ id: message.guild.id });
     const array = require("../Data/scam.json");
 
     // If the Guild has no setup done, dont do anything/ignore it.
