@@ -3,8 +3,7 @@ const { Schema, Types, model } = require("mongoose");
 const scamSchema = new Schema({
     id:
     {
-        type: String,
-        required: true
+        type: String
     },
 }, { timestamps: true });
 

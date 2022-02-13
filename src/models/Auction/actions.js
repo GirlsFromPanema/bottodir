@@ -5,7 +5,6 @@ const auctionSchema = new Schema({
     {
         type: String,
         unique: true,
-        required: true
     },
     message:
     {
@@ -14,7 +13,6 @@ const auctionSchema = new Schema({
     channel:
     {
         type: String,
-        required: true
     },
     description:
     {
