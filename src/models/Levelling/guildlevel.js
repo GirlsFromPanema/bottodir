@@ -6,11 +6,6 @@ const guildlevelSchema = new Schema({
         type: String,
         required: true
     },
-    option:
-    {
-        type: String,
-        required: true
-    },
 }, { timestamps: true });
 
 const GLevel = model("guildlevel", guildlevelSchema);

@@ -50,7 +50,7 @@ module.exports.run = async (interaction) => {
     isSetup.delete();
 
     interaction.followUp({
-      content: `${emojis.success} | Successfully **disabled** economy`,
+      content: `${emojis.success} | Successfully **disabled** economy.`,
       ephemeral: true,
     });
   }
