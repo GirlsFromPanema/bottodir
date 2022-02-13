@@ -4,12 +4,6 @@ const guildeconomySchema = new Schema({
     id:
     {
         type: String,
-        required: true
-    },
-    option:
-    {
-        type: String,
-        required: true
     },
 }, { timestamps: true });
 
