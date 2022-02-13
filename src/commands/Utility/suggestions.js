@@ -153,7 +153,7 @@ module.exports.data = new SlashCommandBuilder()
   .addSubcommand((sub) =>
     sub
       .setName("deny")
-      .setDescription("View the Server Information.")
+      .setDescription("Deny a suggestion")
       .addStringOption((option) =>
         option
           .setName("id")
