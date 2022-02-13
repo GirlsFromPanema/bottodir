@@ -3,8 +3,8 @@
 
                                         ----- INFORMATION ----- INFORMATION ----- INFORMATION ----- INFORMATION ----- INFORMATION ----- INFORMATION 
 
-                                                                            THIS IS THE TIME SYSTEM OF THE BOT.
-                                                                                    MODIFY AT YOUR OWN RISK.
+                                                                                THIS IS THE DASHBOARD OF THE BOT.
+                                                                                    [DEPRECATED - UPDATE: ???]
 
                                                                 - THIS FILE IS ONLY NEEDED FOR INIT. THE TIME UTIL QUERIES.
 
@@ -44,11 +44,12 @@
                                                                                     
                                                                                     
                                                                                     
-                                                                        --      last update: 12/2/2022         --                                                                                                                                                                                                       */
+                                                                        --      last update: 13/2/2022         --                                                                                                                                                                                                       */
 
 
 
 const Discord = require('discord.js');
+const client = require("../util/bot");
 
 const config = require('../../Controller/dashboard.json');
 const port = 8000;
@@ -73,6 +74,8 @@ const minifyHTML = require('express-minify-html-terser');
 const rateLimit = require('express-rate-limit');
 const contactCooldown = new Set();
 
+const templateDir = path.resolve('src/dashboard/templates')
+
 const rateLimiter = rateLimit({
   windowMs: 60 * 1000,
   statusCode: 429,
@@ -80,9 +83,8 @@ const rateLimiter = rateLimit({
   message: 'Too many requests, please try again in a minute'
 });
 
-module.exports = async client => {
+module.exports = async  => {
   app.use(express.static('src/dashboard/static'))
-  const templateDir = path.resolve('src/dashboard/templates')
   passport.serializeUser((user, done) => done(null, user))
   passport.deserializeUser((obj, done) => done(null, obj))
   passport.use(
