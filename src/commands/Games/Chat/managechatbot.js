@@ -29,7 +29,7 @@ module.exports.run = async (interaction) => {
     const hasChatbot = await Guild.findOne({ id: interaction.guild.id });
 
     if (channel.type != "GUILD_TEXT") {
-      interaction.reply({
+      interaction.followUp({
         content: ":x: | This is not a valid channel!",
         ephemeral: true,
       });

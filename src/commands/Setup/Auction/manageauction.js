@@ -29,7 +29,7 @@ module.exports.run = async (interaction) => {
 
     if (!isSetup) {
       if (channel.type != "GUILD_TEXT") {
-        interaction.reply({
+        interaction.followUp({
           content: ":x: | This is not a valid Channel!",
           ephemeral: true,
         });

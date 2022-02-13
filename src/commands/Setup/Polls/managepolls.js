@@ -4,7 +4,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, MessageEmbed } = require("discord.js");
 
 // Database queries
-const Guild = require("../../../models/leave");
+const Guild = require("../../../models/Polls/polls");
 
 // Configs
 const emojis = require("../../../../Controller/emojis/emojis");
@@ -23,35 +23,35 @@ module.exports.run = async (interaction) => {
   const sub = interaction.options.getSubcommand();
 
   if (sub === "setup") {
-    const isSetup = await Guild.findOne({ id: interaction.guild.id });
     const channel =
       interaction.options.getChannel("channel") || interaction.channel;
+    const guildQuery = await Guild.findOne({ id: interaction.guild.id });
 
-    if (!isSetup) {
+    if (!guildQuery) {
+      const newPolls = new Guild({
+        id: interaction.guild.id,
+        channel: channel.id,
+      });
+      newPolls.save();
+      interaction.followUp({
+        content: `${emojis.success} | Successfully set the poll channel to ${channel}`,
+        ephemeral: true,
+      });
+    } else {
       if (channel.type != "GUILD_TEXT") {
-        interaction.followUp({
-          content: ":x: | This is not a valid Channel!",
+        interaction.reply({
+          content: ":x: | This is not a valid channel!",
           ephemeral: true,
         });
         return;
       }
 
-      const newAuctions = new Guild({
-        id: interaction.guild.id,
-        channel: channel.id,
-      });
-      newAuctions.save();
-      interaction.followUp({
-        content: `${emojis.success} | Successfully set the leave Channel to ${channel}`,
-        ephemeral: true,
-      });
-    } else {
       await Guild.findOneAndUpdate({
         id: interaction.guild.id,
         channel: channel.id,
       });
-      interaction.followUp({
-        content: `${emojis.success} | Successfully changed leave channel to ${channel}`,
+      interaction.reply({
+        content: `${emojis.success} | Successfully changed poll channel to ${channel}`,
         ephemeral: true,
       });
     }
@@ -59,33 +59,33 @@ module.exports.run = async (interaction) => {
     const isSetup = await Guild.findOne({ id: interaction.guild.id });
     if (!isSetup)
       return interaction.followUp({
-        content: `${emojis.error} | No leave setup found.`,
+        content: `${emojis.error} | No polls setup found.`,
         ephemeral: true,
       });
 
     isSetup.delete();
     interaction.followUp({
-      content: `${emojis.success} | Successfully removed leave setup`,
+      content: `${emojis.success} | Successfully removed polls setup`,
       ephemeral: true,
     });
   }
 };
 
 module.exports.data = new SlashCommandBuilder()
-  .setName("manageleave")
-  .setDescription("Setup/Remove leave messages")
+  .setName("managepolls")
+  .setDescription("Setup/Remove polls")
   .addSubcommand((sub) =>
     sub
       .setName("setup")
-      .setDescription("Setup leave messages")
+      .setDescription("Setup polls")
 
       .addChannelOption((option) =>
         option
           .setName("channel")
-          .setDescription("Select the channel for sending leave messages")
-          .setRequired(true)
+          .setDescription("Select the channel for sending poll messages")
+          .setRequired(false)
       )
   )
   .addSubcommand((sub) =>
-    sub.setName("remove").setDescription("Remove leave system.")
+    sub.setName("remove").setDescription("Remove poll system.")
   );
