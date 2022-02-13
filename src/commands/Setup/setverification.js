@@ -37,7 +37,7 @@ module.exports.run = async (interaction, utils) => {
 
       if (channel.type != "GUILD_TEXT") {
         interaction.reply({
-          content: ":x: | This is not a valid Channel!",
+          content: `${emojis.error} | This is not a valid channel!`,
           ephemeral: true,
         });
         return;
