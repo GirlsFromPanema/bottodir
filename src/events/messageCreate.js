@@ -5,7 +5,7 @@ const ms = require("moment");
 
 // Database queries
 const Guild = require("../models/Antiscam/antiscam");
-const Logs = require("../models/logs");
+const Logs = require("../models/Logging/logs");
 
 // Configs
 const emojis = require("../../Controller/emojis/emojis");

@@ -3,7 +3,7 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed, Message } = require("discord.js");
 
-const Guild = require("../../models/report");
+const Guild = require("../../models/Report/report");
 
 const emojis = require("../../../Controller/emojis/emojis");
 

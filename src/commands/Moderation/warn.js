@@ -14,7 +14,7 @@ const {
 const warnModel = require("../../models/Moderation/warning");
 
 // Logging
-const Guild = require("../../models/logs");
+const Guild = require("../../models/Logging/logs");
 
 module.exports.cooldown = {
   length: 10000 /* in ms */,

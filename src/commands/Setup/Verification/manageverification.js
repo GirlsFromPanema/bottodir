@@ -4,7 +4,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, MessageEmbed } = require("discord.js");
 
 // Database queries
-const GuildVerification = require("../../../models/verification");
+const GuildVerification = require("../../../models/Verification/verification");
 
 // Configs
 const emojis = require("../../../../Controller/emojis/emojis");

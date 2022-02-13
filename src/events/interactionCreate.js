@@ -50,11 +50,11 @@ const { getKeyByValue, msToMinAndSec } = require('../util/util.js')
 const { red } = require('colors/safe')
 
 // Database queries
-const User = require('../models/Admin/userblacklist')
+const User = require('../models/Admin/userblacklist');
 
 // Configs
-const config = require('../../Controller/owners.json')
-const emojis = require('../../Controller/emojis/emojis')
+const config = require('../../Controller/owners.json');
+const emojis = require('../../Controller/emojis/emojis');
 
 module.exports.data = {
 	name: 'interactionCreate',

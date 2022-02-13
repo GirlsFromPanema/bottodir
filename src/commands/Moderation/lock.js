@@ -5,7 +5,7 @@ const { CommandInteraction, Permissions, MessageEmbed, Message } = require("disc
 
 const emojis = require("../../../Controller/emojis/emojis");
 
-const Guild = require("../../models/logs");
+const Guild = require("../../models/Logging/logs");
 
 module.exports.cooldown = {
     length: 10000, /* in ms */

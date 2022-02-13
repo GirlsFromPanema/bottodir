@@ -4,12 +4,12 @@ const { GuildMember, MessageEmbed, WebhookClient } = require("discord.js");
 const moment = require("moment");
 
 // Database queries
-const Guild = require("../models/welcome.js");
-const GuildLogs = require("../models/logs");
+const Guild = require("../../models/Welcome/welcome.js");
+const GuildLogs = require("../../models/Logging/logs");
 
 // Configs
-const emojis = require("../../Controller/emojis/emojis");
-const client = require("../util/bot.js");
+const emojis = require("../../../Controller/emojis/emojis");
+const client = require("../../util/bot.js");
 
 module.exports.data = {
   name: "guildMemberAdd",

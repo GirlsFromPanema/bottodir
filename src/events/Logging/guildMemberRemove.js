@@ -3,10 +3,10 @@
 const { GuildMember, MessageEmbed, Role } = require("discord.js");
 
 // Database queries
-const Guild = require("../models/leave");
+const Guild = require("../../models/Welcome/leave");
 
 // Configs
-const client = require("../util/bot.js");
+const client = require("../../util/bot");
 
 module.exports.data = {
   name: "guildMemberRemove",

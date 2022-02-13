@@ -9,7 +9,7 @@ const emojis = require("../../../Controller/emojis/emojis");
 const economyUser = require("../../models/Economy/usereconomy");
 
 // Warnings, we are not resetting them due to saveity (guild admins)
-const warnedUser = require("../../models/user");
+const warnedUser = require("../../models/User/user");
 
 // We are not resetting blacklists as they might be unfair.
 
