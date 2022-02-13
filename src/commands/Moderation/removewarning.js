@@ -1,7 +1,7 @@
 "use strict";
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
+const { CommandInteraction, Permissions, MessageEmbed, WebhookClient } = require("discord.js");
 
 // Users database profile
 const warnModel = require("../../models/Moderation/warning");
@@ -53,11 +53,12 @@ module.exports.run = async (interaction, utils) => {
     if (!guildQuery) return;
     
     if (guildQuery) {
-      const guild = interaction.client.guilds.cache.get(
-        interaction.guild.id
-      );
-      const logging = guild.channels.cache.get(guildQuery.channel);
-      logging.send({ embeds: [logs] });
+      const webhookid = guildQuery.webhookid;
+      const webhooktoken = guildQuery.webhooktoken;
+
+      const webhookClient = new WebhookClient({ id: webhookid, token: webhooktoken });
+
+      webhookClient.send({ embeds: [logs]})
     } 
     // Send the Update to the target (user)
     const userlogs = new MessageEmbed()

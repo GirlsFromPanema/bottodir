@@ -1,11 +1,13 @@
 "use strict";
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { CommandInteraction, Permissions, MessageEmbed, Message } = require("discord.js");
+const { CommandInteraction, Permissions, MessageEmbed, WebhookClient } = require("discord.js");
 
-const emojis = require("../../../Controller/emojis/emojis");
-
+// Database queries
 const Guild = require("../../models/Logging/logs");
+
+// Configs
+const emojis = require("../../../Controller/emojis/emojis");
 
 module.exports.cooldown = {
     length: 10000, /* in ms */
@@ -40,9 +42,12 @@ module.exports.run = async (interaction, utils, guild, member) =>
         if(!guildQuery) return;
 
         if(guildQuery) {
-            const guild = interaction.client.guilds.cache.get(interaction.guild.id)
-            const logging = guild.channels.cache.get(guildQuery.channel)
-            logging.send({ embeds: [embed] })
+            const webhookid = guildQuery.webhookid;
+            const webhooktoken = guildQuery.webhooktoken;
+
+            const webhookClient = new WebhookClient({ id: webhookid, token: webhooktoken });
+    
+            webhookClient.send({ embeds: [embed]})
         } 
     }
     catch (err)

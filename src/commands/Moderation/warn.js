@@ -105,8 +105,11 @@ module.exports.run = async (interaction, utils) => {
     // Set the collector on the buttons - if "YES" -> save to database
     collector.on("collect", async (i) => {
       if (i.customId === "YES") {
-        interaction.editReply({ embeds: [e2], components: [], ephemeral: true });
-        //  let warnings = 0;
+        interaction.editReply({
+          embeds: [e2],
+          components: [],
+          ephemeral: true,
+        });
 
         new warnModel({
           userId: target.id,
@@ -120,12 +123,16 @@ module.exports.run = async (interaction, utils) => {
         const guildQuery = await Guild.findOne({ id: interaction.guild.id });
 
         if (guildQuery) {
-          const guild = interaction.client.guilds.cache.get(
-            interaction.guild.id
-          );
-          const logging = guild.channels.cache.get(guildQuery.channel);
-          logging.send({ embeds: [e2] });
-        } 
+          const webhookid = guildQuery.webhookid;
+          const webhooktoken = guildQuery.webhooktoken;
+
+          const webhookClient = new WebhookClient({
+            id: webhookid,
+            token: webhooktoken,
+          });
+
+          webhookClient.send({ embeds: [e2] });
+        }
 
         target.send({ embeds: [targetembed] });
         collector.stop("success");

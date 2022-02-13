@@ -1,8 +1,9 @@
 "use strict";
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
+const { CommandInteraction, Permissions, MessageEmbed, WebhookClient } = require("discord.js");
 
+// Database queries
 const Guild = require("../../models/Logging/logs");
 
 module.exports.cooldown = {
@@ -44,18 +45,19 @@ module.exports.run = async (interaction, utils) =>
         .setTitle("✅ | User banned")
         .setDescription(`User: ${target.user.tag}\nModerator: ${interaction.user.tag}\nReason: ${reason}`)
         .setTimestamp()
-        .setColor("GREEN")
-        .setThumbnail(interaction.guild.iconURL({ dynamic: true }))
-        .setImage(interaction.guild.iconURL({ dynamic: true }))
-
+        .setColor("RED")
+        
         // Log Channel
         const guildQuery = await Guild.findOne({ id: interaction.guild.id })
 
         if(!guildQuery) return;
         if(guildQuery) {
-            const guild = interaction.client.guilds.cache.get(interaction.guild.id)
-            const logging = guild.channels.cache.get(guildQuery.channel)
-            logging.send({ embeds: [logs] })
+            const webhookid = guildQuery.webhookid;
+            const webhooktoken = guildQuery.webhooktoken;
+
+            const webhookClient = new WebhookClient({ id: webhookid, token: webhooktoken });
+    
+            webhookClient.send({ embeds: [logs]})
         } 
 
         await interaction.reply({ embeds: [banmsg], ephemeral: true });
