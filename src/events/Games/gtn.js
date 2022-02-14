@@ -45,7 +45,7 @@ module.exports.run = async (message) => {
         number: isRunning.number
     }
 
-    if(Number.isInteger(parseInt(message.content)) && parseInt(message.content) == data.number && message.channel.id == data.channel) {
+    if(Number.isInteger(parseInt(message.content)) && parseInt(message.content) == isRunning.number && message.channel.id == gamechannel) {
         message.pin().catch(error => {
             if(error instanceof DiscordAPIError) return message.reply({ content: `${emojis.success} correct Number!\n\n**Warning: Unable to pin message**`})
         })
@@ -54,10 +54,13 @@ module.exports.run = async (message) => {
             SEND_MESSAGES: false,
             ADD_REACTIONS: false
         });
-    }
-    message.react("✅").catch(error => console.log(error));
-    message.reply('This is the correct number! Congrats!');
-    isRunning.delete();
+
+        message.react("✅").catch(error => console.log(error));
+        message.reply('This is the correct number! Congrats!');
+        isRunning.delete();
+    } else return;
+    
+   
 
   } catch (err) {
     return Promise.reject(err);
