@@ -37,17 +37,19 @@ module.exports.run = async (message) => {
     // If the Guild has no setup done, dont do anything/ignore it.
     if (!check) return;
     const owner = await message.guild.fetchOwner();
-    if(message.author.id !== owner) return;
+    if(message.author.id === owner) return;
 
     // If the user has a higher / or the same role as the bot, return
-    if (message.author.roles.highest.position >= message.guild.me.roles.highest.position) return;
-
-    // TODO: return members with a certain role (setup mod role)
+    if (message.member.roles.highest.position >= message.guild.me.roles.highest.position) return;
 
     if (check) {
-      //  if(message.author.bot) return;
+  
       if (array.some((word) => message.content.toLowerCase().includes(word))) {
         message.delete();
+
+        // Time the user for 1h after sending a banned word/link.
+        const member = message.guild.members.cache.get(message.author);
+        const timeout = await message.member.timeout(3600000);
 
         const embed = new MessageEmbed()
           .setTitle(`${emojis.error} Scam detected`)
@@ -79,10 +81,7 @@ module.exports.run = async (message) => {
           webhookClient.send({ embeds: [embed] });
         }
 
-        // Timeout the User after sending the word.
-        const member = message.guild.members.cache.get(message.author);
-        const timeout = await message.member.timeout(43200000);
-
+       
         const embed2 = new MessageEmbed()
           .setTitle(`${emojis.error} Scam detected`)
           .setDescription(
@@ -99,7 +98,14 @@ module.exports.run = async (message) => {
           })
           .setTimestamp();
 
-        message.author.send({ embeds: [embed2] });
+          try {
+            await message.author.send({ embeds: [embed2] });
+          } catch(error) {
+            message.channel.send({ content: `Could not send DMs to the User, they are closed.`})
+            console.log(error)
+            return;
+          }
+        
       }
     }
   } catch (err) {
