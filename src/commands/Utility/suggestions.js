@@ -56,7 +56,7 @@ module.exports.run = async (interaction) => {
       .setDescription(`${suggestionmessage}\n\nThanks for this cool idea!`)
       .setColor("RED")
       .setFooter({
-        text: `Bottdir :: Suggestions`,
+        text: `Bottodir:: Suggestions`,
         iconURL: interaction.guild.iconURL({ dynamic: true }),
       })
       .setThumbnail(interaction.guild.iconURL({ dynamic: true }))
@@ -112,7 +112,7 @@ module.exports.run = async (interaction) => {
       )
       .setColor("RED")
       .setFooter({
-        text: `Bottdir :: Suggestions`,
+        text: `Bottodir:: Suggestions`,
         iconURL: interaction.guild.iconURL({ dynamic: true }),
       })
       .setThumbnail(interaction.guild.iconURL({ dynamic: true }))
