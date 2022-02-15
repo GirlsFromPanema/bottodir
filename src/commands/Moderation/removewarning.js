@@ -9,6 +9,9 @@ const warnModel = require("../../models/Moderation/warning");
 // Server logging
 const Guild = require("../../models/Logging/logs");
 
+// Configs
+const emojis = require("../../../Controller/emojis/emojis");
+
 module.exports.cooldown = {
   length: 10000 /* in ms */,
   users: new Set(),
@@ -25,23 +28,25 @@ module.exports.run = async (interaction, utils) => {
     // Fetch the user 
     const target = interaction.options.getUser("target");
 
-    // Find the data of the user and delete one warning, if there isn't any warning saved, return an error.
-    const data = await warnModel.findOne({ 
-      userId: target.id 
-    })
-    if(!data) {
-        return interaction.reply({ content: `${target.tag} has no warnings`, ephemeral: true })
-    } 
-    data.delete();
-    
-    // Embed structure
-    const user = interaction.guild.members.cache.get(target.userId)
-
     const embed = new MessageEmbed()
     .setDescription(`✅ | Successfully deleted ${target}'s warning`)
     .setColor("GREEN")
     .setTimestamp()
 
+    // Find the data of the user and delete one warning, if there isn't any warning saved, return an error.
+    const data = await warnModel.findOne({ 
+      userId: target.id 
+    })
+    if(!data) return interaction.reply({ content: `${target.tag} has no warnings`, ephemeral: true })
+    
+    data.delete();
+
+    interaction.reply({ embeds: [embed], ephemeral: true });
+    
+    // Embed structure
+    const user = interaction.guild.members.cache.get(target.userId)
+
+  
     const logs = new MessageEmbed()
     .setTitle(`✅ | Removed warning`)
     .setDescription(`User: ${target}\nModerator: ${interaction.user.tag}`)
@@ -66,10 +71,7 @@ module.exports.run = async (interaction, utils) => {
     .setDescription(`Hey ${target}!\nYour warn got removed from by ${interaction.user.tag}.\nServer:${interaction.guild.name}`)
     .setColor("GREEN")
     .setTimestamp()
-
-    target.send({ embeds: [userlogs] })
-
-    interaction.reply({ embeds: [embed] });
+        
   } catch (err) {
     return Promise.reject(err);
   }

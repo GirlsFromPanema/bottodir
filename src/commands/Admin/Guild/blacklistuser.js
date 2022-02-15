@@ -25,7 +25,7 @@ module.exports.run = async (interaction, utils) =>
 {
     try
     {
-        const user = interaction.options.getUser("id");
+        const user = interaction.options.getUser("target");
 
         const isBlacklisted = await User.findOne({ userID: user.id })
         if(isBlacklisted) return interaction.reply({ content: `${emojis.error} | <@${user.id}> is already blacklisted.`, ephemeral: true })
@@ -41,9 +41,15 @@ module.exports.run = async (interaction, utils) =>
         .setColor("RED")
         .setTimestamp()
 
-        await user.send({ embeds: [embed] })
+        try {
+            await user.send({ embeds: [embed] });
+        } catch(error) {
+            interaction.reply({ content: `${emojis.success} | Successfully blacklisted ${user}\n\nError: Could not send message.`, ephemeral: true });
+            console.log(error)
+            return;
+        }
 
-        interaction.reply({ content: `${emojis.success} | Successfully blacklisted ${user}`, ephemeral: true })
+        interaction.followUp({ content: `${emojis.success} | Successfully blacklisted ${user}`, ephemeral: true })
     }
     catch (err)
     {
@@ -59,4 +65,4 @@ module.exports.permissions = {
 module.exports.data = new SlashCommandBuilder()
     .setName("blacklistuser")
     .setDescription("Blacklist a User from using the Bot")
-    .addUserOption((option) => option.setName("id").setDescription("Who should get blacklisted?").setRequired(true));
+    .addUserOption((option) => option.setName("target").setDescription("Who should get blacklisted?").setRequired(true));

@@ -34,10 +34,10 @@ module.exports.run = async (interaction, utils, client) => {
   try {
 
     // Database queries
-    const Guild = require("../../models/welcome");
+    const Guild = require("../../models/Welcome/welcome");
     const GuildLogs = require("../../models/Logging/logs");
-    const GuildTracker = require("../../models/guilds");
-    const GuildSuggestion = require("../../models/suggestions");
+    const GuildTracker = require("../../models/Tracker/guilds");
+    const GuildSuggestion = require("../../models/Suggestions/suggestions");
 
     // Welcoming
     const welcome = await Guild.findOne({ 

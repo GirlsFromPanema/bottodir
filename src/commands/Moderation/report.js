@@ -8,8 +8,10 @@ const {
   Message,
 } = require("discord.js");
 
+// Database queries
 const Guild = require("../../models/Report/report");
 
+// Configs
 const emojis = require("../../../Controller/emojis/emojis");
 
 module.exports.cooldown = {

@@ -11,6 +11,9 @@ const {
 // Database queries
 const Guild = require("../../models/Logging/logs");
 
+// Configs
+const emojis = require("../../../Controller/emojis/emojis");
+
 module.exports.cooldown = {
   length: 10000 /* in ms */,
   users: new Set(),
@@ -34,16 +37,24 @@ module.exports.run = async (interaction, utils) => {
       .setDescription(
         `You have been kicked from **${interaction.guild.name}**.\nReason: ${reason}`
       );
-    await target.send({ embeds: [kickdm] });
 
-    target.kick({ target });
+    try {
+      await target.send({ embeds: [kickdm] });
+    } catch (error) {
+      interaction.reply({
+        content: `${emojis.error} | Cannot send messages to this user.\nSuccessfully kicked without sending warning through DMs.`,
+        ephemeral: true,
+      });
+      console.log(error);
+      return target.kick({ target });
+    }
 
     let kickmsg = new MessageEmbed()
       .setColor("GREEN")
       .setTitle(`${target.user.tag} Kicked`)
       .setDescription(
         `Kicked ${target.user.tag} from ${interaction.guild.name}.\nReason: ${reason}`
-      )
+      );
 
     const logs = new MessageEmbed()
       .setTitle("✅ | Member kicked")

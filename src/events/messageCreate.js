@@ -36,6 +36,13 @@ module.exports.run = async (message) => {
 
     // If the Guild has no setup done, dont do anything/ignore it.
     if (!check) return;
+    const owner = await message.guild.fetchOwner();
+    if(message.author.id !== owner) return;
+
+    // If the user has a higher / or the same role as the bot, return
+    if (message.author.roles.highest.position >= message.guild.me.roles.highest.position) return;
+
+    // TODO: return members with a certain role (setup mod role)
 
     if (check) {
       //  if(message.author.bot) return;

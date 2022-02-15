@@ -16,6 +16,9 @@ const warnModel = require("../../models/Moderation/warning");
 // Logging
 const Guild = require("../../models/Logging/logs");
 
+// Configs
+const emojis = require("../../../Controller/emojis/emojis");
+
 module.exports.cooldown = {
   length: 10000 /* in ms */,
   users: new Set(),
@@ -80,7 +83,7 @@ module.exports.run = async (interaction, utils) => {
     const filter = (i) => i.user.id === interaction.user.id;
     const collector = msg.channel.createMessageComponentCollector({
       filter,
-      time: 20000,
+      time: 90000,
     });
 
     const e2 = new MessageEmbed();
@@ -119,6 +122,16 @@ module.exports.run = async (interaction, utils) => {
           timestamp: Date.now(),
         }).save();
 
+        try {
+          await target.send({ embeds: [targetembed] });
+        } catch(error) {
+          interaction.followUp({
+           content: `${emojis.error} | Could not send warning to the User.\nSaved warning in the Database.`, ephemeral: true
+          });
+          console.log(error)
+          return;
+        }
+
         // fetch the logs channel of the guild, then send the embed.
         const guildQuery = await Guild.findOne({ id: interaction.guild.id });
 
@@ -134,7 +147,6 @@ module.exports.run = async (interaction, utils) => {
           webhookClient.send({ embeds: [e2] });
         }
 
-        target.send({ embeds: [targetembed] });
         collector.stop("success");
       } else if (i.customId === "NO") {
         interaction.editReply({
@@ -149,13 +161,6 @@ module.exports.run = async (interaction, utils) => {
     e4.setDescription("You took too much time! timed out");
     e4.setColor("RED");
     collector.on("end", async (ignore, error) => {
-      if (error && error !== "success") {
-        interaction.editReply({
-          embeds: [e4],
-          components: [],
-          ephemeral: true,
-        });
-      }
       collector.stop("success");
     });
   } catch (err) {

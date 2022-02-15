@@ -39,8 +39,15 @@ module.exports.run = async (interaction, utils) =>
         .setColor("GREEN")
         .setTimestamp()
 
-        await user.send({ embeds: [embed] });
-        interaction.reply({ content: `${emojis.success} | Successfully whitelisted ${user}`, ephemeral: true });
+        try {
+            await user.send({ embeds: [embed] });
+        } catch(error) {
+            interaction.reply({ content: `${emojis.success} | Successfully whitelisted ${user}\n\nWarning: Could not send message.`, ephemeral: true });
+            console.log(error)
+            return;
+        }
+        
+        interaction.followUp({ content: `${emojis.success} | Successfully whitelisted ${user}`, ephemeral: true });
     }
     catch (err)
     {

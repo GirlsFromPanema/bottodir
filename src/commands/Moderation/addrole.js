@@ -3,7 +3,11 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed, WebhookClient } = require("discord.js");
 
+// Database queries
 const Guild = require("../../models/Logging/logs");
+
+// Configs
+const emojis = require("../../../Controller/emojis/emojis");
 
 module.exports.cooldown = {
     length: 10000, /* in ms */
@@ -45,14 +49,7 @@ module.exports.run = async (interaction, utils, guild) =>
         .setDescription(`Dear ${target}, this is a notification that your profile got updated.\nServer: ${interaction.guild.name}\nRole: ${role}\nModerator: ${interaction.user.tag}`)
         .setTimestamp()
 
-        // If the user has the role, remove it. Else add it.
-        if(target.roles.cache.has(role.id)) {
-            target.roles.remove(role.id)
-            interaction.reply({ embeds: [removed], ephemeral: true})
-        } else {
-            target.roles.add(role.id)
-            interaction.reply({ embeds: [added], ephemeral: true})
-        }
+    
         const logs = new MessageEmbed()
         .setTitle("✅ | User Updated")
         .setDescription(`User updated: ${target}\nRole updated: ${role}\nModerator: ${interaction.user.tag}`)
@@ -61,10 +58,25 @@ module.exports.run = async (interaction, utils, guild) =>
         .setThumbnail(interaction.guild.iconURL({ dynamic: true }))
         .setImage(interaction.guild.iconURL({ dynamic: true }))
 
-        target.send({ embeds: [userembed]})
+        // Adding role to the user, if the user already has the role, remove it.
+        try {
+            if(target.roles.cache.has(role.id)) {
+                target.roles.remove(role.id)
+                interaction.reply({ embeds: [removed], ephemeral: true})
+            } else {
+                target.roles.add(role.id)
+                interaction.reply({ embeds: [added], ephemeral: true})
+            }
+            await target.send({ embeds: [userembed]})	
+        } catch(error) {
+            console.log(error);
+            return;
+        }
+        
 
-        if (!guildQuery) return;
         const guildQuery = await Guild.findOne({ id: interaction.guild.id });
+        if (!guildQuery) return;
+
         if (guildQuery) {
             const webhookid = guildQuery.webhookid;
             const webhooktoken = guildQuery.webhooktoken;

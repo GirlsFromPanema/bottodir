@@ -20,7 +20,7 @@ const warnSchema = new Schema({
         type: String,
         required: true
     },
-    warnings: {
+    pin: {
         type: Number,
         default: 0,
     },
