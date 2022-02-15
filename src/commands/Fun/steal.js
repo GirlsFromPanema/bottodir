@@ -42,7 +42,7 @@ module.exports.run = async (interaction, utils) => {
       "license.jpg"
     );
 
-    interaction.reply({ content: `If your username contains any non-alphabetical charachters, it won't show the username`, files: [attachment] })
+    interaction.reply({ content: `If your username contains any non-alphabetical characters, it won't show the username`, files: [attachment] })
   } catch (err) {
     return Promise.reject(err);
   }
