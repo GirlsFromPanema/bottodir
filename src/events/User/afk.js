@@ -28,11 +28,13 @@ module.exports.run = async (message) => {
   try {
     if (message.author.bot) return;
 
+    // Search the user in the database
     const isAFK = await User.findOne({
       Guild: message.guild.id,
       userID: message.author.id,
     });
 
+    // If the user is sending a message, delete the saved id in the database and send a message
     if (isAFK) {
       isAFK.delete();
 
@@ -44,6 +46,7 @@ module.exports.run = async (message) => {
       message.channel.send({ embeds: [dataDeletedEmbed] });
     }
 
+    // Check if the mentioned user is within the database/afk
     const mentionedUser = message.mentions.users.first();
     if (mentionedUser) {
       const data = await User.findOne({
@@ -51,6 +54,7 @@ module.exports.run = async (message) => {
         userID: mentionedUser.id,
       });
 
+      // if the user is afk, send an information that the user is currently afk 
       if (data) {
         const embed = new MessageEmbed()
           .setTitle(`${mentionedUser.username} is currently AFK!`)
