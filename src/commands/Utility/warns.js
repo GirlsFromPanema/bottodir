@@ -2,9 +2,9 @@
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
-
 const moment = require("moment");
 
+// Database query
 const warnModel = require("../../models/Moderation/warning");
 
 module.exports.cooldown = {

@@ -8,17 +8,19 @@ const {
   Discord,
 } = require("discord.js");
 
+// Package utility stuff
 const { utc } = require("moment");
 const os = require("os");
 
+// Time stuff
 const ms = require("ms");
 const moment = require("moment");
 const momentDurationFormatSetup = require("moment-duration-format");
 
+// Configs
 const version = require("../../../package.json").version;
-const emojis = require("../../../Controller/emojis/emojis");
-
 const { msToTimeObj, colorPalette } = require("../../util/util");
+const emojis = require("../../../Controller/emojis/emojis");
 
 module.exports.cooldown = {
   length: 180000 /* in ms */,

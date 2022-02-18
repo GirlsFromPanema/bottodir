@@ -68,6 +68,7 @@ const {
   MessageSelectMenu,
 } = require("discord.js");
 
+// Configs
 const emojis = require("../../../Controller/emojis/emojis");
 
 module.exports.cooldown = {

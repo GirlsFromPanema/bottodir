@@ -3,6 +3,7 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions } = require("discord.js");
 
+// Configs
 const { msToTimeObj } = require("../../util/util.js");
 const emojis = require("../../../Controller/emojis/emojis");
 

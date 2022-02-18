@@ -3,9 +3,11 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
 
-const emojis = require("../../../../Controller/emojis/emojis");
-
+// Database query
 const User = require("../../../models/AFK/afk");
+
+// Configs
+const emojis = require("../../../../Controller/emojis/emojis");
 
 module.exports.cooldown = {
     length: 1800000, /* in ms */
