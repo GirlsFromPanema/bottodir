@@ -4,8 +4,8 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
 
 // Database queries
-const economyUser = require("../../models/Economy/usereconomy");
 const Guild = require("../../models/Economy/guildeconomy");
+const economyUser = require("../../models/Economy/usereconomy");
 
 // Configs
 const emojis = require("../../../Controller/emojis/emojis");
@@ -17,7 +17,37 @@ module.exports.cooldown = {
 };
 
 // Randomize the jobs for the users work.
-const jobs = ['House wife', 'Programmer', 'Builder', 'McDonald\'s employee', 'Law enforcer', 'Lawyer', 'Banker', 'Cleaner', 'Discord Mod'];
+const jobs = ['House wife', 
+              'Programmer', 
+              'Builder', 
+              'McDonald\'s employee', 
+              'Law enforcer', 
+              'Lawyer', 
+              'Banker', 
+              'Cleaner', 
+              'Discord Mod',
+              'Guard',
+              'Engineer',
+              'Cashier',
+              'Janitor',
+              'Laborer',
+              'Office clerk',
+              'Server',
+              'Retail sales associate',
+              'Customer service representative',
+              'Nursing assistant',
+              'Administrative assistant',
+              'Accounting clerk',
+              'Maintenance technician',
+              'Teacher',
+              'General manager',
+              'Accountant',
+              'Truck driver',
+              'Marketing manager',
+              'Registered nurse',
+              'Web developer',
+              'Sales manager',           
+ ];
 
 // Randomize the money and then update the user 
 const randomNum = (max, min) => Math.floor(Math.random() * (max - (min ? min : 0))) + (min ? min : 0);
