@@ -43,7 +43,6 @@ module.exports.run = async (message) => {
     if (message.member.roles.highest.position >= message.guild.me.roles.highest.position) return;
 
     if (check) {
-  
       if (array.some((word) => message.content.toLowerCase().includes(word))) {
         message.delete();
 
@@ -80,8 +79,7 @@ module.exports.run = async (message) => {
 
           webhookClient.send({ embeds: [embed] });
         }
-
-       
+        
         const embed2 = new MessageEmbed()
           .setTitle(`${emojis.error} Scam detected`)
           .setDescription(
@@ -98,6 +96,7 @@ module.exports.run = async (message) => {
           })
           .setTimestamp();
 
+          // Handling errors 
           try {
             await message.author.send({ embeds: [embed2] });
           } catch(error) {
@@ -105,8 +104,7 @@ module.exports.run = async (message) => {
             console.log(error)
             return;
           }
-        
-      }
+       }
     }
   } catch (err) {
     return Promise.reject(err);
