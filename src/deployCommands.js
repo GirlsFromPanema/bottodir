@@ -4,7 +4,7 @@
 
                                         ----- INFORMATION ----- INFORMATION ----- INFORMATION ----- INFORMATION ----- INFORMATION ----- INFORMATION 
 
-                                                                            THIS IS THE TIME SYSTEM OF THE BOT.
+                                                                            THIS IS THE COMMAND SYSTEM OF THE BOT.
                                                                                     MODIFY AT YOUR OWN RISK.
 
                                                                 - THIS FILE IS ONLY NEEDED FOR INIT. THE TIME UTIL QUERIES.
@@ -45,7 +45,7 @@
                                                                                     
                                                                                     
                                                                                     
-                                                                        --      last update: 12/2/2022         --                                                                                                                                                                                                       */
+                                                                        --      last update: 22/2/2022         --                                                                                                                                                                                                       */
 
 
 
