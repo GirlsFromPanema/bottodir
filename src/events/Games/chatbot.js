@@ -34,11 +34,13 @@ module.exports.run = async (message) => {
 
     if(message.author.bot) return;
     
+    // If not setup, don't answer.
     const hasChatbot = await Guild.findOne({ id: message.guild.id })
     if(!hasChatbot) return;
 
     const chatbotchannel = hasChatbot.channel;
     
+    // Only allow answers within the bot channel saved in the db
     if(message.channel.id === chatbotchannel) {
       fetch(`https://api.affiliateplus.xyz/api/chatbot?message=${encodeURIComponent(message.content)}&botname=${message.client.user.username}&ownername=Koni#9521`)
         .then(response => response.json())
