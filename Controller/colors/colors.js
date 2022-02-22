@@ -1,5 +1,5 @@
 module.exports = {
-    "aliceblue": "#f0f8ff",
+  "aliceblue": "#f0f8ff",
   "antiquewhite": "#faebd7",
   "aqua": "#00ffff",
   "aquamarine": "#7fffd4",
