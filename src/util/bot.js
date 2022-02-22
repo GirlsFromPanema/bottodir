@@ -18,7 +18,7 @@ const config = require("../../Controller/owners.json");
                                                                             THIS IS THE CLIENT SYSTEM OF THE BOT.
                                                                                     MODIFY AT YOUR OWN RISK.
 
-                                                                - THIS FILE IS ONLY NEEDED FOR INIT. THE TIME UTIL QUERIES.
+                                                                - THIS FILE IS ONLY NEEDED FOR INIT. THE CLIENT UTIL QUERIES.
 
                                      - SUPPORT IS NOT PROVIDED IF THIS IS MODIFIED/CHANGED/MOVED IN ANY WAY THAT MAY BREAK COMMANDS/EVENTS/FUNCTIONS.
 
