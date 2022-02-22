@@ -23,7 +23,7 @@ module.exports.run = async (interaction, utils) =>
 {
     try
     {
-        
+        interaction.reply({ content: "Hello World" });
     }
     catch (err)
     {
@@ -36,6 +36,7 @@ module.exports.permissions = {
     userPermissions: [Permissions.FLAGS.SEND_MESSAGES]
 };
 
+// make sure to fill out the name and the description (to avoid errors)
 module.exports.data = new SlashCommandBuilder()
     .setName("")
     .setDescription("");
