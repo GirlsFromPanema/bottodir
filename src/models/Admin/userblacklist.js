@@ -4,12 +4,9 @@ const blacklistSchema = new Schema({
     userID:
     {
         type: String,
-        unique: true,
-        required: true
     },
     active: { 
         type: Boolean, 
-        required: true, 
         default: false 
     },
 }, { timestamps: true });

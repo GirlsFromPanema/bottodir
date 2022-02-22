@@ -3,9 +3,11 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed, Guild } = require("discord.js");
 
-const emojis = require("../../../../Controller/emojis/emojis");
-
+// Database query
 const User = require("../../../models/Admin/userblacklist");
+
+// Configis
+const emojis = require("../../../../Controller/emojis/emojis");
 
 module.exports.cooldown = {
     length: 10000, /* in ms */
@@ -25,15 +27,16 @@ module.exports.run = async (interaction, utils) =>
 {
     try
     {
-        const user = interaction.options.getUser("target");
+        const user = interaction.options.getString("id");
 
-        const isBlacklisted = await User.findOne({ userID: user.id })
-        if(isBlacklisted) return interaction.reply({ content: `${emojis.error} | <@${user.id}> is already blacklisted.`, ephemeral: true })
+        const isBlacklisted = await User.findOne({ userID: user })
+        if(isBlacklisted) return interaction.reply({ content: `${emojis.error} | <@${user}> is already blacklisted.`, ephemeral: true })
 
         const blacklist = new User({
-            userID: user.id,
+            userID: user,
             active: true
-        }).save();
+        })
+        blacklist.save();
 
         const embed = new MessageEmbed()
         .setTitle(`${emojis.notify} Profile Updated`)
@@ -41,15 +44,7 @@ module.exports.run = async (interaction, utils) =>
         .setColor("RED")
         .setTimestamp()
 
-        try {
-            await user.send({ embeds: [embed] });
-        } catch(error) {
-            interaction.reply({ content: `${emojis.success} | Successfully blacklisted ${user}\n\nError: Could not send message.`, ephemeral: true });
-            console.log(error)
-            return;
-        }
-
-        interaction.followUp({ content: `${emojis.success} | Successfully blacklisted ${user}`, ephemeral: true })
+        interaction.reply({ content: `${emojis.success} | Successfully blacklisted ${user}`, ephemeral: true })
     }
     catch (err)
     {
@@ -65,4 +60,4 @@ module.exports.permissions = {
 module.exports.data = new SlashCommandBuilder()
     .setName("blacklistuser")
     .setDescription("Blacklist a User from using the Bot")
-    .addUserOption((option) => option.setName("target").setDescription("Who should get blacklisted?").setRequired(true));
+    .addStringOption((option) => option.setName("id").setDescription("Who should get blacklisted?").setRequired(true));
