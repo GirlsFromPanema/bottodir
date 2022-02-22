@@ -3,15 +3,14 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { Permissions, MessageEmbed } = require("discord.js");
 
-const emojis = require("../../../Controller/emojis/emojis");
-
 // Economy
 const economyUser = require("../../models/Economy/usereconomy");
 
 // Warnings, we are not resetting them due to saveity (guild admins)
 const warnedUser = require("../../models/User/user");
 
-// We are not resetting blacklists as they might be unfair.
+// Configs
+const emojis = require("../../../Controller/emojis/emojis");
 
 module.exports.cooldown = {
     length: 10000, /* in ms */
@@ -32,14 +31,14 @@ module.exports.run = async (interaction, utils) =>
 {
     try
     {
-        const mentionedUser = interaction.options.getUser("user");
+        const mentionedUser = interaction.options.getString("id");
         if(!mentionedUser) return interaction.reply({ content: `${emojis.error} | That's not a valid User.`, ephemeral: true })
 
-        const userTypesToDelete = [economyUser]
+        const userTypesToDelete = [economyUser];
 
         for (const userType of userTypesToDelete){
             const isUser = await userType.findOne({
-                userID: mentionedUser.id,
+                userID: mentionedUser,
             });
         
             if(!isUser) {
@@ -47,6 +46,7 @@ module.exports.run = async (interaction, utils) =>
                 continue; 
             }
         
+            // If everything is true, delete the users data.
             isUser.delete();
         }
     }
@@ -64,4 +64,4 @@ module.exports.permissions = {
 module.exports.data = new SlashCommandBuilder()
     .setName("resetuser")
     .setDescription("Removes a User from the Database")
-    .addUserOption((option) => option.setName("user").setDescription("Mention the User to reset.").setRequired(true))
+    .addStringOption((option) => option.setName("id").setDescription("Mention the User to reset.").setRequired(true))
