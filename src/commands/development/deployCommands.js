@@ -44,7 +44,7 @@
                                                                                     
                                                                                     
                                                                                     
-                                                                        --      last update: 12/2/2022         --                                                                                                                                                             */
+                                                                        --      last update: 22/2/2022         --                                                                                                                                                             */
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions } = require("discord.js");
