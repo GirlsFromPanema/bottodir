@@ -15,7 +15,7 @@ const config = require("../../Controller/owners.json");
 
                                         ----- INFORMATION ----- INFORMATION ----- INFORMATION ----- INFORMATION ----- INFORMATION ----- INFORMATION 
 
-                                                                            THIS IS THE TIME SYSTEM OF THE BOT.
+                                                                            THIS IS THE CLIENT SYSTEM OF THE BOT.
                                                                                     MODIFY AT YOUR OWN RISK.
 
                                                                 - THIS FILE IS ONLY NEEDED FOR INIT. THE TIME UTIL QUERIES.
