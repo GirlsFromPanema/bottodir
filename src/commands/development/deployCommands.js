@@ -5,10 +5,10 @@
 
                                         ----- INFORMATION ----- INFORMATION ----- INFORMATION ----- INFORMATION ----- INFORMATION ----- INFORMATION 
 
-                                                                            THIS IS THE DATABASE SYSTEM OF THE BOT.
+                                                                            THIS IS THE DEV SYSTEM OF THE BOT.
                                                                                     DO NOT MODIFY THIS.
 
-                                                                - THIS FILE IS ONLY NEEDED FOR INIT. THE DATABASE CONNECTION.
+                                                                - THIS FILE IS ONLY NEEDED FOR INIT. THE COMMANDS AND EVENTS.
 
                                                             - SUPPORT IS NOT PROVIDED IF THIS IS MODIFIED/CHANGED/MOVED IN ANY WAY.
 
