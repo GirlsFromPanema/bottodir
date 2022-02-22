@@ -5,10 +5,10 @@
 
                                         ----- INFORMATION ----- INFORMATION ----- INFORMATION ----- INFORMATION ----- INFORMATION ----- INFORMATION 
 
-                                                                            THIS IS THE DATABASE SYSTEM OF THE BOT.
+                                                                            THIS IS THE RELOAD SYSTEM OF THE BOT.
                                                                                     DO NOT MODIFY THIS.
 
-                                                                - THIS FILE IS ONLY NEEDED FOR INIT. THE DATABASE CONNECTION.
+                                                                - THIS FILE IS ONLY NEEDED FOR INIT. THE RELOAD (CMDS) CONNECTION.
 
                                                             - SUPPORT IS NOT PROVIDED IF THIS IS MODIFIED/CHANGED/MOVED IN ANY WAY.
 
@@ -44,7 +44,7 @@
                                                                                     
                                                                                     
                                                                                     
-                                                                        --      last update: 12/2/2022         --                                                                                                                                                             */
+                                                                        --      last update: 22/2/2022         --                                                                                                                                                             */
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions } = require("discord.js");
