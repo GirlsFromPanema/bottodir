@@ -12,18 +12,9 @@ Nothing can go wrong with someone like Bottodir, what are you waiting for?
 > Click [here to invite Bottodir](https://discord.com/api/oauth2/authorize?client_id=838730162283216968&permissions=1644972474359&scope=bot%20applications.commands).
 * Make sure to add the highest role/permissions possible to be able to use all commands.
 
-> Commands coming here ...
-  
-## Get started
-> 1. Invite Bottodir
-* Click [here](https://discord.com/api/oauth2/authorize?client_id=838730162283216968&permissions=1644972474359&scope=bot%20applications.commands) to invite Bottodir to your Server
-  
-> 2. Setup Bottodir
-* View all commands [here](https://github.com/GirlsFromPanema/bottodir/edit/main/README.md)
-  
-> 3. Setup Enviroment
-* soon
-  
+> Features && Commands
+* View all the commands and features [here]()
+
 ## Local Setup
 > 1. Download/Install
 ```
