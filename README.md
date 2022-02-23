@@ -8,6 +8,12 @@
 # Bottodir - Utility Discord
 Nothing can go wrong with someone like Bottodir, what are you waiting for?
   
+## Guild Setup
+> Click [here to invite Bottodir](https://discord.com/api/oauth2/authorize?client_id=838730162283216968&permissions=1644972474359&scope=bot%20applications.commands).
+* Make sure to add the highest role/permissions possible to be able to use all commands.
+
+> Commands coming here ...
+  
 ## Get started
 > 1. Invite Bottodir
 * Click [here](https://discord.com/api/oauth2/authorize?client_id=838730162283216968&permissions=1644972343287&scope=applications.commands%20bot) to invite Bottodir to your Server
