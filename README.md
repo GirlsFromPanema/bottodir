@@ -42,12 +42,12 @@ The bot should be online now.
 ## Deployment
 I'm using Ubuntu 20.4 and PM2 in this example. Make sure NodeJS v16+ and PM2 is installed.
   
-> 1. Upload project to Server
+> 1. Upload project to server
 ```
 Upload your files through a SFT(P) (Save File Transport)
 ```
   
-> 2. Installing Dependencies
+> 2. Installing dependencies
 ```
 $ npm install
 ```
@@ -72,7 +72,7 @@ current logs (errors etc.) are displayed here.
   
 🎉 Your bot should run 24/7 now.
   
-## Features:
+## Features
   
 * Moderation
 * Utility
@@ -96,10 +96,10 @@ and much more!
 ## Collaborate
 - Fork the Repository 
 - Submit a Pull request.
-[Discord Server](https://discord.gg/SMzefFJN7x) 
+[Join Community](https://discord.gg/SMzefFJN7x) 
 
 ## Support
-If you need help with anything, ask [here](https://discord.gg/SMzefFJN7x)
+If you need help, click [here](https://discord.gg/SMzefFJN7x)
 
 ## Privacy Policy
 
@@ -233,4 +233,3 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-
