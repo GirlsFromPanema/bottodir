@@ -16,7 +16,7 @@ Nothing can go wrong with someone like Bottodir, what are you waiting for?
 * View all the commands and features [here]()
 
 ## Local Setup
-> 1. Download/Install
+> 1. Download && Install
 ```
 $ git clone https://github.com/GirlsFromPanema/bottodir
 $ cd bottodir
@@ -59,7 +59,7 @@ $ pm2 start index.js --name discordbot
 [ a table should be here now ]
 ```
 
-Running 
+Running ...
 ```
 $ pm2 ls
 ``` 
