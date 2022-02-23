@@ -66,7 +66,7 @@ $ pm2 ls
 shows all the current running services.
 
 ```
-pm2 logs
+$ pm2 logs
 ```
 current logs (errors etc.) are displayed here.
   
