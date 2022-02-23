@@ -86,4 +86,4 @@ module.exports.permissions = {
 module.exports.data = new SlashCommandBuilder()
     .setName("suggest")
     .setDescription("Suggest some Ideas for the Server.")
-    .addStringOption(option => option.setName("suggestion").setDescription("Provide the reason for the ban, add proofs via Imgur.").setRequired(true))
+    .addStringOption(option => option.setName("suggestion").setDescription("What would you like to suggest?").setRequired(true))
