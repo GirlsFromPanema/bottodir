@@ -24,8 +24,8 @@ module.exports.run = async (interaction) => {
 
   if (sub === "setup") {
     const isSetup = await Guild.findOne({ id: interaction.guild.id });
-    const channel =
-      interaction.options.getChannel("channel") || interaction.channel;
+    const channel = interaction.options.getChannel("channel") || interaction.channel;
+    const role = interaction.options.getRole("role");
 
     if (!isSetup) {
       if (channel.type != "GUILD_TEXT") {
@@ -38,6 +38,7 @@ module.exports.run = async (interaction) => {
 
       const newAuctions = new Guild({
         id: interaction.guild.id,
+        role: role.id,
         channel: channel.id,
       });
       newAuctions.save();
@@ -48,6 +49,7 @@ module.exports.run = async (interaction) => {
     } else {
       await Guild.findOneAndUpdate({
         id: interaction.guild.id,
+        role: role.id,
         channel: channel.id,
       });
       interaction.followUp({
