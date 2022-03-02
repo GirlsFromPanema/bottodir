@@ -45,8 +45,7 @@ module.exports.run = async (interaction, utils) => {
     
     // Embed structure
     const user = interaction.guild.members.cache.get(target.userId)
-
-  
+    
     const logs = new MessageEmbed()
     .setTitle(`✅ | Removed warning`)
     .setDescription(`User: ${target}\nModerator: ${interaction.user.tag}`)
@@ -78,7 +77,7 @@ module.exports.run = async (interaction, utils) => {
 };
 
 module.exports.permissions = {
-  clientPermissions: [Permissions.FLAGS.ADMINISTRATOR],
+  clientPermissions: [Permissions.FLAGS.SEND_MESSAGES],
   userPermissions: [Permissions.FLAGS.ADMINISTRATOR],
 };
 
