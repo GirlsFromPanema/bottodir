@@ -1,9 +1,4 @@
 "use strict";
-
-const fs = require("fs");
-const path = require("path");
-
-
                                                                                                                                                                                                                                                                                                                             /*
 
                                         ----- INFORMATION ----- INFORMATION ----- INFORMATION ----- INFORMATION ----- INFORMATION ----- INFORMATION 
@@ -56,6 +51,9 @@ const path = require("path");
 Various utility functions for uptime/math etc.
 
 */
+
+const fs = require("fs");
+const path = require("path");
 
 /**
  * Storing the bots color plaette
