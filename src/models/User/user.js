@@ -1,12 +1,22 @@
 const { Schema, Types, model } = require("mongoose");
 
 const userSchema = new Schema({
-    userId: String,
-    guildId: String,
-    moderatorId: String,
-    reason: String,
-    timestamp: Number,
-})
+    userId: {
+        type: String
+    },
+    guildId: {
+        type: String
+    },
+    moderatorId: {
+        type: String
+    },
+    reason: {
+        type: String
+    },
+    timestamp: {
+        type: Number
+    },
+}, { timestamps: true });
    
 const User = model("User", userSchema);
 
