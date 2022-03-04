@@ -6,7 +6,7 @@ const { CommandInteraction, Permissions, MessageEmbed, Guild } = require("discor
 // Database query
 const User = require("../../../models/Admin/userblacklist");
 
-// Configis
+// Configs
 const emojis = require("../../../../Controller/emojis/emojis");
 
 module.exports.cooldown = {
