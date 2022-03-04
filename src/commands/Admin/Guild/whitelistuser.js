@@ -31,7 +31,7 @@ module.exports.run = async (interaction, utils) =>
         const isBlacklisted = await User.findOne({ userID: user });
         if(!isBlacklisted) return interaction.reply({ content: `${emojis.error} | <@${user}> is not blacklisted.`, ephemeral: true });
 
-            isBlacklisted.delete();
+        isBlacklisted.delete();
 
         interaction.reply({ content: `${emojis.success} | Successfully whitelisted ${user}`, ephemeral: true });
     }

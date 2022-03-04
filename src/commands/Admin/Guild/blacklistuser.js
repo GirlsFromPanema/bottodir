@@ -38,12 +38,6 @@ module.exports.run = async (interaction, utils) =>
         })
         blacklist.save();
 
-        const embed = new MessageEmbed()
-        .setTitle(`${emojis.notify} Profile Updated`)
-        .setDescription(`Dear ${user.tag}, your profile got updated!\n\n**Action:** Blacklisted.\nYou have been banned from using my Commands.\n\nIf you think this was a mistake, contact \`Koni#9521\`.`)
-        .setColor("RED")
-        .setTimestamp()
-
         interaction.reply({ content: `${emojis.success} | Successfully blacklisted ${user}`, ephemeral: true })
     }
     catch (err)
