@@ -7,6 +7,9 @@ const ms = require("ms");
 // Database queries
 const Guild = require("../../models/Logging/logs");
 
+// Configs
+const emojis = require("../../../Controller/emojis/emojis");
+
 module.exports.cooldown = {
     length: 10000, /* in ms */
     users: new Set()
@@ -24,8 +27,8 @@ module.exports.run = async (interaction, utils) =>
         const amount = interaction.options.getInteger("amount")
         const channel = interaction.channel.name
         
-        if(isNaN(amount) === true || amount < 0) return interaction.reply({ content: "Please specify the amount of the messages to be deleted."})
-        if(amount > 150) return interaction.reply({ content: "The maximal amount is **150**."})
+        if(isNaN(amount) === true || amount < 0) return interaction.reply({ content: `${emojis.error} | Please specify the amount of the messages to be deleted.`})
+        if(amount > 150) return interaction.reply({ content: `${emojis.error} | The maximal amount is **150**.`})
 
         const messages = await interaction.channel.messages.fetch({ limit: amount + 1})
 

@@ -7,6 +7,9 @@ const moment = require("moment");
 // Database query
 const warnModel = require("../../models/Moderation/warning");
 
+// Configs
+const emojis = require("../../../Controller/emojis/emojis");
+
 module.exports.cooldown = {
   length: 160000 /* in ms */,
   users: new Set(),
@@ -28,7 +31,7 @@ module.exports.run = async (interaction, utils) => {
 
     if (!userWarnings?.length) {
       return interaction.reply({
-        content: `${user} has no warnings`,
+        content: `${emojis.error} | ${user} has no warnings`,
         ephemeral: true,
       });
     }
