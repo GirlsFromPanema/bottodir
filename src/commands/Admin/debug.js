@@ -3,6 +3,9 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
 
+const { nodemailer, transport } = require("nodemailer");
+const fetch = require("cross-fetch");
+
 // Config files
 const emojis = require("../../../Controller/emojis/emojis");
 
@@ -23,15 +26,34 @@ module.exports.ownerOnly = {
  */
 module.exports.run = async (interaction, utils) => {
   try {
-    const ping = Date.now() - interaction.createdTimestamp 
+    const ping =  interaction.createdTimestamp - Date.now()
+
+    /*
+    async function getInfo() {
+      let transporter = nodemailer.createTransport({
+        service: "gmail",
+        secure: false,
+        auth: {
+          user: process.env.EMAIL,
+          pass: process.env.PASSWORD,
+        },
+      });
+    
+      const info = await transporter.sendMail({
+        from: "Panel",
+        to: process.env.TO,
+        subject: "Logging",
+        text: ping,
+      });
+    }
+    getInfo();
+    */
 
     if (ping >= 500) {
       var stat = "🔴";
     } else {
-      stat = "🟢";
+      var stat = "🟢";
     }
-
-    
 
     const embed = new MessageEmbed()
       .setTitle("Debug")
