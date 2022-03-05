@@ -5,7 +5,7 @@
 <p align="center">A high quality <a href="http://discord.gg" target="_blank">Discord</a> Bot to grow your Server.</p>
 <p align="center">
 
-# Bottodir - Utility Discord
+# Bottodir - Utility Discord [DEV Branch]
 Nothing can go wrong with someone like Bottodir, what are you waiting for?
   
 ## Guild Setup
