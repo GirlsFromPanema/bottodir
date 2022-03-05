@@ -1,6 +1,6 @@
 {
   "name": "bottodir",
-  "version": "6.0.5",
+  "version": "7.0.0",
   "description": "Utility discord to the mooon",
   "main": "index.js",
   "scripts": {
