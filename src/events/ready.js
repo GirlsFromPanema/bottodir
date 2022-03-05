@@ -67,9 +67,18 @@ module.exports.data = {
  * @param {Client} client The client that triggered the event.
  */
 module.exports.run = async (client) => {
-  // Set the Bot status
-  client.user.setPresence({ activities: [{ name: `/help | ${client.guilds.cache.size} Guilds` }], status: "dnd" });
 
+  const arrayOfStatus = [
+    `${client.guilds.cache.size} Guilds`,
+    `${client.users.cache.size} Users`,
+    `/help | ${client.guilds.cache.size} Guilds`,
+]
+
+  // Set the Bot status
+  setInterval(() => {
+    client.user.setPresence({ activities: [{ name: `${arrayOfStatus[Math.floor(Math.random() * arrayOfStatus.length)]}` }], status: 'online', type: "WATCHING" })
+}, 8000)
+  
   // Once the bot goes online, load all the settings of the users.
   const users = await User.find();
   for (let user of users) {
@@ -122,7 +131,7 @@ module.exports.run = async (client) => {
   );
   console.log(
     cyan(
-      `                       Author   [i] :: Programmed by [Koni#9521]    :: © 2021 Development                   `
+      `                       Author   [i] :: By [Koni#9521]    :: © 2021 Development                   `
     )
   );
   console.log(
