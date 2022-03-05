@@ -5,6 +5,7 @@ const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
 
 // Database queries
 const Guild = require("../../models/Tournaments/tournaments");
+const User = require("../../models/Tournaments/usertournament");
 
 // Configs
 const emojis = require("../../../Controller/emojis/emojis");
@@ -26,11 +27,13 @@ module.exports.run = async (interaction, utils) =>
 
         // Check if the guild is signed up with any tournament
         const isSetup = await Guild.find({ id: interaction.guild.id });
-        
+        const userJoined = await User.findOne({ userID: interaction.user.id });
+
+        let checkifuserjoined = emojis[userJoined ? 'success' : 'error']
         const tournaments = isSetup 
             .map((tournament) => {
                 return [
-                    [`**Name:** ${tournament.name}\n**Date:** ${tournament.date}\n**Price**: ${tournament.price}\n\n**Pin:** ${tournament.pin}`].join("\n")
+                    [`**Name:** ${tournament.name}\n**Date:** ${tournament.date}\n**Price**: ${tournament.price}\n\n**Pin:** ${tournament.pin}\n**Member:** ${checkifuserjoined}`].join("\n")
                 ]
             }).join("\n");
 
@@ -39,8 +42,9 @@ module.exports.run = async (interaction, utils) =>
 
         const embed = new MessageEmbed()
         .setTitle(`${interaction.guild.name} Tournament's`)
-        .setDescription(`${tournaments}`)
+        .setDescription(`${tournaments}\n\nTo join the tournament run \`/manageentry join\``)
         .setFooter({ text: `Server: ${interaction.guild.name}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true })})
+        .setColor("GREEN")
         .setTimestamp()
        
         interaction.reply({ embeds: [embed], ephemeral: true })
