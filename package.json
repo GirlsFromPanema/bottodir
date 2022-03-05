@@ -54,7 +54,7 @@
     "path": "^0.12.7",
     "uninstall": "^0.0.0",
     "url": "^0.11.0",
-    "voucher-code-generator": "^1.1.1"
+    "voucher-code-generator": "^1.2.0"
   },
   "devDependencies": {
     "discord-player": "^5.2.2",

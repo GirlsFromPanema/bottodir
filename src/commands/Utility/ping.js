@@ -8,6 +8,10 @@ module.exports.cooldown = {
     users: new Set()
 };
 
+module.exports.premiumOnly = {
+    premiumOnly: true
+}
+
 /**
  * Runs the command.
  * @param {CommandInteraction} interaction The Command Interaciton

@@ -49,12 +49,14 @@ const { Permissions, CommandInteraction } = require("discord.js");
 const { getKeyByValue, msToMinAndSec } = require("../util/util.js");
 const { red } = require("colors/safe");
 
-// Database queries
-const User = require("../models/Admin/userblacklist");
-
 // Configs
+const client = require("../util/bot");
 const config = require("../../Controller/owners.json");
 const emojis = require("../../Controller/emojis/emojis");
+
+// Database queries
+const Blacklisted = require("../models/Admin/userblacklist");
+const User = require("../models/Premium/User");
 
 module.exports.data = {
   name: "interactionCreate",
@@ -112,12 +114,40 @@ module.exports.run = async (interaction) => {
     */
 
     // Check if the User is blacklisted, if true, return and error and don't execute the command.
-    let profile = await User.findOne({ userID: interaction.user.id });
-    if (profile)
+    let profile = await Blacklisted.findOne({ userID: interaction.user.id });
+    if (profile) {
       return interaction.reply({
         content: `${emojis.error} | You are blacklisted from using my Commands.`,
         ephemeral: true,
       });
+    }
+
+    // ------------------------------------------------------------------------- //
+
+    // find the user from cache
+    let user = interaction.client.userSettings.get(interaction.user.id)
+
+    // If the user isn't in the cache
+    if (!user) {
+      // check if they're in database, if they are not create a schema or else return
+      const findUser = await User.findOne({ userID: interaction.user.id })
+      if (!findUser) {
+        const newUser = await User.create({ userID: interaction.user.id })
+        interaction.client.userSettings.set(interaction.user.id, newUser)
+        user = newUser
+      } else return;
+    }
+      
+      // Premium only commands
+      if (cmdFile.premiumOnly) {
+        const isPremium = await User.findOne({ isPremium: true })
+        if (isPremium) {
+          return interaction.reply({
+            content: `${emojis.error} | This is only for premium users.`,
+            ephemeral: true,
+          });
+        }
+      }
 
     /*
 		-------------------------------------------------------------------------

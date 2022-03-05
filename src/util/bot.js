@@ -81,6 +81,7 @@ const client = new Client({
   ],
 });
 client.commands = new Collection();
+client.userSettings = new Collection();
 
 /* Load commands. */
 console.log(cyan("Loading Commands . . ."));

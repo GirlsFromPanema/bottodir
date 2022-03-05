@@ -1,5 +1,4 @@
 
-/*
 const { Schema, Types, model } = require("mongoose");
 
 // Generate Premium Code
@@ -25,7 +24,6 @@ const premiumCode = Schema({
   }
 })
 
-const Code = model("Code", premiumCode)
+const Code = model("prem-code", premiumCode)
 
 module.exports = Code;
-*/

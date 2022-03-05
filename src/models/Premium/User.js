@@ -1,13 +1,9 @@
-/*
-
 const { Schema, Types, model } = require("mongoose");
 
 const userPremium = new Schema({
-  id: 
+  userID: 
   {
     type: String,
-    required: true,
-    unique: true
   },
   isPremium: 
   {
@@ -40,9 +36,6 @@ const userPremium = new Schema({
   }
 })
 
-const Premium = model("premiumUser", userPremium)
+const Premium = model("prem-user", userPremium)
 
 module.exports = Premium;
-
-
-*/
