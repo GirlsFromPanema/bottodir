@@ -76,7 +76,6 @@ module.exports.run = async (message) => {
             id: webhookid,
             token: webhooktoken,
           });
-
           webhookClient.send({ embeds: [embed] });
         }
         

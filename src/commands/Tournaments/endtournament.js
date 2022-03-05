@@ -3,9 +3,11 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
 
-const emojis = require("../../../Controller/emojis/emojis");
-
+// Database queries
 const Guild = require("../../models/Tournaments/tournaments");
+
+// Configs
+const emojis = require("../../../Controller/emojis/emojis");
 
 module.exports.cooldown = {
   length: 90000 /* in ms */,
@@ -27,10 +29,7 @@ module.exports.run = async (interaction, utils) => {
         ephemeral: true,
       });
     }
-
-    if (isSetup) {
-      isSetup.delete();
-    }
+    isSetup.delete();
     interaction.reply({
       content: `${emojis.success} | Successfully ended the Tournament`,
       ephemeral: true,
