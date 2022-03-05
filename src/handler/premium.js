@@ -66,7 +66,7 @@ module.exports = async (client) => {
 
             // Save the updated user within the usersSettings.
             const newUser = await user.save({ new: true }).catch((error) => { console.log(error) });
-            client.usersSettings.set(newUser.Id, newUser);
+            client.usersSettings.set(newUser.userID, newUser);
           }
         }
       }
