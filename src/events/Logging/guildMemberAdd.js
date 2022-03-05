@@ -47,15 +47,19 @@ module.exports.run = async (member) => {
       (role) => role.id == guildQuery.role
     );
     
-    if (guildQuery) {
-      // Sending message when new user joins the Server.
-      const guild = member.client.guilds.cache.get(member.guild.id);
-      const logging = guild.channels.cache.get(guildQuery.channel);
-      logging.send({ embeds: [embed] });
-
-      member.roles.add(role); // role.id
+    try {
+      if (guildQuery) {
+        // Sending message when new user joins the Server.
+        const guild = member.client.guilds.cache.get(member.guild.id);
+        const logging = guild.channels.cache.get(guildQuery.channel);
+        logging.send({ embeds: [embed] });
+  
+        member.roles.add(role); // role.id
+      }
+    } catch(error) {
+      console.log(error)
     }
-
+    
     const logQuery = await GuildLogs.findOne({ id: member.guild.id })
     if(!logQuery) return;
 
