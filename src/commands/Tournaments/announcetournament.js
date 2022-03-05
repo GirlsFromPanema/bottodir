@@ -3,9 +3,11 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
 
-const emojis = require("../../../Controller/emojis/emojis");
-
+// Database queries
 const Guild = require("../../models/Tournaments/tournaments");
+
+// Configs
+const emojis = require("../../../Controller/emojis/emojis");
 
 module.exports.cooldown = {
     length: 90000, /* in ms */
@@ -35,7 +37,7 @@ module.exports.run = async (interaction, utils) =>
         const tournaments = isSetup 
             .map((tournament) => {
                 return [
-                    [`**Name:** ${tournament.name}\n**Date:** ${tournament.date}\n**Price:** ${tournament.price}`].join("\n")
+                    [`**Name:** ${tournament.name}\n**Date:** ${tournament.date}\n**Price:** ${tournament.price}\n\n**Pin:** ${tournament.pin}`].join("\n")
                 ]
             }).join("\n");
 

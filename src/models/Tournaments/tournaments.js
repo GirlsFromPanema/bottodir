@@ -6,6 +6,9 @@ const tournamentSchema = new Schema({
         type: String,
         unique: true,
     },
+    pin: {
+        type: String
+    },
     name:
     {
         type: String,
