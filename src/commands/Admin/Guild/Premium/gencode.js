@@ -6,10 +6,10 @@ const moment = require("moment");
 const voucher_codes = require("voucher-code-generator");
 
 // Datbase queries
-const schema = require("../../../models/Premium/Code");
+const schema = require("../../../../models/Premium/Code");
 
 // Configs
-const emojis = require("../../../../Controller/emojis/emojis");
+const emojis = require("../../../../../Controller/emojis/emojis");
 
 module.exports.cooldown = {
   length: 10000,
