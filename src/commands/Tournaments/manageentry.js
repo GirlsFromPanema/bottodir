@@ -80,6 +80,11 @@ module.exports.run = async (interaction) => {
   }
 };
 
+module.exports.permissions = {
+  clientPermissions: [Permissions.FLAGS.SEND_MESSAGES],
+  userPermissions: [Permissions.FLAGS.SEND_MESSAGES]
+};
+
 module.exports.data = new SlashCommandBuilder()
   .setName("manageentry")
   .setDescription("Join/Leave tournaments")

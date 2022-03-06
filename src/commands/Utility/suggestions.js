@@ -136,6 +136,11 @@ module.exports.run = async (interaction) => {
   }
 };
 
+module.exports.permissions = {
+  clientPermissions: [Permissions.FLAGS.SEND_MESSAGES],
+  userPermissions: [Permissions.FLAGS.ADMINISTRATOR]
+};
+
 module.exports.data = new SlashCommandBuilder()
   .setName("suggestions")
   .setDescription("Accept or deny a suggestion")
