@@ -1,7 +1,7 @@
 "use strict";
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { CommandInteraction, MessageEmbed } = require("discord.js");
+const { CommandInteraction, Permissions } = require("discord.js");
 
 // Database queries
 const Guild = require("../../../models/Polls/polls");
