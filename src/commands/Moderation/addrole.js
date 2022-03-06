@@ -100,5 +100,5 @@ module.exports.permissions = {
 module.exports.data = new SlashCommandBuilder()
     .setName("addrole")
     .setDescription("Add a Role to a User")
-    .addUserOption(option => option.setName("target").setDescription("The User which you would like to add a Role to").setRequired(true))
-    .addRoleOption(option => option.setName("role").setDescription("The role you wish to be pinged on a bot status change.").setRequired(true))
+    .addUserOption(option => option.setName("target").setDescription("The User which you would like to add a Role to.").setRequired(true))
+    .addRoleOption(option => option.setName("role").setDescription("The role you would you like to add.").setRequired(true))
