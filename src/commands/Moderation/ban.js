@@ -43,7 +43,7 @@ module.exports.run = async(interaction, utils) => {
             await target.send({ embeds: [bandm] });
         } catch (error) {
             interaction.reply({
-                content: `${emojis.success} | Successfully kicked ${target.user.tag}.\n\nFailed to send DMs due to closed direct messages.`,
+                content: `${emojis.success} | Successfully banned ${target.user.tag}.\n\nFailed to send DMs due to closed direct messages.`,
                 ephemeral: true,
             });
             console.log(error);
