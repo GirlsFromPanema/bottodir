@@ -3,7 +3,6 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, MessageEmbed } = require("discord.js");
 const moment = require("moment");
-const voucher_codes = require("voucher-code-generator");
 
 // Datbase queries
 const User = require("../../models/Premium/User");
@@ -31,9 +30,9 @@ module.exports.run = async(interaction) => {
         });
 
         // Return an error if the User does not include any valid Premium Code
-        if (!code) return interaction.reply({ content: `${emojis.error} | This code is invalid`, ephemeral: true });
+        if (!code) return interaction.reply({ content: `${emojis.error} | This code is invalid.`, ephemeral: true });
 
-        if (user && user.isPremium) return interaction.reply({ content: `${emojis.error} | You already have premium.`, ephemeral: true });
+        if (user && user.isPremium) return interaction.reply({ content: `${emojis.error} | You already have an active premium subscription.`, ephemeral: true });
 
         const premium = await schema.findOne({
             code: code.toUpperCase(),
