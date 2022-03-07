@@ -1,6 +1,6 @@
 "use strict";
 
-const { GuildMember, MessageEmbed, WebhookClient } = require("discord.js");
+const { GuildMember, MessageEmbed, WebhookClient, CommandInteraction } = require("discord.js");
 const ms = require("moment");
 
 // Database queries
@@ -10,14 +10,7 @@ const Logs = require("../models/Logging/logs");
 // Configs
 const emojis = require("../../Controller/emojis/emojis");
 const array = require("../Data/scam.json");
-
-const {
-    CommandInteraction,
-    MessageActionRow,
-    MessageButton,
-    Discord,
-    ReactionUserManager,
-} = require("discord.js");
+const config = require("../../Controller/owners.json");
 
 module.exports.data = {
     name: "messageCreate",
@@ -33,22 +26,29 @@ module.exports.data = {
 module.exports.run = async(message) => {
     try {
         const check = await Guild.findOne({ id: message.guild.id });
+        const guildowner = await message.guild.fetchOwner();
 
         // If the Guild has no setup done, dont do anything/ignore it.
         if (!check) return;
-        const owner = await message.guild.fetchOwner();
-        if (message.author.id === owner) return;
+        if (message.author.id === guildowner) return;
+        if (config.owner.includes(message.author.id)) return;
 
-        // If the user has a higher / or the same role as the bot, return
+        // If the user has a higher / or the same role as the bot, don't do anything.
         if (message.member.roles.highest.position >= message.guild.me.roles.highest.position) return;
 
         if (check) {
             if (array.some((word) => message.content.toLowerCase().includes(word))) {
-                message.delete();
 
-                // Time the user for 1h after sending a banned word/link.
-                const member = message.guild.members.cache.get(message.author);
-                const timeout = await message.member.timeout(3600000);
+                try {
+                    message.delete();
+                    // Timeout the user for 1h after sending a banned word/link.
+                    const member = message.guild.members.cache.get(message.author);
+                    const timeout = await message.member.timeout(3600000);
+                } catch (error) {
+                    //  message.channel.send("Bad word/Scam link detected but could not delete it due to missing permissions.")
+                    console.log(error)
+                    return;
+                }
 
                 const embed = new MessageEmbed()
                     .setTitle(`${emojis.error} Scam detected`)
