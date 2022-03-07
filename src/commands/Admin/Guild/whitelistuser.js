@@ -10,7 +10,8 @@ const User = require("../../../models/Admin/userblacklist");
 const emojis = require("../../../../Controller/emojis/emojis");
 
 module.exports.cooldown = {
-    length: 10000, /* in ms */
+    length: 10000,
+    /* in ms */
     users: new Set()
 };
 
@@ -18,28 +19,24 @@ module.exports.cooldown = {
 module.exports.ownerOnly = {
     ownerOnly: true
 };
-  
+
 
 /**
  * Runs the command.
  * @param {CommandInteraction} interaction The Command Interaciton
  * @param {any} utils Additional util
  */
-module.exports.run = async (interaction, utils) =>
-{
-    try
-    {
+module.exports.run = async(interaction, utils) => {
+    try {
         const user = interaction.options.getString("id");
 
         const isBlacklisted = await User.findOne({ userID: user });
-        if(!isBlacklisted) return interaction.reply({ content: `${emojis.error} | <@${user}> is not blacklisted.`, ephemeral: true });
+        if (!isBlacklisted) return interaction.reply({ content: `${emojis.error} | <@${user}> is not blacklisted.`, ephemeral: true });
 
         isBlacklisted.delete();
 
         interaction.reply({ content: `${emojis.success} | Successfully whitelisted ${user}`, ephemeral: true });
-    }
-    catch (err)
-    {
+    } catch (err) {
         return Promise.reject(err);
     }
 };

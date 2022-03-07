@@ -12,73 +12,71 @@ const schema = require("../../../../models/Premium/Code");
 const emojis = require("../../../../../Controller/emojis/emojis");
 
 module.exports.cooldown = {
-  length: 10000,
-  users: new Set(),
+    length: 10000,
+    users: new Set(),
 };
 
 // only allow owners to run this command
 module.exports.ownerOnly = {
-  ownerOnly: true
+    ownerOnly: true
 };
-
 
 /**
  * @param {CommandInteraction} interaction
  */
 
-module.exports.run = async (interaction) => {
-  try {
-      
-    const plan = interaction.options.getString("option");
-    const plans = ["daily", "monthly"];
+module.exports.run = async(interaction) => {
+    try {
 
-    if(!plans.includes(plan)) {
-        return interaction.reply({ content: `Not a valid option, available option: ${plans.join(", ")}`, ephemeral: true })
-    }
+        const plan = interaction.options.getString("option");
+        const plans = ["daily", "monthly"];
 
-    let codes = [];
+        if (!plans.includes(plan)) {
+            return interaction.reply({ content: `Not a valid option, available option: ${plans.join(", ")}`, ephemeral: true })
+        }
 
-    let time;
-    if (plan === "daily") time = Date.now() + 86400000;
-    if (plan === "monthly") time = Date.now() + 86400000 * 30;
-  
-    for (let i = 0; i < 1; i++) { 
-        const codePremium = voucher_codes.generate({
-            pattern: "####-####-####",
-          });
+        let codes = [];
 
-        const code = codePremium.toString().toUpperCase(); 
+        let time;
+        if (plan === "daily") time = Date.now() + 86400000;
+        if (plan === "monthly") time = Date.now() + 86400000 * 30;
 
-        const find = await schema.findOne({
-            code: code,
-        });
-
-        if (!find) {
-            schema.create({
-              code: code,
-              plan: plan,
-              expiresAt: time,
+        for (let i = 0; i < 1; i++) {
+            const codePremium = voucher_codes.generate({
+                pattern: "####-####-####",
             });
-    
-            // Push the new generated Code into the Queue
-            codes.push(`${i + 1}- ${code}`);
-          }
-        
-          interaction.reply({
-            content: `\`\`\`Generated +${codes.length}\n\n--------\n${codes.join(
+
+            const code = codePremium.toString().toUpperCase();
+
+            const find = await schema.findOne({
+                code: code,
+            });
+
+            if (!find) {
+                schema.create({
+                    code: code,
+                    plan: plan,
+                    expiresAt: time,
+                });
+
+                // Push the new generated Code into the Queue
+                codes.push(`${i + 1}- ${code}`);
+            }
+
+            interaction.reply({
+                content: `\`\`\`Generated +${codes.length}\n\n--------\n${codes.join(
               "\n"
             )}\n--------\n\nType - ${plan}\nExpires - ${moment(time).format(
               "dddd, MMMM Do YYYY"
             )}\`\`\`\nTo redeem, use \`/redeem <code>\``,
-          });
+            });
+        }
+    } catch (error) {
+        console.log(error);
     }
-  } catch(error) {
-      console.log(error);
-  }
 };
 
 module.exports.data = new SlashCommandBuilder()
-  .setName("gencode")
-  .setDescription("Generate a premium Code")
-  .addStringOption(option => option.setName("option").setDescription("Enable with enable, disable with disable").setRequired(true))
-  
+    .setName("gencode")
+    .setDescription("Generate a premium Code")
+    .addStringOption(option => option.setName("option").setDescription("Enable with enable, disable with disable").setRequired(true))
