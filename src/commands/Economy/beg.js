@@ -37,8 +37,6 @@ module.exports.run = async (interaction, utils) =>
 {
     try
     {
-        const masterLogger = interaction.client.channels.cache.get(config.channel);
-
          // Check if the Guild has enabled economy, if not, return an error.
         const isSetup = await Guild.findOne({ id: interaction.guildId })
         if(!isSetup) return interaction.reply({ content: `${emojis.error} | Economy System is **disabled**, make sure to enable it before running this Command.\n\nSimply run \`/manageeconomy <enable/disable>\` and then rerun this Command.`, ephemeral: true})
@@ -64,12 +62,6 @@ module.exports.run = async (interaction, utils) =>
         `)
         .setColor("GREEN")
         .setTimestamp()
-
-        /*
-        if(masterLogger) {
-            masterLogger.send({ embeds: [logs] })
-        }
-        */
 
         return interaction.reply({ embeds: [embed], ephemeral: true })
        

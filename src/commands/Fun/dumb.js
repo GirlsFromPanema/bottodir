@@ -3,6 +3,9 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
 
+// Configs
+const emojis = require("../../../Controller/emojis/emojis");
+
 module.exports.cooldown = {
     length: 10000, /* in ms */
     users: new Set()
@@ -18,10 +21,9 @@ module.exports.run = async (interaction, utils) =>
     try
     {
         const target = interaction.options.getMember("target");
-        if(!target) return interaction.reply({ content: "This is not a valid User!", ephemeral: true})
+        if(!target) return interaction.reply({ content: `${emojis.error} | This is not a valid User!`, ephemeral: true});
 
-        interaction.reply({ content: `${target}\nhttps://images-ext-1.discordapp.net/external/pgcABJ3VPOHSIQWnFE92pXbxC6-UxqZlTst4cQmHVe0/https/media.discordapp.net/attachments/877230407114973264/884509164100010064/image0.png` , ephemeral: false })
-        
+        interaction.reply({ content: `${target}\nhttps://images-ext-1.discordapp.net/external/pgcABJ3VPOHSIQWnFE92pXbxC6-UxqZlTst4cQmHVe0/https/media.discordapp.net/attachments/877230407114973264/884509164100010064/image0.png` , ephemeral: false });
         return;
     }
     catch (err)

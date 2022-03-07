@@ -4,7 +4,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
 
 module.exports.cooldown = {
-    length: 10000, /* in ms */
+    length: 90000, /* in ms */
     users: new Set()
 };
 

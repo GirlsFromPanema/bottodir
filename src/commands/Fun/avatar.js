@@ -3,8 +3,11 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
 
+// Configs
+const emojis = require("../../../Controller/emojis/emojis");
+
 module.exports.cooldown = {
-    length: 10000, /* in ms */
+    length: 90000, /* in ms */
     users: new Set()
 };
 
@@ -18,8 +21,7 @@ module.exports.run = async (interaction, utils) =>
     try
     {
         const user = interaction.options.getMember("user")
-        if(!user) return interaction.reply({ content: "This User is invalid"})
-
+        if(!user) return interaction.reply({ content: `${emojis.error} | This User is invalid`, ephemeral: true });
         const embed = new MessageEmbed()
         .setTitle(`${user.user.username}'s Avatar`)
         .setImage(user.user.displayAvatarURL({dynamic: true, size: 512}))

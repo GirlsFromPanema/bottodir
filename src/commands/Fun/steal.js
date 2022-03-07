@@ -5,8 +5,11 @@ const { CommandInteraction, Permissions, MessageAttachment, Discord } = require(
 
 const Canvas = require("canvas");
 
+// Configs
+const emojis = require("../../../Controller/emojis/emojis");
+
 module.exports.cooldown = {
-  length: 10000 /* in ms */,
+  length: 30000 /* in ms */,
   users: new Set(),
 };
 

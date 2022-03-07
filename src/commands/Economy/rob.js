@@ -35,7 +35,6 @@ module.exports.run = async (interaction, utils) =>
 {
     try
     {
-        const masterLogger = interaction.client.channels.cache.get(config.channel);
         const target = interaction.options.getUser("target");
         
         // Check if the Guild has enabled economy, if not, return an error.
@@ -76,12 +75,6 @@ module.exports.run = async (interaction, utils) =>
         `)
         .setColor("GREEN")
         .setTimestamp()
-
-        /*
-        if(masterLogger) {
-            masterLogger.send({ embeds: [logs] })
-        }
-        */
 
         return interaction.reply({ embeds: [embed], ephemeral: true })
        

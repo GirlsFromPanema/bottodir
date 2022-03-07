@@ -31,7 +31,6 @@ module.exports.run = async (interaction) => {
   const sub = interaction.options.getSubcommand();
 
   if (sub === "register") {
-    const masterLogger = interaction.client.channels.cache.get(config.channel);
     // Check if the Guild has enabled economy, if not, return an error.
     const isSetup = await Guild.findOne({ id: interaction.guildId });
     if (!isSetup)
@@ -83,16 +82,8 @@ module.exports.run = async (interaction) => {
       .setColor("GREEN")
       .setTimestamp();
 
-    /*
-   if(masterLogger) {
-       masterLogger.send({ embeds: [logs] })
-   }
-   */
-
     interaction.followUp({ embeds: [registered], ephemeral: true });
   } else if (sub === "unregister") {
-    const masterLogger = interaction.client.channels.cache.get(config.channel);
-
     // Check if the Guild has enabled economy, if not, return an error.
     const isSetup = await Guild.findOne({ id: interaction.guildId });
     if (!isSetup)
@@ -209,12 +200,6 @@ module.exports.run = async (interaction) => {
         )
         .setColor("GREEN")
         .setTimestamp();
-
-      /*
-       if(masterLogger) {
-           masterLogger.send({ embeds: [logs] })
-       }
-       */
     });
   }
 };
