@@ -21,8 +21,7 @@ const warnSchema = new Schema({
         required: true
     },
     pin: {
-        type: Number,
-        default: 0,
+        type: String,
     },
     timestamp: {
         type: Number,

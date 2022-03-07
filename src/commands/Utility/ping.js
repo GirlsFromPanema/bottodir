@@ -4,7 +4,8 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const { CommandInteraction, Permissions } = require("discord.js");
 
 module.exports.cooldown = {
-    length: 10000, /* in ms */
+    length: 90000,
+    /* in ms */
     users: new Set()
 };
 
@@ -17,17 +18,11 @@ module.exports.premiumOnly = {
  * @param {CommandInteraction} interaction The Command Interaciton
  * @param {any} utils Additional util
  */
-module.exports.run = async (interaction, utils) =>
-{
-    try
-    {
-        
-
+module.exports.run = async(interaction, utils) => {
+    try {
         await interaction.reply({ content: `Pong!`, ephemeral: true });
         return;
-    }
-    catch (err)
-    {
+    } catch (err) {
         return Promise.reject(err);
     }
 };
