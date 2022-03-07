@@ -69,7 +69,7 @@ module.exports.run = async (interaction, utils) =>
 };
 
 module.exports.permissions = {
-    clientPermissions: [Permissions.FLAGS.SEND_MESSAGES],
+    clientPermissions: [Permissions.FLAGS.MANAGE_MESSAGES],
     userPermissions: [Permissions.FLAGS.MANAGE_MESSAGES]
 };
 

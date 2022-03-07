@@ -80,8 +80,8 @@ module.exports.run = async (interaction, utils, guild, member) => {
 };
 
 module.exports.permissions = {
-  clientPermissions: [Permissions.FLAGS.MANAGE_MESSAGES],
-  userPermissions: [Permissions.FLAGS.BAN_MEMBERS],
+  clientPermissions: [Permissions.FLAGS.BAN_MEMBERS],
+  userPermissions: [Permissions.FLAGS.KICK_MEMBERS],
 };
 
 module.exports.data = new SlashCommandBuilder()

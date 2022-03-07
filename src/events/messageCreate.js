@@ -25,18 +25,18 @@ module.exports.data = {
 
 module.exports.run = async(message) => {
     try {
-        const check = await Guild.findOne({ id: message.guild.id });
+        const hasSetup = await Guild.findOne({ id: message.guild.id });
         const guildowner = await message.guild.fetchOwner();
 
         // If the Guild has no setup done, dont do anything/ignore it.
-        if (!check) return;
+        if (!hasSetup) return;
         if (message.author.id === guildowner) return;
         if (config.owner.includes(message.author.id)) return;
 
         // If the user has a higher / or the same role as the bot, don't do anything.
         if (message.member.roles.highest.position >= message.guild.me.roles.highest.position) return;
 
-        if (check) {
+        if (hasSetup) {
             if (array.some((word) => message.content.toLowerCase().includes(word))) {
 
                 try {
