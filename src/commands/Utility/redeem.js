@@ -13,55 +13,54 @@ const schema = require("../../models/Premium/Code");
 const emojis = require("../../../Controller/emojis/emojis");
 
 module.exports.cooldown = {
-  length: 10000,
-  users: new Set(),
+    length: 10000,
+    users: new Set(),
 };
 
 /**
  * @param {CommandInteraction} interaction
  */
 
-module.exports.run = async (interaction) => {
-  try {
-      
-    const code = interaction.options.getString("code");
+module.exports.run = async(interaction) => {
+    try {
 
-    let user = await User.findOne({
-        userID: interaction.member.user.id,  
-    });
+        const code = interaction.options.getString("code");
 
-    // Return an error if the User does not include any valid Premium Code
-    if (!code) return interaction.reply({ content: `${emojis.error} | This code is invalid`, ephemeral: true });
-  
-    if (user && user.isPremium) return interaction.reply({ content: `${emojis.error} | You already have premium.`, ephemeral: true });
-    
-    const premium = await schema.findOne({
-        code: code.toUpperCase(),
-    });
+        let user = await User.findOne({
+            userID: interaction.member.user.id,
+        });
 
-      if (premium) {
-        const expires = moment(premium.expiresAt).format(
-          "dddd, MMMM Do YYYY HH:mm:ss");
-  
-        user.isPremium = true;
-        user.premium.redeemedBy.push(interaction.user);
-        user.premium.redeemedAt = Date.now();
-        user.premium.expiresAt = premium.expiresAt;
-        user.premium.plan = premium.plan;
-  
-        user = await user.save({ new: true });
-        interaction.client.userSettings.set(interaction.user.id, user);
-        await premium.deleteOne();
+        // Return an error if the User does not include any valid Premium Code
+        if (!code) return interaction.reply({ content: `${emojis.error} | This code is invalid`, ephemeral: true });
 
-        interaction.reply({ content: `${emojis.success} | Successfully redeemed premium.\n\n\`Expires at: ${expires}\``, ephemeral: true })
+        if (user && user.isPremium) return interaction.reply({ content: `${emojis.error} | You already have premium.`, ephemeral: true });
+
+        const premium = await schema.findOne({
+            code: code.toUpperCase(),
+        });
+
+        if (premium) {
+            const expires = moment(premium.expiresAt).format(
+                "dddd, MMMM Do YYYY HH:mm:ss");
+
+            user.isPremium = true;
+            user.premium.redeemedBy.push(interaction.user);
+            user.premium.redeemedAt = Date.now();
+            user.premium.expiresAt = premium.expiresAt;
+            user.premium.plan = premium.plan;
+
+            user = await user.save({ new: true });
+            interaction.client.userSettings.set(interaction.user.id, user);
+            await premium.deleteOne();
+
+            interaction.reply({ content: `${emojis.success} | Successfully redeemed premium.\n\n\`Expires at: ${expires}\``, ephemeral: true });
+        }
+    } catch (error) {
+        console.log(error);
     }
-  } catch(error) {
-      console.log(error);
-  }
 };
 
 module.exports.data = new SlashCommandBuilder()
-  .setName("redeem")
-  .setDescription("Redeem a premium Code")
-  .addStringOption(option => option.setName("code").setDescription("Redeem a premium code").setRequired(true))
-  
+    .setName("redeem")
+    .setDescription("Redeem a premium Code")
+    .addStringOption(option => option.setName("code").setDescription("Redeem a premium code").setRequired(true))
