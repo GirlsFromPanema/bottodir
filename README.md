@@ -103,9 +103,9 @@ and much more!
 * [API](https://www.npmjs.com/package/discord.js?source=post_page-----7b5fe27cb6fa----------------------)
 * [Database](https://www.mongodb.com/) 
 * [Ecosystem](https://pm2.keymetrics.io/docs/usage/application-declaration/)
-* ~~[Testing](https://jestjs.io/)~~ [D] 
-* ~~[Tasks](https://gruntjs.com/getting-started)~~ [D] 
-* ~~[Automation](https://gulpjs.com/)~~ [D] 
+* ~~[Testing](https://jestjs.io/)~~ [D] [RM]
+* ~~[Tasks](https://gruntjs.com/getting-started)~~ [D] [RM]
+* ~~[Automation](https://gulpjs.com/)~~ [D] [RM]
 
 
 ## Collaborate
