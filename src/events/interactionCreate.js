@@ -119,11 +119,11 @@ module.exports.run = async (interaction) => {
         ephemeral: true,
       });
 
-    /*
-		-------------------------------------------------------------------------
-	  	Custom Owner Permissions 
+    	/*
+	-------------------------------------------------------------------------
+	 Custom Owner Permissions 
 
-		Sometimes, we don't want other people execute some commands. (Ex. blacklist/whitelist etc.)
+		Sometimes, we don't want other people execute some commands. (Ex. owner only command etc.)
 		That's why we have an option to only allow developers (defined by discord user ID in the configs) to execute these commands
 
 
@@ -131,8 +131,8 @@ module.exports.run = async (interaction) => {
   			ownerOnly: true
 		};
 
-		-------------------------------------------------------------------------
-	*/
+	-------------------------------------------------------------------------
+    	*/
     if (cmdFile.ownerOnly) {
       if (!config.owner.includes(interaction.user.id))
         return interaction.reply({
@@ -181,7 +181,7 @@ module.exports.run = async (interaction) => {
         missingUserPermissions.push(getKeyByValue(Permissions.FLAGS, flag));
     });
 
-    /* 
+    	/* 
 	-------------------------------------------------------------------------
 	Command options:
 
@@ -192,9 +192,6 @@ module.exports.run = async (interaction) => {
 
 		Normally, this would be four separate commands. However, with subcommands, this is handled in max. two commands.
 		
-		
-	Integrated by: Hallel 💃✨#5119
-
 	-------------------------------------------------------------------------
 	*/
 
