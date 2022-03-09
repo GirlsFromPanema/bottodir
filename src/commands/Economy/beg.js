@@ -43,7 +43,7 @@ module.exports.run = async (interaction, utils) =>
         
         // Find the user in the database, if he isn't registered, return an error.
         const isRegistered = await economyUser.findOne({ userID: interaction.user.id });
-        if(!isRegistered) return interaction.reply({ content: `${emojis.error} | You are not registered!\nUse \`/register\` to create an account.`, ephemeral: true })
+        if(!isRegistered) return interaction.reply({ content: `${emojis.error} | You are not registered!\nUse \`/account register\` to create an account.`, ephemeral: true })
 
         const earning = randomNum(100, 350);
         await addMoney(interaction.user.id, earning)
