@@ -3,8 +3,9 @@ module.exports = {
         {
             name: "Bottodir",
             script: ".", 
-            version: "v5.5.0",
-            autorestart: true,
+            version: "v7..0",
+            autorestart: false,
+            dev: true,
             watch: false,
         },
     ],
