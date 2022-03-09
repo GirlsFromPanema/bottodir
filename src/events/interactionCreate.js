@@ -43,7 +43,7 @@
                                                                                     
                                                                                     
                                                                                     
-                                                                        --      last update: 22/2/2022         --                                                                                                                                                                                                       */
+                                                                        --      last update: 09/03/2022         --                                                                                                                                                                                                       */
 
 const { Permissions, CommandInteraction } = require("discord.js");
 const { getKeyByValue, msToMinAndSec } = require("../util/util.js");
