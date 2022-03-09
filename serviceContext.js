@@ -1,6 +1,6 @@
 require('@google-cloud/profiler').start({
     serviceContext: {
       service: 'Bottodir',
-      version: '2.5.0',
+      version: '7.0.0',
     },
   })
