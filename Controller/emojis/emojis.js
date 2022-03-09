@@ -2,7 +2,7 @@ module.exports = {
 
     // Basic Error/Success Messages
     error: '<:error:924715450036813824>', 
-	success: '<:success:924715343774109726>',
+    success: '<:success:924715343774109726>',
 
     // Sub Badges
     saphire: '<:saphire:924717252719312916>',
