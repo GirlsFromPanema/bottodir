@@ -17,7 +17,7 @@ Nothing can go wrong with someone like Bottodir, what are you waiting for?
 
 ## Index
 - [D] = Deprecated.
-- [DEV] = Only avaiable on Dev branch.
+- [DEV] = Only available on Dev branch.
 - [MB] = Maintenance break. 
 - [RM] = Removed from main + dev branch.
 - [LTV] = Latest version.
