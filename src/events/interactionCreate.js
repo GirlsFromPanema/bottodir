@@ -43,7 +43,7 @@
                                                                                     
                                                                                     
                                                                                     
-                                                                        --      last update: 22/2/2022         --                                                                                                                                                                                                       */
+                                                                        --      last update: 09/03/2022         --                                                                                                                                                                                                       */
 
 const { Permissions, CommandInteraction } = require("discord.js");
 const { getKeyByValue, msToMinAndSec } = require("../util/util.js");
@@ -99,7 +99,7 @@ module.exports.run = async (interaction) => {
     }
 
     /*
-	-------------------------------------------------------------------------
+    -------------------------------------------------------------------------
 
     Some database queries, adding security options to the application commands
     
@@ -122,7 +122,18 @@ module.exports.run = async (interaction) => {
       });
     }
 
-    // ------------------------------------------------------------------------- //
+    /*
+    -------------------------------------------------------------------------
+    This is used for the premium system. 
+    Every user that is interacting with the bot in any way, is cached 
+    and saved to the Database.
+    
+    Once they redeem a premium code, their profile is updated within the DB.
+    
+    Why isn't this within another user profile schema? like economy?
+    	- We like to keep things clean.
+    -------------------------------------------------------------------------
+    */
 
     // find the user from cache
     let user = interaction.client.userSettings.get(interaction.user.id)
@@ -138,7 +149,7 @@ module.exports.run = async (interaction) => {
       } else return;
     }
       
-      // Premium only commands
+      // Only allow premium members to use command [ ... ].
       if (cmdFile.premiumOnly) {
         const isPremium = await User.findOne({ isPremium: true })
         if (isPremium) {
@@ -150,19 +161,19 @@ module.exports.run = async (interaction) => {
       }
 
     /*
-		-------------------------------------------------------------------------
-	  	Custom Owner Permissions 
+    -------------------------------------------------------------------------
+    Custom Owner Permissions 
 
-		Sometimes, we don't want other people execute some commands. (Ex. blacklist/whitelist etc.)
-		That's why we have an option to only allow developers (defined by discord user ID in the configs) to execute these commands
+    Sometimes, we don't want other people execute some commands. (Ex. blacklist/whitelist etc.)
+    That's why we have an option to only allow developers (defined by discord user ID in the configs) to execute these commands
 
 
-		module.exports.ownerOnly = {
-  			ownerOnly: true
-		};
+     module.exports.ownerOnly = {
+  	ownerOnly: true
+     };
 
-		-------------------------------------------------------------------------
-	*/
+    -------------------------------------------------------------------------
+    */
     if (cmdFile.ownerOnly) {
       if (!config.owner.includes(interaction.user.id))
         return interaction.reply({
@@ -211,24 +222,20 @@ module.exports.run = async (interaction) => {
         missingUserPermissions.push(getKeyByValue(Permissions.FLAGS, flag));
     });
 
-    /* 
+    	/* 
 	-------------------------------------------------------------------------
 	Command options:
 
-		Handling options to make command handling cleaner.
+	Handling options to make command handling cleaner.
 
 		Example:
 			- A module that requires a setup, a change (update), reset (deleting saved [] in database), adding additional information.
 
 		Normally, this would be four separate commands. However, with subcommands, this is handled in max. two commands.
 		
-		
-	Integrated by: Hallel 💃✨#5119
-
 	-------------------------------------------------------------------------
 	*/
-
-		
+	  
     /* Handling sub commands */
     // TODO: Add cmd options
     const args = [];
