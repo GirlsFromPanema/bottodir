@@ -7,7 +7,7 @@ const { CommandInteraction, MessageEmbed, Permissions  } = require("discord.js")
 const Guild = require("../../../models/Tracker/guilds.js");
 const Bot = require("../../../models/Tracker/bots.js");
 
-// Settings
+// configs
 const emojis = require("../../../../Controller/emojis/emojis");
 
 module.exports.cooldown = {
