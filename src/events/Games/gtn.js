@@ -2,7 +2,7 @@
 
 const { GuildMember, MessageEmbed, MessageFlags, DiscordAPIError } = require("discord.js");
 
-// Database Query Model
+// Database queries
 const Guild = require("../../models/Games/gtn");
 
 // Configs
