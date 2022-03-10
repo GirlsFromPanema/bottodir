@@ -88,17 +88,7 @@ module.exports.run = async (interaction, utils) =>
         .setFooter({ text: `Account: ${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true })})
         .setTimestamp()
 
-        const logs = new MessageEmbed()
-        .setTitle(`${emojis.success} Worked as a ${job} and earned \`${earning}$\``)
-        .setDescription(`
-        **Actioned by**: \`${interaction.user.tag}\`
-        **Earning**: \`${earning}$\`
-        `)
-        .setColor("GREEN")
-        .setTimestamp()
-
         return interaction.reply({ embeds: [embed], ephemeral: true })
-       
     }
     catch (err)
     {
