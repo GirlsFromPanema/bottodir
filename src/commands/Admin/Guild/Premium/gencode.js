@@ -79,4 +79,4 @@ module.exports.run = async(interaction) => {
 module.exports.data = new SlashCommandBuilder()
     .setName("gencode")
     .setDescription("Generate a premium Code")
-    .addStringOption(option => option.setName("option").setDescription("Enable with enable, disable with disable").setRequired(true))
+    .addStringOption(option => option.setName("option").setDescription("Generates a daily or monthly premium code.").setRequired(true))
