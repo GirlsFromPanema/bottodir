@@ -7,7 +7,7 @@ const {
     MessageEmbed,
     MessageActionRow,
     MessageButton,
-    ReactionUserManager,
+    WebhookClient,
 } = require("discord.js");
 
 // User profile

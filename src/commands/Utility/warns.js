@@ -40,7 +40,7 @@ module.exports.run = async(interaction, utils) => {
             .map((warn) => {
                 const moderator = interaction.guild.members.cache.get(warn.moderatorId);
                 return [
-                    `Warn ID: ${warn._id}`,
+                    `Warn ID: ${warn.pin}`,
                     `Moderator: ${moderator || "Has left"}`,
                     `Date: ${moment(warn.timestamp).format("MMMM Do YYYY")}`,
                     `Reason: ${warn.reason}`,
