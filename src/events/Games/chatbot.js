@@ -39,14 +39,24 @@ module.exports.run = async (message) => {
     if(!hasChatbot) return;
 
     const chatbotchannel = hasChatbot.channel;
-    
+    const errorchannel = message.channel;
+
     // Only allow answers within the bot channel saved in the db
     if(message.channel.id === chatbotchannel) {
-      fetch(`https://api.affiliateplus.xyz/api/chatbot?message=${encodeURIComponent(message.content)}&botname=${message.client.user.username}&ownername=Koni#9521`)
-        .then(response => response.json())
-        .then(data => {
-            message.reply(data.message)
-        })
+    const response = await fetch(`https://api.affiliateplus.xyz/api/chatbot?message=${encodeURIComponent(message.content)}&botname=${message.client.user.username}&ownername=Koni#9521`)
+    
+    console.log(response.status)
+    if(!response.ok) {
+      console.log("Error while fetching APi for chatbot") 
+      return;
+    }
+
+    if(response.ok) {
+      errorchannel.permissionOverwrites.create(errorchannel.guild.roles.everyone, { SEND_MESSAGES: true });
+    }
+
+    const data = await response.text();
+    message.reply(data.message);
     }
   } catch (err) {
     return Promise.reject(err);
