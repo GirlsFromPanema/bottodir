@@ -48,11 +48,12 @@ module.exports.run = async (message) => {
     console.log(response.status)
     if(!response.ok) {
       console.log("Error while fetching APi for chatbot") 
+      errorchannel.setRateLimitPerUser(300)
       return;
     }
 
     if(response.ok) {
-      errorchannel.permissionOverwrites.create(errorchannel.guild.roles.everyone, { SEND_MESSAGES: true });
+      errorchannel.setRateLimitPerUser(0)
     }
 
     const data = await response.text();
