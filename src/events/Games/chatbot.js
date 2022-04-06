@@ -45,18 +45,17 @@ module.exports.run = async (message) => {
     if(message.channel.id === chatbotchannel) {
     const response = await fetch(`https://api.affiliateplus.xyz/api/chatbot?message=${encodeURIComponent(message.content)}&botname=${message.client.user.username}&ownername=Koni#9521`)
     
-    console.log(response.status)
     if(!response.ok) {
       console.log("Error while fetching APi for chatbot") 
       errorchannel.setRateLimitPerUser(300)
       return;
-    }
+    } 
 
     if(response.ok) {
       errorchannel.setRateLimitPerUser(0)
     }
 
-    const data = await response.text();
+    const data = await response.json();
     message.reply(data.message);
     }
   } catch (err) {
