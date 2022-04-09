@@ -40,10 +40,10 @@ module.exports.run = async (interaction, utils) => {
 
         let options = {
             yellow: `🟨`,
-            grey: `⬜`,
-            green: `🟩`,
-            black: `⬛`,
-        }
+            grey:   `⬜`,
+            green:  `🟩`,
+            black:  `⬛`,
+        };
 
         let tries = 0;
         let words = ["books", "apple", "color", "ready", "house", "table", "light", "sugar", "eager", "elite", "plant", "stamp", "spawn", "dog", "kitchen", "mouse", "beer"]
