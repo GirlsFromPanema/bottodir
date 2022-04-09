@@ -16,85 +16,82 @@ module.exports.cooldown = {
  * @param {CommandInteraction} interaction The Command Interaciton
  * @param {any} utils Additional util
  */
-module.exports.run = async (interaction, utils) =>
-{
-    try
-    {
+module.exports.run = async (interaction, utils) => {
+    try {
         let errEmbed = new MessageEmbed()
-.setColor("#6F8FAF")
+            .setColor("#6F8FAF")
 
-const gamedesc = [
-`⬛⬛⬛⬛⬛ - Empty`,
-`⬛⬛⬛⬛⬛ - Empty`,
-`⬛⬛⬛⬛⬛ - Empty`,
-`⬛⬛⬛⬛⬛ - Empty`,
-`⬛⬛⬛⬛⬛ - Empty`,
-`⬛⬛⬛⬛⬛ - Empty`
-]
+        const gamedesc = [
+            `⬛⬛⬛⬛⬛ - Empty`,
+            `⬛⬛⬛⬛⬛ - Empty`,
+            `⬛⬛⬛⬛⬛ - Empty`,
+            `⬛⬛⬛⬛⬛ - Empty`,
+            `⬛⬛⬛⬛⬛ - Empty`,
+            `⬛⬛⬛⬛⬛ - Empty`
+        ]
 
-let game = new MessageEmbed()
-.setTitle(`Wordle`)
-.setDescription(gamedesc.join('\n'))
-.setFooter({ text: `You have 6 tries to guess the word`})
-.setColor("#6F8FAF")
-  
-interaction.reply({ embeds: [game]})
-  
-let options = {
-    yellow: `🟨`,
-    grey: `⬜`,
-    green: `🟩`,
-    black: `⬛`,
-}
+        let game = new MessageEmbed()
+            .setTitle(`Wordle`)
+            .setDescription(gamedesc.join('\n'))
+            .setFooter({ text: `You have 6 tries to guess the word` })
+            .setColor("#6F8FAF")
 
-let tries = 0;
-let words = ["books","apple","color","ready","house","table","light","sugar","eager","elite", "plant", "stamp","spawn", "dog", "kitchen", "mouse", "beer"]
-let solution = words[Math.floor(Math.random() * words.length)];
+        interaction.reply({ embeds: [game] })
 
-const filter = m => m.author.id === interaction.user.id;
-const msgCollector = interaction.channel.createMessageCollector({ filter, time: 50000});
+        let options = {
+            yellow: `🟨`,
+            grey: `⬜`,
+            green: `🟩`,
+            black: `⬛`,
+        }
 
-msgCollector.on('collect', async m => {
-    if(m.author.bot) return;
-    let guess = m.content.toLowerCase();
+        let tries = 0;
+        let words = ["books", "apple", "color", "ready", "house", "table", "light", "sugar", "eager", "elite", "plant", "stamp", "spawn", "dog", "kitchen", "mouse", "beer"]
+        let solution = words[Math.floor(Math.random() * words.length)];
 
-    if(guess.length > 5 || guess.length < 5) return;
-    let result = "";
+        const filter = m => m.author.id === interaction.user.id;
+        const msgCollector = interaction.channel.createMessageCollector({ filter, time: 50000 });
 
-    for (let i = 0; i < guess.length; i++) {
-        let guessLetter = guess.charAt(i);
-        let solutionLetter = solution.charAt(i);
+        msgCollector.on('collect', async m => {
+            if (m.author.bot) return;
+            let guess = m.content.toLowerCase();
 
-    if (guessLetter === solutionLetter) {
-        result = result.concat(options.green)
-    } 
-    else if (solution.indexOf(guessLetter) != -1) {
-        result = result.concat(options.yellow)
+            if (guess.length > 5 || guess.length < 5) return;
+            let result = "";
+
+            for (let i = 0; i < guess.length; i++) {
+                let guessLetter = guess.charAt(i);
+                let solutionLetter = solution.charAt(i);
+
+                if (guessLetter === solutionLetter) {
+                    result = result.concat(options.green)
+                }
+                else if (solution.indexOf(guessLetter) != -1) {
+                    result = result.concat(options.yellow)
+                }
+                else {
+                    result = result.concat(options.grey)
+                }
+            }
+            if (result === "🟩🟩🟩🟩🟩") {
+                gamedesc[tries] = `${result} - ${guess}`;
+
+                interaction.editReply({ embeds: [game.setDescription(gamedesc.join('\n'))] })
+                interaction.editReply({ embeds: [game.setFooter({ text: `${emojis.success} You got the correct Word!` })] })
+                return msgCollector.stop();
+            } else {
+                msgCollector.resetTimer();
+                gamedesc[tries] = `${result} - ${guess}`;
+                interaction.editReply({ embeds: [game.setDescription(gamedesc.join('\n'))] })
+                tries += 1
+                if (tries === 6) {
+                    interaction.editReply({ embeds: [game.setFooter({ text: `You used your 6 tries, the correct word was: ${solution}.` })] })
+                    return msgCollector.stop();
+                }
+            }
+        });
     }
-    else {
-        result = result.concat(options.grey)
-    }
-}
-    if(result === "🟩🟩🟩🟩🟩"){
-    gamedesc[tries] = `${result} - ${guess}`;
-
-    interaction.editReply({ embeds: [game.setDescription(gamedesc.join('\n'))]})
-    interaction.editReply({ embeds: [game.setFooter({ text: `${emojis.success} You got the correct Word!`})]})
-    return msgCollector.stop();
-} else {
-    msgCollector.resetTimer();
-    gamedesc[tries] = `${result} - ${guess}`;
-    interaction.editReply({ embeds: [game.setDescription(gamedesc.join('\n'))]})
-    tries += 1
-    if(tries === 6){
-    interaction.editReply({ embeds: [game.setFooter({ text: `You used your 6 tries, the correct word was: ${solution}.`})]})
-    return msgCollector.stop();
-    }
-}
-});
-    }
-    catch (err)
-    {
+    catch (err) {
         return Promise.reject(err);
     }
 };
