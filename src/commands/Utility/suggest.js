@@ -47,7 +47,7 @@ module.exports.run = async (interaction) =>
 
         const embed = new MessageEmbed()
         .setTitle(`${emojis.notify} New Suggestion`)
-        .setDescription(`${suggestion}\n\nWaiting for the community to vote!`)
+        .setDescription(`${suggestion}\n\n📊 Waiting for the community to vote!\n🕴 By ${interaction.user.tag}`)
         .setTimestamp()
         .setFooter({ text: `Pin: ${pin}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true })})
         .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))

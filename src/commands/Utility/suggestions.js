@@ -32,6 +32,7 @@ module.exports.run = async (interaction) => {
 
     // Get the suggestion (message)
     const suggestionmessage = suggestionQuery.suggestion;
+    const suggestionbyuser = suggestionQuery.userID.tag;
 
     if (!guildQuery)
       return interaction.reply({
@@ -53,7 +54,7 @@ module.exports.run = async (interaction) => {
 
     const embed = new MessageEmbed()
       .setTitle(`${emojis.success} | Suggestion accepted`)
-      .setDescription(`${suggestionmessage}\n\nThanks for this cool idea!`)
+      .setDescription(`**${suggestionmessage}**\nBy <@${suggestionbyuser}>\n💝 Thanks for this cool idea!`)
       .setColor("RED")
       .setFooter({
         text: `Bottodir:: Suggestions`,
@@ -65,6 +66,7 @@ module.exports.run = async (interaction) => {
     // Fetch the message, edit it and remove all reactions
     const message = suggestionQuery.message;
 
+    // Fetch the message with the suggestion and edit the message
     await schannel.messages.fetch(message).then((editm) => {
       editm.edit({ embeds: [embed] });
       editm.reactions.removeAll();
@@ -86,6 +88,7 @@ module.exports.run = async (interaction) => {
 
     // Get the suggestion (message)
     const suggestionmessage = suggestionQuery.suggestion;
+    const suggestionbyuser = suggestionQuery.userID;
 
     if (!guildQuery)
       return interaction.reply({
@@ -108,7 +111,7 @@ module.exports.run = async (interaction) => {
     const embed = new MessageEmbed()
       .setTitle(`${emojis.error} | Suggestion denied`)
       .setDescription(
-        `${suggestionmessage}\n\nSadly, this suggestion is not good enough.`
+        `**${suggestionmessage}**\nBy <@${suggestionbyuser}>\n😟 Sadly, this suggestion wasn't good enough.`
       )
       .setColor("RED")
       .setFooter({
@@ -121,6 +124,7 @@ module.exports.run = async (interaction) => {
     // Fetch the message, edit it and remove all reactions
     const message = suggestionQuery.message;
 
+    // Fetch the message with the suggestion and edit the message
     await schannel.messages.fetch(message).then((editm) => {
       editm.edit({ embeds: [embed] });
       editm.reactions.removeAll();
