@@ -26,5 +26,4 @@ const afkSchema = new Schema({
 
 const Afk = model("Afk", afkSchema);
 
-
 module.exports = Afk;
