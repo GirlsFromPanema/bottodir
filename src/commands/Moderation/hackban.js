@@ -32,11 +32,11 @@ module.exports.run = async(interaction, utils) => {
         // ban the user if the ID is valid. 
         interaction.guild.members.ban(target).then((user) => {
             interaction.reply({ 
-                content: `${emojis.success} | \`The user ${user.tag} has been hack-banned from this server!\`` 
+                content: `${emojis.success} | \`The user ${user.tag} has been hack-banned from this server.\`` 
         });
         }).catch(() => {
             interaction.reply({
-                 content: `${emojis.error} | Please provide a valid member/user ID!`
+                 content: `${emojis.error} | Please provide a valid member/user ID.`
                 });
         });  
 
