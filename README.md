@@ -90,10 +90,10 @@ Current logs (errors, warnings etc.) are displayed here.
   
 * Moderation
 * Utility
-* Economy
+* Economy [D]
 * Fun
+* Premium [RM]
 * NSFW
-* Utility
 
 and much more!
 
