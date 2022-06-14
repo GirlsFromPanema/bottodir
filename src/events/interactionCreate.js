@@ -43,7 +43,7 @@
                                                                                     
                                                                                     
                                                                                     
-                                                                        --      last update: 09/03/2022         --                                                                                                                                                                                                       */
+                                                                        --      last update: 06/14/2022         --                                                                                                                                                                                                       */
 
 const { Permissions, CommandInteraction } = require("discord.js");
 const { getKeyByValue, msToMinAndSec } = require("../util/util.js");
@@ -124,6 +124,8 @@ module.exports.run = async (interaction) => {
 
     /*
     -------------------------------------------------------------------------
+    *** ![DEPRECATED + REMOVED FROM CURRENT BRANCH]! ***
+    
     This is used for the premium system. 
     Every user that is interacting with the bot in any way, is cached 
     and saved to the Database.
@@ -132,6 +134,8 @@ module.exports.run = async (interaction) => {
     
     Why isn't this within another user profile schema? like economy?
     	- We like to keep things clean.
+	
+    *** ![DEPRECATED + REMOVED FROM CURRENT BRANCH]! ***
     -------------------------------------------------------------------------
     */
 
@@ -149,7 +153,11 @@ module.exports.run = async (interaction) => {
       } else return;
     }
       
-      // Only allow premium members to use command [ ... ].
+      /* Only allow premium members to use command [ ... ].
+      
+      *** ![DEPRECATED + REMOVED FROM CURRENT BRANCH]! ***
+      
+      
       if (cmdFile.premiumOnly) {
         const isPremium = await User.findOne({ isPremium: true })
         if (isPremium) {
@@ -159,6 +167,7 @@ module.exports.run = async (interaction) => {
           });
         }
       }
+     */
 
     /*
     -------------------------------------------------------------------------
