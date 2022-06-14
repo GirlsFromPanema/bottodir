@@ -39,7 +39,7 @@ module.exports.run = async (message) => {
       isAFK.delete();
 
       const dataDeletedEmbed = new MessageEmbed()
-        .setDescription(`${message.author.username} You are no longer AFK!`)
+        .setDescription(`${message.author.username}, you are no longer AFK!`)
         .setColor("GREEN")
         .setTimestamp();
 
