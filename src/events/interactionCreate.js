@@ -124,53 +124,6 @@ module.exports.run = async (interaction) => {
 
     /*
     -------------------------------------------------------------------------
-    *** ![DEPRECATED + REMOVED FROM CURRENT BRANCH]! ***
-    
-    This is used for the premium system. 
-    Every user that is interacting with the bot in any way, is cached 
-    and saved to the Database.
-    
-    Once they redeem a premium code, their profile is updated within the DB.
-    
-    Why isn't this within another user profile schema? like economy?
-    	- We like to keep things clean.
-	
-    *** ![DEPRECATED + REMOVED FROM CURRENT BRANCH]! ***
-    -------------------------------------------------------------------------
-    */
-
-    // find the user from cache
-    let user = interaction.client.userSettings.get(interaction.user.id)
-
-    // If the user isn't in the cache
-    if (!user) {
-      // check if they're in database, if they are not create a schema or else return
-      const findUser = await User.findOne({ userID: interaction.user.id })
-      if (!findUser) {
-        const newUser = await User.create({ userID: interaction.user.id })
-        interaction.client.userSettings.set(interaction.user.id, newUser)
-        user = newUser
-      } else return;
-    }
-      
-      /* Only allow premium members to use command [ ... ].
-      
-      *** ![DEPRECATED + REMOVED FROM CURRENT BRANCH]! ***
-      
-      
-      if (cmdFile.premiumOnly) {
-        const isPremium = await User.findOne({ isPremium: true })
-        if (isPremium) {
-          return interaction.reply({
-            content: `${emojis.error} | This is only for premium users.`,
-            ephemeral: true,
-          });
-        }
-      }
-     */
-
-    /*
-    -------------------------------------------------------------------------
     Custom Owner Permissions 
 
     Sometimes, we don't want other people execute some commands. (Ex. blacklist/whitelist etc.)

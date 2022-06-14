@@ -54,9 +54,6 @@ const { red, green, blue, yellow, cyan } = require("chalk");
 const client = require("../util/bot");
 const emojis = require("../../Controller/emojis/emojis");
 
-// Database queries
-const User = require("../models/Premium/User");
-
 module.exports.data = {
   name: "ready",
   once: true,
@@ -79,15 +76,6 @@ module.exports.run = async (client) => {
     client.user.setPresence({ activities: [{ name: `${arrayOfStatus[Math.floor(Math.random() * arrayOfStatus.length)]}` }], status: 'online', type: "WATCHING" })
 }, 8000)
   
-  // Once the bot goes online, load all the settings of the users.
-  const users = await User.find();
-  for (let user of users) {
-    client.userSettings.set(user.userID, user); 
-    //                            ^^ 
-    // make sure to have the same name as in the schema here. if userid, change to userid.
-  }
-  require('../handler/premium')
-
   const loading = String.raw`
                   __         ______   __    __  __    __   ______   __    __  ______  __    __   ______  
                  /  |       /      \ /  |  /  |/  \  /  | /      \ /  |  /  |/      |/  \  /  | /      \ 
