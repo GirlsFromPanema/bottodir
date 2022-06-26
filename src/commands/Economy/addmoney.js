@@ -70,7 +70,7 @@ module.exports.run = async (interaction, utils) =>
         const userlogs = new MessageEmbed()
         .setTitle(`${emojis.notify} Economy Profile Update`)
         .setDescription(`
-        Your Balance has changed because someone removed your Money!
+        Your Balance has changed because someone added you Money!
         **Actioned by**: \`${interaction.user.tag}\`
         **User**: \`${user.tag}\`
         **Guild**: \`${interaction.guild.name}\`
