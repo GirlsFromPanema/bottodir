@@ -58,7 +58,7 @@
   },
   "devDependencies": {
     "discord-player": "^5.2.2",
-    "grunt": "^1.4.1",
+    "grunt": "^1.5.3",
     "gulp": "^4.0.2",
     "prettier": "2.5.1"
   }
