@@ -88,7 +88,7 @@ module.exports.run = async (interaction) => {
     const isSetup = await Guild.findOne({ id: interaction.guildId });
     if (!isSetup)
       return interaction.followUp({
-        content: `${emojis.error} | Economy System is **disabled**, make sure to enable it before running this Command.\n\nSimply run \´/manageeconomy <enable/disable>\` and then rerun this Command.`,
+        content: `${emojis.error} | Economy System is **disabled**, make sure to enable it before running this Command.\n\nSimply run \`/manageeconomy <enable/disable>\` and then rerun this Command.`,
         ephemeral: true,
       });
 
